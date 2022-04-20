@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using EmpresariosConLiderazgo.Models;
 
 namespace EmpresariosConLiderazgo.Data
 {
@@ -9,5 +10,6 @@ namespace EmpresariosConLiderazgo.Data
             : base(options)
         {
         }
+        public DbSet<EmpresariosConLiderazgo.Models.Ultima> Ultima { get; set; }
     }
 }
