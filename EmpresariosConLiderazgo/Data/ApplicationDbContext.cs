@@ -10,6 +10,7 @@ namespace EmpresariosConLiderazgo.Data
             : base(options)
         {
         }
-        public DbSet<EmpresariosConLiderazgo.Models.Ultima> Ultima { get; set; }
+        public DbSet<EmpresariosConLiderazgo.Models.Users_App> Users_App { get; set; }
+        public DbSet<EmpresariosConLiderazgo.Models.Logs> User_Logs { get; set; }
     }
 }

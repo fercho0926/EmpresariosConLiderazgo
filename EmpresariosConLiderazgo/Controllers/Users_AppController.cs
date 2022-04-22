@@ -11,22 +11,22 @@ using EmpresariosConLiderazgo.Models;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
-    public class UltimaController : Controller
+    public class Users_AppController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public UltimaController(ApplicationDbContext context)
+        public Users_AppController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Ultima
+        // GET: Users_App
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Ultima.ToListAsync());
+            return View(await _context.Users_App.ToListAsync());
         }
 
-        // GET: Ultima/Details/5
+        // GET: Users_App/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +34,39 @@ namespace EmpresariosConLiderazgo.Controllers
                 return NotFound();
             }
 
-            var ultima = await _context.Ultima
+            var users_App = await _context.Users_App
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (ultima == null)
+            if (users_App == null)
             {
                 return NotFound();
             }
 
-            return View(ultima);
+            return View(users_App);
         }
 
-        // GET: Ultima/Create
+        // GET: Users_App/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Ultima/Create
+        // POST: Users_App/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LastName,Date")] Ultima ultima)
+        public async Task<IActionResult> Create([Bind("LastName,Identification,DateBirth,EnumCountries,City,Neighborhood,Address,phone,AspNetUserId,Id,Name")] Users_App users_App)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ultima);
+                _context.Add(users_App);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ultima);
+            return View(users_App);
         }
 
-        // GET: Ultima/Edit/5
+        // GET: Users_App/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace EmpresariosConLiderazgo.Controllers
                 return NotFound();
             }
 
-            var ultima = await _context.Ultima.FindAsync(id);
-            if (ultima == null)
+            var users_App = await _context.Users_App.FindAsync(id);
+            if (users_App == null)
             {
                 return NotFound();
             }
-            return View(ultima);
+            return View(users_App);
         }
 
-        // POST: Ultima/Edit/5
+        // POST: Users_App/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LastName,Date")] Ultima ultima)
+        public async Task<IActionResult> Edit(int id, [Bind("LastName,Identification,DateBirth,EnumCountries,City,Neighborhood,Address,phone,AspNetUserId,Id,Name")] Users_App users_App)
         {
-            if (id != ultima.Id)
+            if (id != users_App.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 try
                 {
-                    _context.Update(ultima);
+                    _context.Update(users_App);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UltimaExists(ultima.Id))
+                    if (!Users_AppExists(users_App.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace EmpresariosConLiderazgo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ultima);
+            return View(users_App);
         }
 
-        // GET: Ultima/Delete/5
+        // GET: Users_App/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +125,30 @@ namespace EmpresariosConLiderazgo.Controllers
                 return NotFound();
             }
 
-            var ultima = await _context.Ultima
+            var users_App = await _context.Users_App
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (ultima == null)
+            if (users_App == null)
             {
                 return NotFound();
             }
 
-            return View(ultima);
+            return View(users_App);
         }
 
-        // POST: Ultima/Delete/5
+        // POST: Users_App/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var ultima = await _context.Ultima.FindAsync(id);
-            _context.Ultima.Remove(ultima);
+            var users_App = await _context.Users_App.FindAsync(id);
+            _context.Users_App.Remove(users_App);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UltimaExists(int id)
+        private bool Users_AppExists(int id)
         {
-            return _context.Ultima.Any(e => e.Id == id);
+            return _context.Users_App.Any(e => e.Id == id);
         }
     }
 }

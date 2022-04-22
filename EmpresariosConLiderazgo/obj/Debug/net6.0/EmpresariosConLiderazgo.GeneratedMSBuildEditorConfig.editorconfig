@@ -47,6 +47,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/NonLogic/Packages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm9uTG9naWNcUGFja2FnZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -63,24 +67,44 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Ultima/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWx0aW1hXENyZWF0ZS5jc2h0bWw=
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Users_App/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNfQXBwXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Ultima/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWx0aW1hXERlbGV0ZS5jc2h0bWw=
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Users_App/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNfQXBwXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Ultima/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWx0aW1hXERldGFpbHMuY3NodG1s
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Users_App/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNfQXBwXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Ultima/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWx0aW1hXEVkaXQuY3NodG1s
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Users_App/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNfQXBwXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Ultima/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWx0aW1hXEluZGV4LmNzaHRtbA==
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Users_App/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNfQXBwXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/User_Logs/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcl9Mb2dzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/User_Logs/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcl9Mb2dzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/User_Logs/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcl9Mb2dzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/User_Logs/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcl9Mb2dzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/User_Logs/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcl9Mb2dzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/_ViewImports.cshtml]
