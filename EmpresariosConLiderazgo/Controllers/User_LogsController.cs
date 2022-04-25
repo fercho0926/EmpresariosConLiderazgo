@@ -150,5 +150,6 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             return _context.User_Logs.Any(e => e.Id == id);
         }
+
     }
 }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "jnWE1U/8r+6icAdHkA7P2P1j9UXmPNgKkVidGHb6c7U=",
+  "Hash": "PWdDP2JlcFmivXEYmtGGeggCFNftY0x4CDBCbpUyjZE=",
   "Source": "EmpresariosConLiderazgo",
   "BasePath": "_content/EmpresariosConLiderazgo",
   "Mode": "Default",
@@ -2140,6 +2140,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Theme\\img\\ecl.svg"
+    },
+    {
+      "Identity": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\Theme\\img\\icon.svg",
+      "SourceId": "EmpresariosConLiderazgo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\",
+      "BasePath": "_content/EmpresariosConLiderazgo",
+      "RelativePath": "Theme/img/icon.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Theme\\img\\icon.svg"
+    },
+    {
+      "Identity": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\Theme\\img\\Login.svg",
+      "SourceId": "EmpresariosConLiderazgo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\",
+      "BasePath": "_content/EmpresariosConLiderazgo",
+      "RelativePath": "Theme/img/Login.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Theme\\img\\Login.svg"
     },
     {
       "Identity": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\Theme\\img\\undraw_posting_photo.svg",

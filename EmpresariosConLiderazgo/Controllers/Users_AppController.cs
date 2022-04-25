@@ -150,5 +150,28 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             return _context.Users_App.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> EditByMail(string mail)
+        {
+
+            if (User.Identity?.Name != mail)
+            {
+                return NotFound();
+            }
+
+            if (mail == null)
+            {
+                return NotFound();
+            }
+
+            var users_App = _context.Users_App.FirstOrDefault(x => x.AspNetUserId == mail);
+            if (users_App == null)
+            {
+                return NotFound();
+            }
+            return View(users_App);
+
+        }
+
     }
 }
