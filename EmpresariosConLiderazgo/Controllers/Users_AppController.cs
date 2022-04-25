@@ -112,7 +112,7 @@ namespace EmpresariosConLiderazgo.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
             return View(users_App);
         }
