@@ -19,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="ExpertPdf.HtmlToPdf.NetCore" Version="17.0.0" />
+    <PackageReference Include="itext7" Version="7.2.2" />
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.4" />
@@ -33,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Entities\" />
+    <Folder Include="Views\User_contracts\Contracts\" />
   </ItemGroup>
 
 </Project>
