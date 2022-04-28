@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using EmpresariosConLiderazgo.Models;
 
 namespace EmpresariosConLiderazgo.Data
 {
@@ -9,5 +10,8 @@ namespace EmpresariosConLiderazgo.Data
             : base(options)
         {
         }
+        public DbSet<EmpresariosConLiderazgo.Models.Users_App> Users_App { get; set; }
+        public DbSet<EmpresariosConLiderazgo.Models.Logs> User_Logs { get; set; }
+        public DbSet<EmpresariosConLiderazgo.Models.User_contracts> User_contracts { get; set; }
     }
 }

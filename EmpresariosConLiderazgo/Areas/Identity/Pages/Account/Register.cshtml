@@ -1,0 +1,43 @@
+﻿@page
+@model RegisterModel
+@{
+    Layout = "_LayoutLogin";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="text-center">
+    @*<h1 class="h4 text-gray-900 mb-4">Registrarse!</h1>*@
+</div>
+<div>
+    <div>
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="user">
+            <h2>Crear nueva cuenta.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="form-control form-control-user" autocomplete="username" aria-required="true" placeholder="Email" />
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-floating">
+                <input asp-for="Input.Password" class="form-control form-control-user" autocomplete="new-password" aria-required="true" placeholder="Contraseña" />
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-floating">
+                <input asp-for="Input.ConfirmPassword" class="form-control form-control-user" autocomplete="new-password" aria-required="true" placeholder="Confirmar Contraseña" />
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <br />
+            <button id="registerSubmit" type="submit" class="btn btn-primary btn-user btn-block">Registrarse</button>
+        </form>
+         <hr>
+            <div class="text-center">
+                <a id="account" asp-page="./Login">Ingresar</a>
+            </div>
+    </div>
+
+
+    @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    }
