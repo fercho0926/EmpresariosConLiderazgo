@@ -71,20 +71,20 @@
         </a>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+
+    <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-           aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Saldos y Movimientos</span>
+        <a class="nav-link" href="~/Balance/BalanceByMail/?mail=@User.Identity?.Name">
+            <i class="fas fa-fw fa-dollar-sign"></i>
+            <span>Saldos y movimientos</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="buttons.html">Saldos -Pend</a>
-                <a class="collapse-item" href="cards.html">Movimientos -Pend</a>
-                <a class="collapse-item" href="~/User_Contracts/ColombianContract">Mis contratos -Pend</a>
-            </div>
-        </div>
+    </li>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="~/User_Contracts/ColombianContract/?mail=@User.Identity?.Name">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Contratos</span>
+        </a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->

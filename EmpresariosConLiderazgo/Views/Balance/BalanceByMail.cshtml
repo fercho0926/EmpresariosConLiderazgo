@@ -1,0 +1,70 @@
+﻿@model IEnumerable<EmpresariosConLiderazgo.Models.Entities.Balance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Saldos</h1>
+
+<p>
+    <h4> @User.Identity?.Name</h4>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserApp) 
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastMovement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InitialDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndlDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserApp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BalanceAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastMovement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InitialDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndlDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Retirar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Movimientos</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
