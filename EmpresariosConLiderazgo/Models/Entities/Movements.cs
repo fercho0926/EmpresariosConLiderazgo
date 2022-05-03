@@ -8,7 +8,7 @@ namespace EmpresariosConLiderazgo.Models.Entities
 {
     public class Movements : BaseClass
     {
-        public string IdBalanceProduct { get; set; }
+        public int IdBalanceProduct { get; set; }
         public DateTime DateMovement { get; set; }
         public string BalanceBefore { get; set; }
         public string BalanceAfter { get; set; }

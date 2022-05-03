@@ -191,8 +191,6 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 return NotFound();
             }
-
-
             var TotalBalance = _context.Balance.ToList().Where(x => x.UserApp == mail);
 
             if (TotalBalance.Count() == 0)
@@ -201,6 +199,35 @@ namespace EmpresariosConLiderazgo.Controllers
             }
             return View(TotalBalance);
         }
+
+        // GET: Balance/Details/5
+        public async Task<IActionResult> Movements(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var balance = await _context.Balance
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            var movements = _context.Movements
+                .Where(b => b.IdBalanceProduct == id)
+                .ToList();
+
+            ViewBag.Movements = movements;
+
+
+
+
+            if (balance == null)
+            {
+                return NotFound();
+            }
+
+            return View(balance);
+        }
+
 
     }
 }
