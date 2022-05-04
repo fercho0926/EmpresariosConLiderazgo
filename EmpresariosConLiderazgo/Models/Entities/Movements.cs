@@ -10,7 +10,9 @@ namespace EmpresariosConLiderazgo.Models.Entities
     {
         public int IdBalanceProduct { get; set; }
         public DateTime DateMovement { get; set; }
-        public string BalanceBefore { get; set; }
-        public string BalanceAfter { get; set; }
+        public float BalanceBefore { get; set; }
+        public float CashOut { get; set; }
+        public float BalanceAfter { get; set; }
+        public bool Approved { get; set; }
     }
 }

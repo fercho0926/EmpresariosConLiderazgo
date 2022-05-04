@@ -1,11 +1,11 @@
 ﻿@model EmpresariosConLiderazgo.Models.Entities.Balance
 
 @{
-    ViewData["Title"] = "Movimientos";
-    IEnumerable<Movements> movements = ViewData["Movements"] as IEnumerable<Movements>;
+    ViewData["Title"] = "Retiros";
+
 }
 
-<h1>Movimientos</h1>
+<h1>Retiros</h1>
 
 <div>
     <h4> @User.Identity?.Name</h4>
@@ -53,48 +53,25 @@
     </dl>
 </div>
 
+ <div class="col-md-4">
+        <form asp-action="CashOut">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="UserApp" />
+            <input type="hidden" asp-for="Name" />
+            <input type="hidden" asp-for="Product" />
+            <input type="hidden" asp-for="BalanceAvailable" />
+            <div class="form-group">
+                <label asp-for="CashOut" class="control-label"></label>
+                <input asp-for="CashOut" class="form-control" />
+                <span asp-validation-for="CashOut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Solicitar retiro" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
 
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-           Id
-        </th>
-        <th>
-           Fecha
-        </th>
-        <th>
-           Nombre
-        </th>
-        <th>
-           Saldo Antes
-        </th>
-          <th>
-           Valor Retiro
-        </th>
-        <th>
-           Saldo Despues
-        </th>
-         <th>
-           Aprobado
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (Movements movement in movements)
-    {
-        <tr>
-            <td>@movement.Id</td>
-            <td>@movement.DateMovement</td>
-            <td>@movement.Name</td>
-            <td>@movement.BalanceBefore</td>
-            <td>@movement.CashOut</td>
-            <td>@movement.BalanceAfter</td>
-            <td>@movement.Approved</td>
 
-        </tr>
-    }
-    
-    </tbody>
-</table>
+

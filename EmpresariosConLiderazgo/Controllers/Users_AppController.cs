@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class Users_AppController : Controller
     {
         private readonly ApplicationDbContext _context;

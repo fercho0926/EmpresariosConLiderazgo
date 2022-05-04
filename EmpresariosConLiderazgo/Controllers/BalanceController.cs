@@ -45,6 +45,7 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
         // GET: Balance/Create
+
         public IActionResult Create()
         {
             return View();
@@ -152,34 +153,6 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
-
-
-        public async Task<IActionResult> BalanceByMail_OLD(string mail)
-        {
-
-            if (User.Identity?.Name != mail)
-            {
-                return NotFound();
-            }
-
-            if (mail == null)
-            {
-                return NotFound();
-            }
-
-            var result = _context.Balance.FirstOrDefault(x => x.UserApp == mail);
-
-
-
-            //if (balance == null)
-            //{
-            //    return NotFound();
-            //}
-            return View(result);
-
-        }
-
-
         public async Task<IActionResult> BalanceByMail(string mail)
         {
             if (mail == null)
@@ -200,31 +173,90 @@ namespace EmpresariosConLiderazgo.Controllers
             return View(TotalBalance);
         }
 
-        // GET: Balance/Details/5
+
         public async Task<IActionResult> Movements(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
             var balance = await _context.Balance
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             var movements = _context.Movements
                 .Where(b => b.IdBalanceProduct == id)
+                .OrderByDescending(o => o.DateMovement)
                 .ToList();
 
-            ViewBag.Movements = movements;
-
-
-
-
+            ViewData["Movements"] = movements;
             if (balance == null)
             {
                 return NotFound();
             }
+            return View(balance);
+        }
 
+        public async Task<IActionResult> CashOut(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var balance = await _context.Balance.FindAsync(id);
+            if (balance == null)
+            {
+                return NotFound();
+            }
+            return View(balance);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CashOut(int id, [Bind("UserApp,BalanceAvailable,Id,CashOut,Name,Product")] Balance balance)
+        {
+            if (id != balance.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Movements movement = new Movements();
+                    movement.IdBalanceProduct = balance.Id;
+                    movement.DateMovement = DateTime.Now;
+                    movement.Name = "Solicitud Retiro";
+                    movement.BalanceBefore = balance.BalanceAvailable;
+                    movement.CashOut = balance.CashOut;
+                    movement.BalanceAfter = balance.BalanceAvailable - balance.CashOut;
+
+
+                    balance.LastMovement = DateTime.Now;
+                    balance.BalanceAvailable = balance.BalanceAvailable - balance.CashOut;
+
+                    _context.Movements.Add(movement);
+                    _context.Update(balance);
+
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!BalanceExists(balance.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                TempData["AlertMessage"] = $"Se registro la solicitud de retiro del producto {balance.Product}, por valor de $ {balance.CashOut} El desembolso se realiza el dia MARTES";
+                return RedirectToAction("Index", "Home");
+            }
             return View(balance);
         }
 

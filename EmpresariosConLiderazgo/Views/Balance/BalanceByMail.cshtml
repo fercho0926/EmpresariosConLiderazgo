@@ -1,20 +1,19 @@
-﻿@model IEnumerable<EmpresariosConLiderazgo.Models.Entities.Balance>
+﻿@model IEnumerable<Balance>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Saldos</h1>
-
 <p>
     <h4> @User.Identity?.Name</h4>
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
+           @* <th>
                 @Html.DisplayNameFor(model => model.UserApp) 
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Product)
             </th>
@@ -39,9 +38,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+           @* <td>
                 @Html.DisplayFor(modelItem => item.UserApp)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Product)
             </td>
@@ -61,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Retirar</a> |
+                <a asp-action="CashOut" asp-route-id="@item.Id">Retirar</a> |
                 <a asp-action="Movements" asp-route-id="@item.Id">Movimientos</a> |
             </td>
         </tr>

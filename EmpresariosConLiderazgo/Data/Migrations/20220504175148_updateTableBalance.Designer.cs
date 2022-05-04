@@ -4,6 +4,7 @@ using EmpresariosConLiderazgo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmpresariosConLiderazgo.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220504175148_updateTableBalance")]
+    partial class updateTableBalance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,17 +78,13 @@ namespace EmpresariosConLiderazgo.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("Approved")
-                        .HasColumnType("bit");
+                    b.Property<string>("BalanceAfter")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("BalanceAfter")
-                        .HasColumnType("real");
-
-                    b.Property<float>("BalanceBefore")
-                        .HasColumnType("real");
-
-                    b.Property<float>("CashOut")
-                        .HasColumnType("real");
+                    b.Property<string>("BalanceBefore")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateMovement")
                         .HasColumnType("datetime2");
