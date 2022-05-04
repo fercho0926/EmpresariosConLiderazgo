@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EmpresariosConLiderazgo.Utils;
 
 namespace EmpresariosConLiderazgo.Models.Entities
 {
@@ -13,6 +9,6 @@ namespace EmpresariosConLiderazgo.Models.Entities
         public float BalanceBefore { get; set; }
         public float CashOut { get; set; }
         public float BalanceAfter { get; set; }
-        public bool Approved { get; set; }
+        public EnumStatus status { get; set; }
     }
 }

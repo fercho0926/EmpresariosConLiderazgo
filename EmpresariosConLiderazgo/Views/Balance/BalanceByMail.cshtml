@@ -60,8 +60,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                <a asp-action="CashOut" asp-route-id="@item.Id">Retirar</a> |
-                <a asp-action="Movements" asp-route-id="@item.Id">Movimientos</a> |
+                 <a  class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar"  style="font-size:24px;color:green"></a> |
+                 <a  class="fas fa-chart-line" asp-action="Movements" asp-route-id="@item.Id" title="Movimientos" style="font-size:24px;color:blue"></a> |
             </td>
         </tr>
 }

@@ -6,6 +6,12 @@
 }
 
 <h1>Retiros</h1>
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-danger jumbotron">
+        <strong>Error!</strong> @TempData["AlertMessage"]
+    </div>
+}
 
 <div>
     <h4> @User.Identity?.Name</h4>
@@ -63,7 +69,7 @@
             <input type="hidden" asp-for="BalanceAvailable" />
             <div class="form-group">
                 <label asp-for="CashOut" class="control-label"></label>
-                <input asp-for="CashOut" class="form-control" />
+                <input asp-for="CashOut" class="form-control" placeholder="Ingresa la cantidad a retirar"/>
                 <span asp-validation-for="CashOut" class="text-danger"></span>
             </div>
             <div class="form-group">

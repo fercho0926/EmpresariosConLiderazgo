@@ -1,0 +1,77 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+      IEnumerable<Movements> movements = ViewData["Movements"] as IEnumerable<Movements>;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+
+
+@foreach (var item in result)
+{
+    
+    <h1>item.User</h1>
+}
+@*<table class="table">
+     <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdBalanceProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateMovement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceBefore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CashOut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceAfter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+     <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdBalanceProduct)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateMovement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BalanceBefore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CashOut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BalanceAfter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+        
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>*@
+
+</table>

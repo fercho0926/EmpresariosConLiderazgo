@@ -31,9 +31,6 @@ namespace EmpresariosConLiderazgo.Models.Entities
         [Display(Name = "Fecha fin")]
         public DateTime EndlDate { get; set; }
 
-        [Display(Name = "Retiro aprobado")]
-        public bool Approved { get; set; }
-
 
     }
 }

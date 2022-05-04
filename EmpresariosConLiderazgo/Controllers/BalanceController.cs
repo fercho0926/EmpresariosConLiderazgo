@@ -221,6 +221,13 @@ namespace EmpresariosConLiderazgo.Controllers
                 return NotFound();
             }
 
+            if (balance.CashOut > balance.BalanceAvailable)
+            {
+                TempData["AlertMessage"] = $"El valor del retiro por  $ {balance.CashOut}, supera el Saldo disponible : $ {balance.BalanceAvailable}";
+                return View(balance);
+            }
+
+
             if (ModelState.IsValid)
             {
                 try
@@ -232,6 +239,7 @@ namespace EmpresariosConLiderazgo.Controllers
                     movement.BalanceBefore = balance.BalanceAvailable;
                     movement.CashOut = balance.CashOut;
                     movement.BalanceAfter = balance.BalanceAvailable - balance.CashOut;
+                    movement.status = Utils.EnumStatus.Pendiente;
 
 
                     balance.LastMovement = DateTime.Now;
@@ -259,6 +267,8 @@ namespace EmpresariosConLiderazgo.Controllers
             }
             return View(balance);
         }
+
+
 
 
     }
