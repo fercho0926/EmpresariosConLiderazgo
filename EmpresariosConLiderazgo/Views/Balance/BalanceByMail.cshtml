@@ -4,9 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Saldos</h1>
+<h1>Mis productos</h1>
 <p>
     <h4> @User.Identity?.Name</h4>
+</p>
+
+<p>
+    <a asp-action="Create">Comprar</a>
 </p>
 <table class="table">
     <thead>

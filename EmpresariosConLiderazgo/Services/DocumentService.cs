@@ -57,13 +57,13 @@ namespace EmpresariosConLiderazgo.Services
                     <strong>Aunque el riesgo es bajo, no lo exime de los riesgos que conlleva operar en los mercados bursátiles.</strong>
                       <br><br>
                       <br><br>___________________________________________________
-                    <br>Inversionista :
-                    <br> Documento: 
+                    <br><strong>Inversionista :</strong>
+                    <br><strong> Documento: </strong>
 
                      <br><br>___________________________________________________
-                    <br>Representante Legal : Uber Meneses Vásquez 
-                    <br> Nit: 1128469767 -1 
-                    <br> Empresarios Con Liderazgo</p>
+                    <br><strong>Representante Legal :</strong> Uber Meneses Vásquez 
+                    <br> <strong>Nit:</strong> 1128469767 -1 
+                    <br> <strong>Empresarios Con Liderazgo</strong></p>
             </body>
             </html>
             ";

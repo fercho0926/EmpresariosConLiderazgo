@@ -14,7 +14,7 @@ namespace EmpresariosConLiderazgo.Models.Entities
         public string UserApp { get; set; }
         [Display(Name = "Producto")]
         public string Product { get; set; }
-        [Display(Name = "Saldo")]
+        [Display(Name = "Saldo disponible")]
         [DisplayFormat(DataFormatString = "{0:N0} ")]
         public float BalanceAvailable { get; set; }
         [Display(Name = "Modeda")]
