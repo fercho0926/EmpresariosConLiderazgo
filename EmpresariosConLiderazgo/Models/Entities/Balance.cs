@@ -31,6 +31,8 @@ namespace EmpresariosConLiderazgo.Models.Entities
         [Display(Name = "Fecha fin")]
         public DateTime EndlDate { get; set; }
 
+        public List<MovementsByBalance> MovementsByBalance { get; set; }
+
 
     }
 }

@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace EmpresariosConLiderazgo.Data.Migrations
+namespace EmpresariosConLiderazgo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220504175148_updateTableBalance")]
-    partial class updateTableBalance
+    [Migration("20220504215747_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,9 +31,6 @@ namespace EmpresariosConLiderazgo.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<bool>("Approved")
-                        .HasColumnType("bit");
 
                     b.Property<float>("BalanceAvailable")
                         .HasColumnType("real");
@@ -70,7 +67,7 @@ namespace EmpresariosConLiderazgo.Data.Migrations
                     b.ToTable("Balance");
                 });
 
-            modelBuilder.Entity("EmpresariosConLiderazgo.Models.Entities.Movements", b =>
+            modelBuilder.Entity("EmpresariosConLiderazgo.Models.Entities.MovementsByBalance", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,27 +75,33 @@ namespace EmpresariosConLiderazgo.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("BalanceAfter")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("BalanceAfter")
+                        .HasColumnType("real");
 
-                    b.Property<string>("BalanceBefore")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("BalanceBefore")
+                        .HasColumnType("real");
+
+                    b.Property<int>("BalanceId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("CashOut")
+                        .HasColumnType("real");
 
                     b.Property<DateTime>("DateMovement")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IdBalanceProduct")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Movements");
+                    b.HasIndex("BalanceId");
+
+                    b.ToTable("MovementsByBalance");
                 });
 
             modelBuilder.Entity("EmpresariosConLiderazgo.Models.Logs", b =>
@@ -428,6 +431,15 @@ namespace EmpresariosConLiderazgo.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("EmpresariosConLiderazgo.Models.Entities.MovementsByBalance", b =>
+                {
+                    b.HasOne("EmpresariosConLiderazgo.Models.Entities.Balance", null)
+                        .WithMany("MovementsByBalance")
+                        .HasForeignKey("BalanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -477,6 +489,11 @@ namespace EmpresariosConLiderazgo.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EmpresariosConLiderazgo.Models.Entities.Balance", b =>
+                {
+                    b.Navigation("MovementsByBalance");
                 });
 #pragma warning restore 612, 618
         }

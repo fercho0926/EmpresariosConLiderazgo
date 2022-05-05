@@ -1,0 +1,107 @@
+﻿@model IEnumerable<EmpresariosConLiderazgo.Models.Entities.Balance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserApp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastMovement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InitialDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndlDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovementsByBalance[0])
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserApp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BalanceAvailable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastMovement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InitialDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndlDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+               
+            </tr>
+
+
+
+            @foreach (var movement in item.MovementsByBalance)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelmovement => movement.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelmovement => movement.BalanceId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelmovement => movement.DateMovement)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelmovement => movement.BalanceBefore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelmovement => movement.CashOut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelmovement => movement.BalanceAfter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelmovement => movement.status)
+                    </td>
+                     <td>
+                    <a asp-action="Edit" asp-route-id="@movement.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@movement.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@movement.Id">Delete</a>
+                </td>
+                </tr>
+
+            }
+
+        }
+    </tbody>
+</table>
