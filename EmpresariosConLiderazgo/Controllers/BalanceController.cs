@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
+    [Authorize]
     public class BalanceController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,11 +22,11 @@ namespace EmpresariosConLiderazgo.Controllers
             _context = context;
         }
 
-        //// GET: Balance
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Balance.ToListAsync());
-        //}
+        // GET: Balance
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.Balance.ToListAsync());
+        }
 
         //// GET: Balance/Details/5
         //public async Task<IActionResult> Details(int? id)
@@ -157,7 +159,7 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             if (mail == null)
             {
-                return NotFound();
+                RedirectToPage("Error");
             }
 
             if (User.Identity?.Name != mail)
@@ -168,7 +170,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             if (TotalBalance.Count() == 0)
             {
-                return NotFound();
+                RedirectToPage("Error");
             }
             return View(TotalBalance);
         }

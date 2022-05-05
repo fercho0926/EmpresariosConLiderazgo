@@ -1,4 +1,7 @@
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using EmpresariosConLiderazgo.Data;
+using EmpresariosConLiderazgo.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +18,11 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+
+// Services dependencies
+builder.Services.AddTransient<IDocumentService, DocumentService>();
+
 
 var app = builder.Build();
 
