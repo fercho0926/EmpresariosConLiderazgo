@@ -10,7 +10,7 @@ namespace EmpresariosConLiderazgo.Utils
     {
         Colombia,
         Mexico,
-        Estados_Unidos
-
+        Estados_Unidos,
+        PorDefinir
     }
 }

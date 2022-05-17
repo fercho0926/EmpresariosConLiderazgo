@@ -5,21 +5,44 @@ using EmpresariosConLiderazgo.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Text;
+using EmpresariosConLiderazgo.Data;
+using iText.StyledXmlParser.Jsoup.Select;
+using Microsoft.AspNetCore.Identity;
+
 
 namespace EmpresariosConLiderazgo.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager,
+            SignInManager<IdentityUser> SignInManager, ApplicationDbContext context)
         {
             _logger = logger;
+            _userManager = userManager;
+            _signInManager = SignInManager;
+            _context = context;
         }
 
         public IActionResult Index()
         {
+            string UserLogged = User.Identity?.Name.ToString();
+
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+
             return View();
         }
 
@@ -140,6 +163,12 @@ namespace EmpresariosConLiderazgo.Controllers
             }
 
             return View();
+        }
+
+
+        public IActionResult FinalRegister()
+        {
+            return RedirectToPage("~/Users_App/Index");
         }
     }
 }

@@ -5,7 +5,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h4>Editar @User.Identity?.Name</h4>
+<h4> @User.Identity?.Name</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,18 +16,18 @@
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" readonly="readonly"/>
+                <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
            
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" readonly="readonly"/>
+                <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Identification" class="control-label"></label>
-                <input asp-for="Identification" class="form-control" readonly="readonly"/>
+                <input asp-for="Identification" class="form-control" />
                 <span asp-validation-for="Identification" class="text-danger"></span>
             </div>
             <div class="form-group">

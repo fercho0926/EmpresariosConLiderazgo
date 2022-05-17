@@ -68,6 +68,7 @@ C:\WorkSpaces\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\r
 C:\WorkSpaces\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\EmpresariosConLiderazgo.pdb
 C:\WorkSpaces\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\EmpresariosConLiderazgo.genruntimeconfig.cache
 C:\WorkSpaces\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\ref\EmpresariosConLiderazgo.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\EmpresariosConLiderazgo.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\epengine.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\appsettings.Development.json
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\appsettings.json
@@ -76,9 +77,9 @@ C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\EmpresariosConLiderazgo.exe
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\EmpresariosConLiderazgo.deps.json
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\EmpresariosConLiderazgo.runtimeconfig.json
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\EmpresariosConLiderazgo.dll
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\EmpresariosConLiderazgo.pdb
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\AWSSDK.Core.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\AWSSDK.SimpleEmail.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\DinkToPdf.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\ephtmltopdf.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Humanizer.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\itext.barcodes.dll
@@ -98,6 +99,8 @@ C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.UI.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.Build.Locator.dll
@@ -155,6 +158,7 @@ C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\NuGet.ProjectModel.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\NuGet.Protocol.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\NuGet.Versioning.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -359,9 +363,7 @@ C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\refint\EmpresariosConLiderazgo.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\EmpresariosConLiderazgo.pdb
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\EmpresariosConLiderazgo.genruntimeconfig.cache
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\ref\EmpresariosConLiderazgo.dll
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\AWSSDK.Core.dll
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\AWSSDK.SimpleEmail.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\EmpresariosConLiderazgo.pdb
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Antiforgery.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Authentication.Abstractions.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Authentication.Cookies.dll
@@ -645,6 +647,4 @@ C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\System.Xml.XPath.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\System.Xml.XPath.XDocument.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\WindowsBase.dll
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\DinkToPdf.dll
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
-C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\ref\EmpresariosConLiderazgo.dll
