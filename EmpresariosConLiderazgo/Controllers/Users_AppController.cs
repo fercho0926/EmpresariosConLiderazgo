@@ -123,6 +123,8 @@ namespace EmpresariosConLiderazgo.Controllers
                     }
                 }
 
+                TempData["AlertMessage"] =
+                    $"Se ha realizado la actualizacion de la Informacion";
                 return RedirectToAction("Index", "Home");
             }
 
