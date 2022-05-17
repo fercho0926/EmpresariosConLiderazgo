@@ -4,6 +4,8 @@ using Amazon.SimpleEmail.Model;
 using EmpresariosConLiderazgo.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Net.Mail;
+using System.Text;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
@@ -42,8 +44,8 @@ namespace EmpresariosConLiderazgo.Controllers
             string receiverAddress = "fercho0926@hotmail.com";
             string subject = "Titulo  : Bla bla ";
             string textBody = "Amazon SES Test (.NET)\r\n"
-                                           + "This email was sent through Amazon SES "
-                                           + "using the AWS SDK for .NET.";
+                              + "This email was sent through Amazon SES "
+                              + "using the AWS SDK for .NET.";
 
             string htmlBody = @"<html>
 <head></head>
@@ -67,7 +69,7 @@ namespace EmpresariosConLiderazgo.Controllers
                     Destination = new Destination
                     {
                         ToAddresses =
-                        new List<string> { receiverAddress }
+                            new List<string> { receiverAddress }
                     },
                     Message = new Message
                     {
@@ -102,11 +104,40 @@ namespace EmpresariosConLiderazgo.Controllers
                 {
                     Console.WriteLine("The email was not sent.");
                     Console.WriteLine("Error message: " + ex.Message);
-
                 }
             }
 
 
+            return View();
+        }
+
+
+        public IActionResult SendLocal()
+        {
+            string to = "milton.vasquez0726@gmail.com"; //To address    
+            string from = "milton.vasquez0726@gmail.com"; //From address    
+            MailMessage message = new MailMessage(from, to);
+
+            string mailbody = "In this article you will learn how to send a email using Asp.Net & C#";
+            message.Subject = "Sending Email Using Asp.Net & C#";
+            message.Body = mailbody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            System.Net.NetworkCredential basicCredential1 = new
+                System.Net.NetworkCredential("m.logueo123@gmail.com", "D3e#vPadp");
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
+            client.Credentials = basicCredential1;
+            try
+            {
+                client.Send(message);
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
             return View();
         }

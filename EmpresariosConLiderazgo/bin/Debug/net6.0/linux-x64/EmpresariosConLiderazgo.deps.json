@@ -35,7 +35,7 @@
       "EmpresariosConLiderazgo/1.0.0": {
         "dependencies": {
           "AWSSDK.SimpleEmail": "3.7.0.154",
-          "DinkToPdf": "1.0.8",
+          "DinkToPdfIncludesDependencies": "1.0.8",
           "ExpertPdf.HtmlToPdf.NetCore": "17.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.4",
@@ -1792,18 +1792,9 @@
           "lib/netcoreapp3.1/AWSSDK.SimpleEmail.dll": {}
         }
       },
-      "DinkToPdf/1.0.8": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Collections.Concurrent": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.3.0",
-          "System.Runtime": "4.3.1",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Threading.Thread": "4.3.0"
-        },
+      "DinkToPdfIncludesDependencies/1.0.8": {
         "compile": {
-          "lib/netstandard1.6/DinkToPdf.dll": {}
+          "lib/netcoreapp2.0/DinkToPdf.dll": {}
         }
       },
       "ExpertPdf.HtmlToPdf.NetCore/17.0.0": {
@@ -3652,7 +3643,7 @@
       "EmpresariosConLiderazgo/1.0.0": {
         "dependencies": {
           "AWSSDK.SimpleEmail": "3.7.0.154",
-          "DinkToPdf": "1.0.8",
+          "DinkToPdfIncludesDependencies": "1.0.8",
           "ExpertPdf.HtmlToPdf.NetCore": "17.0.0",
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "6.0.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.4",
@@ -3975,18 +3966,9 @@
           }
         }
       },
-      "DinkToPdf/1.0.8": {
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Collections.Concurrent": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Reflection.TypeExtensions": "4.3.0",
-          "System.Runtime": "4.3.1",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Threading.Thread": "4.3.0"
-        },
+      "DinkToPdfIncludesDependencies/1.0.8": {
         "runtime": {
-          "lib/netstandard1.6/DinkToPdf.dll": {
+          "lib/netcoreapp2.0/DinkToPdf.dll": {
             "assemblyVersion": "1.0.8.0",
             "fileVersion": "1.0.8.0"
           }
@@ -6653,12 +6635,12 @@
       "path": "awssdk.simpleemail/3.7.0.154",
       "hashPath": "awssdk.simpleemail.3.7.0.154.nupkg.sha512"
     },
-    "DinkToPdf/1.0.8": {
+    "DinkToPdfIncludesDependencies/1.0.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wJDlcNXjQ+OnBFwh3LBeAXgrXqlKl0RsgN60XpxEFbyqzdaG9ASb5HTXQjXQPaBguSCOrGZZESPnpcng34TEkw==",
-      "path": "dinktopdf/1.0.8",
-      "hashPath": "dinktopdf.1.0.8.nupkg.sha512"
+      "sha512": "sha512-T3how7gY7vP3dXafpER/mD3HC5azY6dti9J34zSo3EuUG4xm9ZnyWqsD5FLj+8gy9Jy/6hnLcAlMauUJu7qGkQ==",
+      "path": "dinktopdfincludesdependencies/1.0.8",
+      "hashPath": "dinktopdfincludesdependencies.1.0.8.nupkg.sha512"
     },
     "ExpertPdf.HtmlToPdf.NetCore/17.0.0": {
       "type": "package",

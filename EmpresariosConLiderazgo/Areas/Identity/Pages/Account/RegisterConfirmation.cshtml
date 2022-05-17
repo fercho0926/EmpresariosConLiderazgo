@@ -1,0 +1,70 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Confirmación de registro";
+    Layout = "_LayoutSimple";
+}
+
+<style>
+
+    body,html {
+        margin: 0;
+        font-family: sans-serif;
+    }
+
+  
+
+    a {
+        outline: none;
+        text-decoration: none;
+        display: inline-block;
+        width: 19.5%;
+        margin-right: 0.625%;
+        text-align: center;
+        line-height: 3;
+        color: black;
+    }
+
+    li:last-child a {
+        margin-right: 0;
+    }
+
+    #confirm-link {
+        background: lightgreen;
+    }
+
+    #confirm-link:hover {
+        background: orange;
+    }
+
+    a:active {
+        background: red;
+        color: white;
+    }
+
+
+
+</style>
+
+<h1>@ViewData["Title"]</h1>
+@{
+
+
+
+
+
+    if (@Model.DisplayConfirmAccountLink)
+    {
+        <p>
+            Empresarios con liderazgo se reserva el derecho de admision, BLA BLA BLA, en caso de continuar, acepta los terminos y cond BLA BLA BLA.
+            MAS CARRETA : <a   id="confirm-link" href="@Model.EmailConfirmationUrl">ACEPTAR</a>
+        </p>
+    }
+    else
+    {
+<p>
+        Please check your email to confirm your account.
+</p>
+    }
+}
+
