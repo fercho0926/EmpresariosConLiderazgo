@@ -648,3 +648,8 @@ C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\System.Xml.XPath.XDocument.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\WindowsBase.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\obj\Debug\net6.0\ref\EmpresariosConLiderazgo.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.Extensions.FileProviders.Embedded.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.Extensions.Identity.Core.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.Extensions.Identity.Stores.dll
