@@ -40,4 +40,10 @@
     <Folder Include="Views\User_contracts\Contracts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="libwkhtmltox">
+      <HintPath>bin\Debug\net6.0\libwkhtmltox.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

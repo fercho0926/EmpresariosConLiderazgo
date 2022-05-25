@@ -271,6 +271,21 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
+        public async Task<IActionResult> Packages()
+        {
+
+            return View();
+        }
+
+        public async Task<IActionResult> BuyById(int? id)
+        {
+            Console.WriteLine("asd");
+            return View();
+        }
+
+
+
+
 
     }
 }

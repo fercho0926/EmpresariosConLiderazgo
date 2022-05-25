@@ -28,7 +28,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
                 string subject = "Invitacion Empresarios Con Liderazgo";
                 string body =
-                    $"Hola {refer.Name.ToString()} Empresarios con liderazgo quiere q hagas parte del proyecto, por ende te invitamos a registrarte y ser parte de nuestra comunidad, Visita https://empresariosconliderazgo.org/";
+                    $"Hola {refer.Name.ToString()} Empresarios con liderazgo quiere q hagas parte del proyecto, por ende te invitamos a registrarte y ser parte de nuestra comunidad, Visita https://localhost:7154/Identity/Account/Register?returnUrl=%2F";
 
                 SendMail.SendMailWithoutattached(subject, refer.Mail.ToString(), body);
             }
