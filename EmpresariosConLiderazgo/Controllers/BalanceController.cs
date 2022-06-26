@@ -168,14 +168,14 @@ namespace EmpresariosConLiderazgo.Controllers
                 return NotFound();
             }
 
-            var TotalBalance = _context.Balance.ToList().Where(x => x.UserApp == mail);
+            var movementsByMail = _context.Balance.Where(x => x.UserApp == mail).OrderByDescending(x => x.Id).ToList();
 
-            if (TotalBalance.Count() == 0)
+            if (movementsByMail.Count() == 0)
             {
                 RedirectToPage("Error");
             }
 
-            return View(TotalBalance);
+            return View(movementsByMail);
         }
 
 
@@ -296,26 +296,26 @@ namespace EmpresariosConLiderazgo.Controllers
             return View();
         }
 
-        public async Task<IActionResult> BuyById(int? id)
-        {
-            var NewProduct = new Balance()
-            {
-                UserApp = User.Identity?.Name,
-                Name = "BASIC",
-                Product = id.ToString(), //CAMBIAR
-                BalanceAvailable = 1,
-                Currency = EnumCurrencies.Peso_Colombiano,
-                CashOut = 0,
-                LastMovement = DateTime.Now,
-                InitialDate = DateTime.Now,
-                EndlDate = DateTime.Now,
-            };
-            _context.Add(NewProduct);
+        //public async Task<IActionResult> BuyById(int? id)
+        //{
+        //    var NewProduct = new Balance()
+        //    {
+        //        UserApp = User.Identity?.Name,
+        //        Name = "BASIC",
+        //        Product = id.ToString(), //CAMBIAR
+        //        BalanceAvailable = 1,
+        //        Currency = EnumCurrencies.Peso_Colombiano,
+        //        CashOut = 0,
+        //        LastMovement = DateTime.Now,
+        //        InitialDate = DateTime.Now,
+        //        EndlDate = DateTime.Now,
+        //    };
+        //    _context.Add(NewProduct);
 
-            await _context.SaveChangesAsync();
+        //    await _context.SaveChangesAsync();
 
-            return View();
-        }
+        //    return View();
+        //}
 
 
         public async Task<IActionResult> CreateProduct()
@@ -344,7 +344,10 @@ namespace EmpresariosConLiderazgo.Controllers
             CreateMovement(productId.Id, "Creacion Inicial", productId.BalanceAvailable, productId.CashOut,
                 Utils.EnumStatus.creacion);
 
-            return View();
+            TempData["AlertMessage"] =
+                $"Se realizo la creacion del nuevo producto  {NewProduct.Product}, por valor de $ {NewProduct.BalanceAvailable}, Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos";
+
+            return RedirectToAction("BalanceByMail", "Balance", new { @mail = User.Identity?.Name });
         }
 
 

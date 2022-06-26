@@ -1,8 +1,18 @@
-﻿@model IEnumerable<Balance>
+﻿@using EmpresariosConLiderazgo.Utils
+@model IEnumerable<Balance>
 
 @{
     ViewData["Title"] = "Index";
 }
+
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+
 
 <h1>Mis productos</h1>
 <p>
@@ -14,38 +24,48 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-             <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BalanceAvailable)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastMovement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InitialDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndlDate)
-            </th>
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BalanceAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastMovement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InitialDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndlDate)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.StatusBalance)
+        </th>
 
-            <th></th>
-        </tr>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-              
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Product)
                 </td>
-                  <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
@@ -59,11 +79,19 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.EndlDate)
+                </td>    <td>
+                    @Html.DisplayFor(modelItem => item.StatusBalance)
                 </td>
 
                 <td>
-                    <a class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar" style="font-size:24px;color:green"></a> |
-                    <a class="fas fa-chart-line" asp-action="Movements" asp-route-id="@item.Id" title="Movimientos" style="font-size:24px;color:blue"></a> |
+                    <a class="fas fa-chart-line" asp-action="Movements" asp-route-id="@item.Id" title="Movimientos" style="font-size: 24px; color: blue"></a> |
+
+                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
+                    {
+                        <a class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar" style="font-size: 24px; color: green"></a>
+                    }
+
+
                 </td>
             </tr>
         }

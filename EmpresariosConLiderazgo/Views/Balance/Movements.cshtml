@@ -6,6 +6,13 @@
 
 <h1>Movimientos</h1>
 
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
 <div>
     <h4> @User.Identity?.Name</h4>
     <hr />

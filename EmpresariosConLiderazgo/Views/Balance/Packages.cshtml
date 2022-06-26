@@ -25,9 +25,9 @@
                             <p>Desde : $10.000.000</p>
                             <p>Hasta : $12.000.000</p>
                             <p>Porcentaje : 7%</p>
-                            <div>
+                           @* <div>
                                 <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 1})'" />
-                            </div>
+                            </div>*@
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -44,14 +44,10 @@
                             <div class="font-weight-bold text-primary text-uppercase mb-1">
                                 Star
                             </div>
-                            @*<div class="h5 mb-0 font-weight-bold text-gray-800">$400,000</div>*@
                             <hr>
                             <p>Desde : $12.000.001</p>
                             <p>Hasta : $16.000.000</p>
                             <p>Porcentaje : 7.5%</p>
-                            <div>
-                                <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 2})'" />
-                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -68,14 +64,10 @@
                             <div class="font-weight-bold text-primary text-uppercase mb-1">
                                 Vip
                             </div>
-                            @*<div class="h5 mb-0 font-weight-bold text-gray-800">$400,000</div>*@
                             <hr>
                             <p>Desde : $16.000.001</p>
                             <p>Hasta : $20.000.000</p>
                             <p>Porcentaje : 8%</p>
-                            <div>
-                                <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 3})'" />
-                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -92,14 +84,10 @@
                             <div class="font-weight-bold text-primary text-uppercase mb-1">
                                 Elite
                             </div>
-                            @*<div class="h5 mb-0 font-weight-bold text-gray-800">$400,000</div>*@
                             <hr>
                             <p>Desde : $20.000.001</p>
                             <p>Sin Limite  </p>
                             <p>Porcentaje : 9%</p>
-                            <div>
-                                <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 4})'" />
-                            </div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -112,8 +100,6 @@
     </div>
 
     <div class="row">
-
-
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text"> $</span>
@@ -123,14 +109,11 @@
                 <button class="btn btn-success" type="button" data-toggle="modal" data-target="#InvestConfirmation" onclick="InvestConfirm()">INVERTIR</button>
             </div>
         </div>
-
     </div>
 
 
 
     <div>
-
-
         <!-- Modal -->
         <div class="modal fade" id="InvestConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -177,7 +160,6 @@
 </div>
 
 <script type="text/javascript">
-
     function InvestConfirm() {
 
         var I_amount = document.getElementById('amountToInvest').value;
@@ -211,10 +193,4 @@
 
         }
     }
-
-
-        //function formSubmit() {
-        //    document.getElementById("myForm").submit();
-        //}
-
 </script>

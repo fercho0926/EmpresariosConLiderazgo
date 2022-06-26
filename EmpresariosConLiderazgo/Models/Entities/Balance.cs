@@ -27,7 +27,7 @@ namespace EmpresariosConLiderazgo.Models.Entities
         [Display(Name = "Fecha inicio")] public DateTime InitialDate { get; set; }
         [Display(Name = "Fecha fin")] public DateTime EndlDate { get; set; }
 
-        public EnumStatusBalance StatusBalance { get; set; }
+        [Display(Name = "Estado")] public EnumStatusBalance StatusBalance { get; set; }
 
         public bool Contract { get; set; } // 0 sin contrato 1 co contrato
 
