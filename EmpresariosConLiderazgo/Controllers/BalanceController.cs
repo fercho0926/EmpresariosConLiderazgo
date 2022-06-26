@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Models.Entities;
+using EmpresariosConLiderazgo.Utils;
 using Microsoft.AspNetCore.Authorization;
 
 namespace EmpresariosConLiderazgo.Controllers
@@ -166,12 +167,14 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 return NotFound();
             }
+
             var TotalBalance = _context.Balance.ToList().Where(x => x.UserApp == mail);
 
             if (TotalBalance.Count() == 0)
             {
                 RedirectToPage("Error");
             }
+
             return View(TotalBalance);
         }
 
@@ -182,12 +185,14 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 return NotFound();
             }
+
             var result = _context.Balance.Where(b => b.Id == id)
-            .Include(x => x.MovementsByBalance).ToList();
+                .Include(x => x.MovementsByBalance).ToList();
             if (result == null)
             {
                 return NotFound();
             }
+
             return View(result);
         }
 
@@ -203,13 +208,16 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 return NotFound();
             }
+
             return View(balance);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CashOut(int id, [Bind("UserApp,BalanceAvailable,Id,CashOut,Name,Product")] Balance balance)
+        public async Task<IActionResult> CashOut(int id,
+            [Bind("UserApp,BalanceAvailable,Id,CashOut,Name,Product")]
+            Balance balance)
         {
             if (id != balance.Id)
             {
@@ -218,28 +226,40 @@ namespace EmpresariosConLiderazgo.Controllers
 
             if (balance.CashOut > balance.BalanceAvailable)
             {
-                TempData["AlertMessage"] = $"El valor del retiro por  $ {balance.CashOut}, supera el Saldo disponible : $ {balance.BalanceAvailable}";
+                TempData["AlertMessage"] =
+                    $"El valor del retiro por  $ {balance.CashOut}, supera el Saldo disponible : $ {balance.BalanceAvailable}";
+                return View(balance);
+            }
+
+            if (balance.CashOut == 0)
+            {
+                TempData["AlertMessage"] =
+                    $"El Valor a retirar debe ser superior a $0";
                 return View(balance);
             }
 
             try
             {
-                MovementsByBalance movement = new MovementsByBalance();
-                movement.BalanceId = balance.Id;
-                movement.DateMovement = DateTime.Now;
-                movement.Name = "Solicitud Retiro";
-                movement.BalanceBefore = balance.BalanceAvailable;
-                movement.CashOut = balance.CashOut;
-                movement.BalanceAfter = balance.BalanceAvailable - balance.CashOut;
-                movement.status = Utils.EnumStatus.Pendiente;
+                CreateMovement(balance.Id, "Solicitud de retiro", balance.BalanceAvailable, balance.CashOut,
+                    Utils.EnumStatus.Pendiente);
 
-                balance.LastMovement = DateTime.Now;
-                balance.BalanceAvailable = balance.BalanceAvailable - balance.CashOut;
 
-                _context.MovementsByBalance.Add(movement);
-                _context.Update(balance);
+                //MovementsByBalance movement = new MovementsByBalance();
+                //movement.BalanceId = balance.Id;
+                //movement.DateMovement = DateTime.Now;
+                //movement.Name = "Solicitud Retiro";
+                //movement.BalanceBefore = balance.BalanceAvailable;
+                //movement.CashOut = balance.CashOut;
+                //movement.BalanceAfter = balance.BalanceAvailable - balance.CashOut;
+                //movement.status = Utils.EnumStatus.Pendiente;
 
-                await _context.SaveChangesAsync();
+                //balance.LastMovement = DateTime.Now;
+                //balance.BalanceAvailable = balance.BalanceAvailable - balance.CashOut;
+
+                //_context.MovementsByBalance.Add(movement);
+                //_context.Update(balance);
+
+                //await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -253,7 +273,8 @@ namespace EmpresariosConLiderazgo.Controllers
                 //}
             }
 
-            TempData["AlertMessage"] = $"Se registro la solicitud de retiro del producto {balance.Product}, por valor de $ {balance.CashOut} El desembolso se realiza el dia MARTES";
+            TempData["AlertMessage"] =
+                $"Se registro la solicitud de retiro del producto {balance.Product}, por valor de $ {balance.CashOut} El desembolso se realiza el dia MARTES";
             return RedirectToAction("Index", "Home");
 
             return View(balance);
@@ -262,7 +283,6 @@ namespace EmpresariosConLiderazgo.Controllers
 
         public async Task<IActionResult> AdminCashOutRequest()
         {
-
             var balancerepo = _context.Balance
                 .Include(x => x.MovementsByBalance).ToList();
 
@@ -273,19 +293,76 @@ namespace EmpresariosConLiderazgo.Controllers
 
         public async Task<IActionResult> Packages()
         {
-
             return View();
         }
 
         public async Task<IActionResult> BuyById(int? id)
         {
-            Console.WriteLine("asd");
+            var NewProduct = new Balance()
+            {
+                UserApp = User.Identity?.Name,
+                Name = "BASIC",
+                Product = id.ToString(), //CAMBIAR
+                BalanceAvailable = 1,
+                Currency = EnumCurrencies.Peso_Colombiano,
+                CashOut = 0,
+                LastMovement = DateTime.Now,
+                InitialDate = DateTime.Now,
+                EndlDate = DateTime.Now,
+            };
+            _context.Add(NewProduct);
+
+            await _context.SaveChangesAsync();
+
             return View();
         }
 
 
+        public async Task<IActionResult> CreateProduct()
+        {
+            var NewProduct = new Balance()
+            {
+                UserApp = User.Identity?.Name,
+                Name = HttpContext.Request.Form["category"],
+                Product = HttpContext.Request.Form["category"],
+                BalanceAvailable = float.Parse(HttpContext.Request.Form["amount"]),
+                Currency = EnumCurrencies.Peso_Colombiano,
+                CashOut = 0,
+                LastMovement = DateTime.Now,
+                InitialDate = DateTime.Now,
+                EndlDate = DateTime.Now,
+                StatusBalance = EnumStatusBalance.PENDIENTE,
+                Contract = false
+            };
+            _context.Add(NewProduct);
+
+            await _context.SaveChangesAsync();
+            var productId = await _context.Balance.SingleAsync(x => x.UserApp == NewProduct.UserApp &&
+                                                                    x.InitialDate == NewProduct.InitialDate);
 
 
+            CreateMovement(productId.Id, "Creacion Inicial", productId.BalanceAvailable, productId.CashOut,
+                Utils.EnumStatus.creacion);
 
+            return View();
+        }
+
+
+        private void CreateMovement(int productID, string action, float balanceAvailable, float cashOut,
+            Utils.EnumStatus status)
+        {
+            var movement = new MovementsByBalance
+            {
+                BalanceId = productID,
+                DateMovement = DateTime.Now,
+                Name = action,
+                BalanceBefore = balanceAvailable,
+                CashOut = cashOut,
+                BalanceAfter = balanceAvailable - cashOut,
+                status = status
+            };
+            _context.MovementsByBalance.Add(movement);
+            _context.SaveChangesAsync();
+        }
     }
 }

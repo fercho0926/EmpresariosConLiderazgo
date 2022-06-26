@@ -17,7 +17,7 @@ namespace EmpresariosConLiderazgo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -35,6 +35,9 @@ namespace EmpresariosConLiderazgo.Migrations
 
                     b.Property<float>("CashOut")
                         .HasColumnType("real");
+
+                    b.Property<bool>("Contract")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Currency")
                         .HasColumnType("int");
@@ -55,6 +58,9 @@ namespace EmpresariosConLiderazgo.Migrations
                     b.Property<string>("Product")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StatusBalance")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserApp")
                         .IsRequired()

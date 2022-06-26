@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bkZ7+yFLgGHRqem9lnmCcdwK90JbaTk8occhz3Hvb0c=",
+  "Hash": "Oa8x0IxpbjVX8PDeKbVR1B1pIxyF6OpJLZLFFS2qBLI=",
   "Source": "EmpresariosConLiderazgo",
   "BasePath": "_content/EmpresariosConLiderazgo",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\js\\currencyFormat.js",
+      "SourceId": "EmpresariosConLiderazgo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\",
+      "BasePath": "_content/EmpresariosConLiderazgo",
+      "RelativePath": "js/currencyFormat.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\currencyFormat.js"
     },
     {
       "Identity": "C:\\WorkSpaces\\git\\EmpresariosConLiderazgo\\EmpresariosConLiderazgo\\wwwroot\\js\\site.js",

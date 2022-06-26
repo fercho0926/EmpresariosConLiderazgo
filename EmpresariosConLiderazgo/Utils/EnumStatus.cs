@@ -10,7 +10,7 @@ namespace EmpresariosConLiderazgo.Utils
     {
         Aprovado,
         Pendiente,
-        Rechazado
-
+        Rechazado,
+        creacion
     }
 }
