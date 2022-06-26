@@ -15,13 +15,13 @@ namespace EmpresariosConLiderazgo.Models.Entities
 
         [Display(Name = "Saldo disponible")]
         [DisplayFormat(DataFormatString = "{0:N0} ")]
-        public float BalanceAvailable { get; set; }
+        public decimal BalanceAvailable { get; set; }
 
         [Display(Name = "Modeda")] public EnumCurrencies Currency { get; set; }
 
         [Display(Name = "Retirar")]
         [DisplayFormat(DataFormatString = "{0:N0} ")]
-        public float CashOut { get; set; }
+        public decimal CashOut { get; set; }
 
         [Display(Name = "Ultimo movimiento")] public DateTime LastMovement { get; set; }
         [Display(Name = "Fecha inicio")] public DateTime InitialDate { get; set; }

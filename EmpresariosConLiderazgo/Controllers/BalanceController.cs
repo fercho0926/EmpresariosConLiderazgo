@@ -29,132 +29,6 @@ namespace EmpresariosConLiderazgo.Controllers
             return View(await _context.Balance.ToListAsync());
         }
 
-        //// GET: Balance/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var balance = await _context.Balance
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (balance == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(balance);
-        //}
-
-        //// GET: Balance/Create
-
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Balance/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("UserApp,Product,BalanceAvailable,LastMovement,InitialDate,EndlDate,Id,Name")] Balance balance)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(balance);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(balance);
-        //}
-
-        //// GET: Balance/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var balance = await _context.Balance.FindAsync(id);
-        //    if (balance == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(balance);
-        //}
-
-        //// POST: Balance/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("UserApp,Product,BalanceAvailable,LastMovement,InitialDate,EndlDate,Id,Name")] Balance balance)
-        //{
-        //    if (id != balance.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(balance);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BalanceExists(balance.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(balance);
-        //}
-
-        //// GET: Balance/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var balance = await _context.Balance
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (balance == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(balance);
-        //}
-
-        //// POST: Balance/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var balance = await _context.Balance.FindAsync(id);
-        //    _context.Balance.Remove(balance);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool BalanceExists(int id)
-        //{
-        //    return _context.Balance.Any(e => e.Id == id);
-        //}
-
 
         public async Task<IActionResult> BalanceByMail(string mail)
         {
@@ -242,35 +116,12 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 CreateMovement(balance.Id, "Solicitud de retiro", balance.BalanceAvailable, balance.CashOut,
                     Utils.EnumStatus.Pendiente);
-
-
-                //MovementsByBalance movement = new MovementsByBalance();
-                //movement.BalanceId = balance.Id;
-                //movement.DateMovement = DateTime.Now;
-                //movement.Name = "Solicitud Retiro";
-                //movement.BalanceBefore = balance.BalanceAvailable;
-                //movement.CashOut = balance.CashOut;
-                //movement.BalanceAfter = balance.BalanceAvailable - balance.CashOut;
-                //movement.status = Utils.EnumStatus.Pendiente;
-
-                //balance.LastMovement = DateTime.Now;
-                //balance.BalanceAvailable = balance.BalanceAvailable - balance.CashOut;
-
-                //_context.MovementsByBalance.Add(movement);
-                //_context.Update(balance);
-
-                //await _context.SaveChangesAsync();
             }
+
+
             catch (DbUpdateConcurrencyException)
             {
-                //if (!BalanceExists(balance.Id))
-                //{
-                //    return NotFound();
-                //}
-                //else
-                //{
-                //    throw;
-                //}
+
             }
 
             TempData["AlertMessage"] =
@@ -296,27 +147,6 @@ namespace EmpresariosConLiderazgo.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> BuyById(int? id)
-        //{
-        //    var NewProduct = new Balance()
-        //    {
-        //        UserApp = User.Identity?.Name,
-        //        Name = "BASIC",
-        //        Product = id.ToString(), //CAMBIAR
-        //        BalanceAvailable = 1,
-        //        Currency = EnumCurrencies.Peso_Colombiano,
-        //        CashOut = 0,
-        //        LastMovement = DateTime.Now,
-        //        InitialDate = DateTime.Now,
-        //        EndlDate = DateTime.Now,
-        //    };
-        //    _context.Add(NewProduct);
-
-        //    await _context.SaveChangesAsync();
-
-        //    return View();
-        //}
-
 
         public async Task<IActionResult> CreateProduct()
         {
@@ -325,7 +155,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 UserApp = User.Identity?.Name,
                 Name = HttpContext.Request.Form["category"],
                 Product = HttpContext.Request.Form["category"],
-                BalanceAvailable = float.Parse(HttpContext.Request.Form["amount"]),
+                BalanceAvailable = decimal.Parse(HttpContext.Request.Form["amount"]),
                 Currency = EnumCurrencies.Peso_Colombiano,
                 CashOut = 0,
                 LastMovement = DateTime.Now,
@@ -335,7 +165,6 @@ namespace EmpresariosConLiderazgo.Controllers
                 Contract = false
             };
             _context.Add(NewProduct);
-
             await _context.SaveChangesAsync();
             var productId = await _context.Balance.SingleAsync(x => x.UserApp == NewProduct.UserApp &&
                                                                     x.InitialDate == NewProduct.InitialDate);
@@ -351,7 +180,10 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
-        private void CreateMovement(int productID, string action, float balanceAvailable, float cashOut,
+
+
+
+        private void CreateMovement(int productID, string action, decimal balanceAvailable, decimal cashOut,
             Utils.EnumStatus status)
         {
             var movement = new MovementsByBalance
@@ -368,4 +200,5 @@ namespace EmpresariosConLiderazgo.Controllers
             _context.SaveChangesAsync();
         }
     }
+
 }
