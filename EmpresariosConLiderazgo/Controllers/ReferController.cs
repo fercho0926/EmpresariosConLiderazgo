@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EmpresariosConLiderazgo.Models;
 using EmpresariosConLiderazgo.Utils;
-
+using EmpresariosConLiderazgo.Services;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
     public class ReferController : Controller
     {
+        private readonly IMailService mailService;
+        public ReferController(IMailService mailService)
+        {
+            this.mailService = mailService;
+        }   
+
+
+
         public IActionResult Index()
         {
             return View();
@@ -30,7 +38,14 @@ namespace EmpresariosConLiderazgo.Controllers
                 string body =
                     $"Hola {refer.Name.ToString()} Empresarios con liderazgo quiere q hagas parte del proyecto, por ende te invitamos a registrarte y ser parte de nuestra comunidad, Visita https://localhost:7154/Identity/Account/Register?returnUrl=%2F";
 
-                SendMail.SendMailWithoutattached(subject, refer.Mail.ToString(), body);
+                var request = new MailRequest();
+
+                request.Body = body;
+                request.Subject = subject;
+                request.ToEmail = refer.Mail.ToString();
+
+                await mailService.SendEmailAsync(request);
+
             }
 
             TempData["AlertMessage"] =

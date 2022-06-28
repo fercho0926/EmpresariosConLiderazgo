@@ -10,7 +10,7 @@ using System.Text;
 using EmpresariosConLiderazgo.Data;
 using iText.StyledXmlParser.Jsoup.Select;
 using Microsoft.AspNetCore.Identity;
-
+using EmpresariosConLiderazgo.Services;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
@@ -20,14 +20,16 @@ namespace EmpresariosConLiderazgo.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+        private readonly IMailService mailService;
 
         public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> SignInManager, ApplicationDbContext context)
+            SignInManager<IdentityUser> SignInManager, ApplicationDbContext context, IMailService mailService)
         {
             _logger = logger;
             _userManager = userManager;
             _signInManager = SignInManager;
             _context = context;
+            this.mailService = mailService;
         }
 
         public IActionResult Index()
@@ -50,6 +52,25 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             return View();
         }
+
+
+
+        public async Task<IActionResult> SendMail([FromForm] MailRequest request)
+        {
+            try
+            {
+                await mailService.SendEmailAsync(request);
+                return Ok();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

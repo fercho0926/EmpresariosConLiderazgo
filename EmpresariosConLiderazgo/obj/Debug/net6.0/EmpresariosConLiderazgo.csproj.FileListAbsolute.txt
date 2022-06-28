@@ -653,3 +653,5 @@ C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.Extensions.FileProviders.Embedded.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.Extensions.Identity.Core.dll
 C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\refs\Microsoft.Extensions.Identity.Stores.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\MailKit.dll
+C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\bin\Debug\net6.0\MimeKit.dll

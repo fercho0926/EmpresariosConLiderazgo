@@ -2,8 +2,10 @@ using DinkToPdf;
 using DinkToPdf.Contracts;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Services;
+using EmpresariosConLiderazgo.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); ;
@@ -22,6 +24,11 @@ builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new 
 
 // Services dependencies
 builder.Services.AddTransient<IDocumentService, DocumentService>();
+
+
+
+builder.Services.AddTransient<IMailService, MailService>();
+
 
 
 var app = builder.Build();
