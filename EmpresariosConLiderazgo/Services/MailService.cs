@@ -5,14 +5,10 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 
 
-
-
 namespace EmpresariosConLiderazgo.Services
 {
     public class MailService : IMailService
     {
-
-
         //private readonly MailSettings _mailSettings;
         //public MailService(MailSettings mailSettings)
         //{
@@ -22,10 +18,6 @@ namespace EmpresariosConLiderazgo.Services
 
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
-
-
-
-
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse("empresariosconliderazgoNotify@gmail.com");
             email.To.Add(MailboxAddress.Parse(mailRequest.ToEmail));
@@ -43,10 +35,12 @@ namespace EmpresariosConLiderazgo.Services
                             file.CopyTo(ms);
                             fileBytes = ms.ToArray();
                         }
+
                         builder.Attachments.Add(file.FileName, fileBytes, ContentType.Parse(file.ContentType));
                     }
                 }
             }
+
             builder.HtmlBody = mailRequest.Body;
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
@@ -55,6 +49,5 @@ namespace EmpresariosConLiderazgo.Services
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }
-
     }
 }
