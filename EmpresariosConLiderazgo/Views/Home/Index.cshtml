@@ -1,7 +1,18 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@{
     ViewData["Title"] = "Home Page";
 }
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
 
 <div class="text-center">
-    <h1 class="display-4">Espacio para la magia</h1>
+    <h1 class="display-4">Espacio para la magia )</h1>
 </div>
+
+
+

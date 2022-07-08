@@ -1,0 +1,151 @@
+﻿@model IEnumerable<EmpresariosConLiderazgo.Models.Entities.Balance>
+
+@{
+    ViewData["Title"] = "Movimientos";
+}
+
+<h1>Movimientos</h1>
+
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+<div>
+    <h4> @User.Identity?.Name</h4>
+    <hr />
+
+    <table class="table table-hover ">
+        <thead>
+        <th>Producto:
+        <tr>
+            <th>
+                        @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                        @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                        @Html.DisplayNameFor(model => model.Name)
+            </th>
+
+            <th>
+                        @Html.DisplayNameFor(model => model.BalanceAvailable)
+            </th>
+            <th>
+                        @Html.DisplayNameFor(model => model.LastMovement)
+            </th>
+
+
+
+            <th>
+                        @Html.DisplayNameFor(model => model.InitialDate)
+            </th>
+            <th>
+                        @Html.DisplayNameFor(model => model.EndlDate)
+            </th>
+
+            <th></th>
+   
+
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BalanceAvailable)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastMovement)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InitialDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndlDate)
+                    </td>
+                </tr>
+                <tr></tr>
+            <thead>
+            <th>Movimientos
+            <tr>
+                <th>
+                                @Html.DisplayNameFor(model => model.MovementsByBalance[0].Id)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.MovementsByBalance[0].Name)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.MovementsByBalance[0].DateMovement)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.MovementsByBalance[0].BalanceBefore)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.MovementsByBalance[0].CashOut)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.MovementsByBalance[0].BalanceAfter)
+                </th>
+                <th>
+                                @Html.DisplayNameFor(model => model.MovementsByBalance[0].status)
+                </th>
+
+                <th></th>
+         
+            </th>
+            </thead>
+
+            <tbody>
+                    @foreach (var movement in item.MovementsByBalance)
+                    {
+                    <tr>
+                        <td>
+                                @Html.DisplayFor(modelmovement => movement.Id)
+                        </td>
+                        <td>
+                                @Html.DisplayFor(modelmovement => movement.Name)
+                        </td>
+                        <td>
+                                @Html.DisplayFor(modelmovement => movement.DateMovement)
+                        </td>
+                        <td>
+                                @Html.DisplayFor(modelmovement => movement.BalanceBefore)
+                        </td>
+                        <td>
+                                @Html.DisplayFor(modelmovement => movement.CashOut)
+                        </td>
+                        <td>
+                                @Html.DisplayFor(modelmovement => movement.BalanceAfter)
+                        </td>
+                        <td>
+                                @Html.DisplayFor(modelmovement => movement.status)
+                        </td>
+
+                    </tr>
+
+                    }
+            </tbody>
+
+
+
+            }
+
+
+        </tbody>
+    </table>
+</div>

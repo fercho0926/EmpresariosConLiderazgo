@@ -11,9 +11,13 @@ build_property.RootNamespace = EmpresariosConLiderazgo
 build_property.ProjectDir = C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = C:\WorkSpaces\git\EmpresariosConLiderazgo\EmpresariosConLiderazgo
 build_property._RazorSourceGeneratorDebug = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
 
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
@@ -21,6 +25,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Areas/Identity/Pages/Account/RegisterConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3RlckNvbmZpcm1hdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Areas/Identity/Pages/Account/_ViewImports.cshtml]
@@ -39,6 +47,54 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/AdminCashOutRequest.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxBZG1pbkNhc2hPdXRSZXF1ZXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/BalanceByMail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxCYWxhbmNlQnlNYWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/CashOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxDYXNoT3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Index - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxJbmRleCAtIENvcHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Movements.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxNb3ZlbWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Balance/Packages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFsYW5jZVxQYWNrYWdlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -47,8 +103,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/NonLogic/Packages.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm9uTG9naWNcUGFja2FnZXMuY3NodG1s
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Refer/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVmZXJcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Shared/Error.cshtml]
@@ -57,6 +113,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Shared/_LayoutLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Shared/_LayoutSimple.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRTaW1wbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/WorkSpaces/git/EmpresariosConLiderazgo/EmpresariosConLiderazgo/Views/Shared/_LoginPartial.cshtml]

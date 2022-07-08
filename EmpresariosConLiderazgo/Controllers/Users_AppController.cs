@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
+    //[Authorize(Roles = "Administrator")]
     public class Users_AppController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,6 +23,7 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
         // GET: Users_App
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Users_App.ToListAsync());
@@ -55,7 +58,10 @@ namespace EmpresariosConLiderazgo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,Identification,DateBirth,EnumCountries,City,Neighborhood,Address,phone,AspNetUserId,Id,Name")] Users_App users_App)
+        public async Task<IActionResult> Create(
+            [Bind(
+                "LastName,Identification,DateBirth,EnumCountries,City,Neighborhood,Address,phone,AspNetUserId,Id,Name")]
+            Users_App users_App)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +69,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             return View(users_App);
         }
 
@@ -79,6 +86,7 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 return NotFound();
             }
+
             return View(users_App);
         }
 
@@ -87,7 +95,10 @@ namespace EmpresariosConLiderazgo.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LastName,Identification,DateBirth,EnumCountries,City,Neighborhood,Address,phone,AspNetUserId,Id,Name")] Users_App users_App)
+        public async Task<IActionResult> Edit(int id,
+            [Bind(
+                "LastName,Identification,DateBirth,EnumCountries,City,Neighborhood,Address,phone,AspNetUserId,Id,Name")]
+            Users_App users_App)
         {
             if (id != users_App.Id)
             {
@@ -112,8 +123,12 @@ namespace EmpresariosConLiderazgo.Controllers
                         throw;
                     }
                 }
+
+                TempData["AlertMessage"] =
+                    $"Se ha realizado la actualizacion de la Informacion";
                 return RedirectToAction("Index", "Home");
             }
+
             return View(users_App);
         }
 
@@ -153,7 +168,6 @@ namespace EmpresariosConLiderazgo.Controllers
 
         public async Task<IActionResult> EditByMail(string mail)
         {
-
             if (User.Identity?.Name != mail)
             {
                 return NotFound();
@@ -169,9 +183,8 @@ namespace EmpresariosConLiderazgo.Controllers
             {
                 return NotFound();
             }
+
             return View(users_App);
-
         }
-
     }
 }

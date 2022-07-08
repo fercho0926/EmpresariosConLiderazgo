@@ -1,0 +1,206 @@
+﻿@model IEnumerable<EmpresariosConLiderazgo.Models.Entities.Balance>
+
+@{
+    ViewData["Title"] = "Paquetes";
+}
+
+
+
+<h1>Paquetes de inversión</h1>
+
+<div>
+    <!-- Content Row -->
+    <div class="row">
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                Plus
+                            </div>
+                            @*<div class="h6 mb-0 font-weight-bold text-gray-800"> Porcentaje : 7%</div>*@
+                            <hr>
+                            <p>Desde : $10.000.000</p>
+                            <p>Hasta : $12.000.000</p>
+                            <p>Porcentaje : 7%</p>
+                           @* <div>
+                                <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 1})'" />
+                            </div>*@
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                Star
+                            </div>
+                            <hr>
+                            <p>Desde : $12.000.001</p>
+                            <p>Hasta : $16.000.000</p>
+                            <p>Porcentaje : 7.5%</p>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                Vip
+                            </div>
+                            <hr>
+                            <p>Desde : $16.000.001</p>
+                            <p>Hasta : $20.000.000</p>
+                            <p>Porcentaje : 8%</p>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="font-weight-bold text-primary text-uppercase mb-1">
+                                Elite
+                            </div>
+                            <hr>
+                            <p>Desde : $20.000.001</p>
+                            <p>Sin Limite  </p>
+                            <p>Porcentaje : 9%</p>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> $</span>
+            </div>
+            <input type="text" class="form-control" name="amountToInvest" id="amountToInvest" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Ingrese valor a INVERTIR" maxlength="10">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="button"  onclick="InvestConfirm()">INVERTIR</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <!-- Modal -->
+        <div class="modal fade" id="InvestConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmar Inversión</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="myForm" action="CreateProduct" method="post">
+                            <div class="form-group">
+                                <label for="category">Categoria</label>
+                                <input type="text" class="form-control" id="category" name="category" readonly="readonly">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Valor a Invertir</label>
+                                <input type="text" class="form-control" id="amount" name="amount" readonly="readonly">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="amount">Estado Actual</label>
+                                <input type="text" class="form-control" id="status" disabled="disabled" value="PENDIENTE DE APROBACION">
+                            </div>
+                            <div class="form-group">
+                                <label for="amount">Observaciones</label>
+                                <textarea class="form-control" id="detail" disabled="disabled" rows="5">Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos</textarea>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-success">Aceptar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+    function InvestConfirm() {
+
+        var I_amount = document.getElementById('amountToInvest').value;
+        var output = parseFloat(I_amount.replace(/,/g, ''));
+
+        var Category = "";
+
+
+        if (typeof I_amount == 'undefined' || I_amount === null || I_amount === "" || (output >= 0 && output <= 9000000)) {
+             $("#category").val(null);
+            $("#amount").val(0);
+             alert("La cantidad Ingresada no cumple con los requisitos");
+
+             $('#InvestConfirmation').modal('hide');
+
+
+        } else { 
+            
+            //if (output >= 0 && output <= 9000000) {
+            //    alert("La cantidad Ingresada no cumple con los requisitos")
+            //}
+            if (output >= 10000000 && output <= 12000000) {
+                Category = "PLUS";
+            }
+
+            if (output >= 12000001 && output <= 16000000) {
+                Category = "STAR";
+            }
+
+            if (output >= 16000001 && output <= 20000000) {
+                Category = "VIP";
+            }
+
+            if (output >= 20000001) {
+                Category = "ELITE";
+            }
+
+            $("#category").val(Category);
+            $("#amount").val(I_amount);
+            $('#InvestConfirmation').modal('show');
+
+        }
+    }
+</script>

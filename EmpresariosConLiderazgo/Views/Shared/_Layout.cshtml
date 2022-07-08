@@ -24,6 +24,9 @@
     <link href="~/Theme/css/sb-admin-2.min.css" rel="stylesheet">
     
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    
+    
+
 
 </head>
 <body id="page-top">
@@ -65,26 +68,34 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="~/NonLogic/Packages">
+        <a class="nav-link" href="~/Balance/Packages">
             <i class="fas fa-fw fa-dollar-sign"></i>
-            <span>Paquetes</span>
+            <span>Paquetes de inversión</span>
         </a>
     </li>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+
+    <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-           aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Saldos y Movimientos</span>
+        <a class="nav-link" href="~/Balance/BalanceByMail/?mail=@User.Identity?.Name">
+            <i class="fas fa-fw fa-dollar-sign"></i>
+            <span>Mis productos</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="buttons.html">Saldos -Pend</a>
-                <a class="collapse-item" href="cards.html">Movimientos -Pend</a>
-                <a class="collapse-item" href="~/User_Contracts/ColombianContract">Mis contratos -Pend</a>
-            </div>
-        </div>
+    </li>
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="~/User_Contracts/ColombianContract/?mail=@User.Identity?.Name">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Contratos</span>
+        </a>
+    </li>
+
+     <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" href="~/User_Contracts/Get">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Contratos Nuevo</span>
+        </a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
@@ -108,12 +119,16 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Panel Administrativo
-    </div>
-
+    
+    
+    
+    @if (User.IsInRole("Admin"))
+    {
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Panel Administrativo
+        </div>
+   
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
@@ -154,8 +169,8 @@
         <div id="collapseReports" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Usuarios:</h6>
-                <a class="collapse-item" href="~/Users_App/Index">Solicitudes de retiro</a>
-                <a class="collapse-item" href="register.html">Saldos consolidados</a>
+                <a class="collapse-item" href="~/Balance/AdminCashOutRequest">Solicitudes de retiro</a>
+                <a class="collapse-item" href="~/Balance/Index">Saldos consolidados</a>
                 <a class="collapse-item" href="forgot-password.html">Otros</a>
                 <div class="collapse-divider"></div>
                
@@ -163,7 +178,7 @@
             </div>
         </div>
     </li>
-
+    }
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -231,107 +246,21 @@
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <h2 class="h3 mb-0 text-gray-800">Empresarios Con Liderazgo</h2>
-                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-pri
-mary shadow-sm">
+                <a class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"  href="~/Refer/Index">
                     <i class="fa fa-user-plus fa-sm text-white-50"></i>  Refiere un amigo
                 </a>
             </div>
 
-            <!-- Content Row -->
-            @*       <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Saldo
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$400,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Valor mensual
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$21,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                POR PREGUNTAR
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$25,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                POR PREGUNTAR
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$15,000</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        *@
-
-            <!-- Content Row -->
 
             <div class="container">
                 <main role="main" class="pb-3">
                     @RenderBody()
                 </main>
 
-      @*          @await RenderSectionAsync("Scripts", required: false)*@
+
 
             </div>
 
-
-
-            @*       </div>*@
             <!-- /.container-fluid -->
 
         </div>
@@ -396,6 +325,10 @@ mary shadow-sm">
 <script src="~/Theme/js/demo/chart-pie-demo.js"></script>
     
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+<script src="~/js/currencyFormat.js"></script>
+
+
 </div>
 
 

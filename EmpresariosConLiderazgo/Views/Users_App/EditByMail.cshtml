@@ -5,29 +5,29 @@
     ViewData["Title"] = "Edit";
 }
 
-<h4>Editar @User.Identity?.Name</h4>
+<h4> @User.Identity?.Name</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-             <input type="hidden" asp-for="Id" />
-              <input type="hidden" asp-for="AspNetUserId" />
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="AspNetUserId" />
 
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" readonly="readonly"/>
+                <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
            
             <div class="form-group">
                 <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" readonly="readonly"/>
+                <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Identification" class="control-label"></label>
-                <input asp-for="Identification" class="form-control" readonly="readonly"/>
+                <input asp-for="Identification" class="form-control" />
                 <span asp-validation-for="Identification" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EnumCountries" class="control-label"></label>
-                 @Html.DropDownList("EnumCountries", Html.GetEnumSelectList<EnumCountries>(), "", new { @class = "form-control" })
+                @Html.DropDownList("EnumCountries", Html.GetEnumSelectList<EnumCountries>(), "", new { @class = "form-control" })
                 <span asp-validation-for="EnumCountries" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -61,7 +61,7 @@
                 <span asp-validation-for="phone" class="text-danger"></span>
             </div>
             
-             <div class="form-group">
+            <div class="form-group">
                 <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
             </div>
            
