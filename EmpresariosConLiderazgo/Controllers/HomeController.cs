@@ -54,7 +54,6 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
-
         public async Task<IActionResult> SendMail([FromForm] MailRequest request)
         {
             try
@@ -64,12 +63,9 @@ namespace EmpresariosConLiderazgo.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
-
         }
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
