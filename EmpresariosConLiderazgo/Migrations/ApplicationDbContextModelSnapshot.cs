@@ -33,6 +33,9 @@ namespace EmpresariosConLiderazgo.Migrations
                     b.Property<decimal>("BalanceAvailable")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("BaseBalanceAvailable")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal>("CashOut")
                         .HasColumnType("decimal(18,2)");
 
@@ -58,6 +61,9 @@ namespace EmpresariosConLiderazgo.Migrations
                     b.Property<string>("Product")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Profit")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("StatusBalance")
                         .HasColumnType("int");

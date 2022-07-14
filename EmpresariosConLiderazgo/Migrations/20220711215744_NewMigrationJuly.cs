@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EmpresariosConLiderazgo.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class NewMigrationJuly : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,12 +56,16 @@ namespace EmpresariosConLiderazgo.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserApp = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Product = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BalanceAvailable = table.Column<float>(type: "real", nullable: false),
+                    BalanceAvailable = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BaseBalanceAvailable = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Profit = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Currency = table.Column<int>(type: "int", nullable: false),
-                    CashOut = table.Column<float>(type: "real", nullable: false),
+                    CashOut = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     LastMovement = table.Column<DateTime>(type: "datetime2", nullable: false),
                     InitialDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndlDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StatusBalance = table.Column<int>(type: "int", nullable: false),
+                    Contract = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -241,9 +245,9 @@ namespace EmpresariosConLiderazgo.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DateMovement = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BalanceBefore = table.Column<float>(type: "real", nullable: false),
-                    CashOut = table.Column<float>(type: "real", nullable: false),
-                    BalanceAfter = table.Column<float>(type: "real", nullable: false),
+                    BalanceBefore = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CashOut = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    BalanceAfter = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     status = table.Column<int>(type: "int", nullable: false),
                     BalanceId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)

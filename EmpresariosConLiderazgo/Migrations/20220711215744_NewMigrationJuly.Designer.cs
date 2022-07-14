@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmpresariosConLiderazgo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220504215747_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220711215744_NewMigrationJuly")]
+    partial class NewMigrationJuly
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -32,11 +32,17 @@ namespace EmpresariosConLiderazgo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<float>("BalanceAvailable")
-                        .HasColumnType("real");
+                    b.Property<decimal>("BalanceAvailable")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("CashOut")
-                        .HasColumnType("real");
+                    b.Property<decimal>("BaseBalanceAvailable")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("CashOut")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Contract")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Currency")
                         .HasColumnType("int");
@@ -58,6 +64,12 @@ namespace EmpresariosConLiderazgo.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Profit")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("StatusBalance")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserApp")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -75,17 +87,17 @@ namespace EmpresariosConLiderazgo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<float>("BalanceAfter")
-                        .HasColumnType("real");
+                    b.Property<decimal>("BalanceAfter")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float>("BalanceBefore")
-                        .HasColumnType("real");
+                    b.Property<decimal>("BalanceBefore")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("BalanceId")
                         .HasColumnType("int");
 
-                    b.Property<float>("CashOut")
-                        .HasColumnType("real");
+                    b.Property<decimal>("CashOut")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("DateMovement")
                         .HasColumnType("datetime2");

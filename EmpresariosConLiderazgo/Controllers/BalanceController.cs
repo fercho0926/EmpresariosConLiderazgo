@@ -172,6 +172,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             CreateMovement(productId.Id, "Creacion Inicial", productId.BalanceAvailable, productId.CashOut,
                 Utils.EnumStatus.creacion);
+           
 
             TempData["AlertMessage"] =
                 $"Se realizo la creacion del nuevo producto  {NewProduct.Product}, por valor de $ {NewProduct.BalanceAvailable}, Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos";
@@ -197,7 +198,8 @@ namespace EmpresariosConLiderazgo.Controllers
                 status = status
             };
             _context.MovementsByBalance.Add(movement);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+  
         }
     }
 

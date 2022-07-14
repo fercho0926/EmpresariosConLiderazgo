@@ -1,8 +1,12 @@
 ﻿@page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Bienvenido";<a   id="confirm-link" href="~/Users_App/EditByMail?mail=fercho0926@hotmail.com">ACEPTAR</a>
+    ViewData["Title"] = "Bienvenid@, en empresarios con liderazgo estamos comprometidos con el cumplimiento de tus metas y propósitos, Gracias por elegirnos.";
+     Layout = "_Layout_simple";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<h4>@ViewData["Title"]</h4>
+
+<input type="button" class="btn btn-success" value="Continuar" onclick="location.href='@Url.Action("Index", "Home")'" />
+
+

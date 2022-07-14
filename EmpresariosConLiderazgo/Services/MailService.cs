@@ -45,7 +45,7 @@ namespace EmpresariosConLiderazgo.Services
             email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("empresariosconliderazgoNotify@gmail.com", "lgcxcwzfdobfoixi");
+            smtp.Authenticate("empresariosconliderazgoNotify@gmail.com", "lokhcgulnhmqpeod");
             await smtp.SendAsync(email);
             smtp.Disconnect(true);
         }

@@ -17,6 +17,14 @@ namespace EmpresariosConLiderazgo.Models.Entities
         [DisplayFormat(DataFormatString = "{0:N0} ")]
         public decimal BalanceAvailable { get; set; }
 
+        [Display(Name = "Saldo Base")]
+        [DisplayFormat(DataFormatString = "{0:N0} ")]
+        public decimal BaseBalanceAvailable { get; set; }
+
+        [Display(Name = "Rentabilidad")]
+        [DisplayFormat(DataFormatString = "{0:N0} ")]
+        public decimal Profit { get; set; }
+
         [Display(Name = "Modeda")] public EnumCurrencies Currency { get; set; }
 
         [Display(Name = "Retirar")]
