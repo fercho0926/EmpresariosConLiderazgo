@@ -117,8 +117,11 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Usuarios:</h6>
                 <a class="collapse-item" href="~/Users_App/Index">Usuarios Registrados</a>
-                <a class="collapse-item" href="register.html">Contratos -Pend</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                     <a class="collapse-item" href="~/Balance/ApproveInvestments">Aprobar Inversiones</a>
+                       <a class="collapse-item" href="~/Balance/ApproveCashOut">Aprobar Retiros</a>
+                @*<a class="collapse-item" href="register.html">Contratos -Pendiente</a>*@
+                <a class="collapse-item" href="~/Home/Index">Contratos -por implementar</a>
+                <a class="collapse-item" href="~/Identity/Account/ForgotPassword">Restaurar Contraseñas</a>
                 <div class="collapse-divider"></div>
                
                
@@ -126,35 +129,7 @@
         </div>
     </li>
 
-@*    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Estadisticas</span>
-        </a>
-    </li>
-*@
 
-    
-    <!-- Nav Item - Pages Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReports"
-           aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Reportes</span>
-        </a>
-        <div id="collapseReports" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Usuarios:</h6>
-                <a class="collapse-item" href="~/Balance/AdminCashOutRequest">Solicitudes de retiro</a>
-                <a class="collapse-item" href="~/Balance/Index">Saldos consolidados</a>
-                <a class="collapse-item" href="forgot-password.html">Otros</a>
-                <div class="collapse-divider"></div>
-               
-               
-            </div>
-        </div>
-    </li>
     }
 
     <!-- Divider -->
@@ -201,10 +176,7 @@
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Perfil
                         </a>
-                        <a class="dropdown-item" href="">
-                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Movimientos
-                        </a>
+                      
                         <div class="dropdown-divider"></div>
                         <form class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><button type="submit">Salir</button>

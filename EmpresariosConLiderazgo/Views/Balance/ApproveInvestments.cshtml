@@ -1,0 +1,111 @@
+﻿@using EmpresariosConLiderazgo.Utils
+@model IEnumerable<Balance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+
+
+<h1>Aprobacion de Inversiones</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserApp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BalanceAvailable)
+            </th>
+
+             <th>
+                @Html.DisplayNameFor(model => model.Profit)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.LastMovement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InitialDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndlDate)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.StatusBalance)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                  <td>
+                    @Html.DisplayFor(modelItem => item.UserApp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BalanceAvailable)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.Profit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastMovement)
+                </td>
+                <td>
+                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
+                    {
+                        @Html.DisplayFor(modelItem => item.InitialDate)
+                    }
+                </td>
+                <td>
+                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
+                    {
+                        @Html.DisplayFor(modelItem => item.EndlDate)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusBalance)
+                </td>
+
+                <td>
+                    <a class="fas fa-check" asp-action="ApproveInvestmentById" asp-route-id="@item.Id" title="Aprobar" style="font-size: 24px; color: green"></a> 
+                    <a class="fas fa-times" asp-action="RejectInvestmentById"  asp-route-id="@item.Id" title="Rechazar" style="font-size: 24px; color: red"></a> 
+
+
+                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
+                    {
+                        <a class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar" style="font-size: 24px; color: green"></a>
+                    }
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
