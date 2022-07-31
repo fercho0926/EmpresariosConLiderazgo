@@ -112,14 +112,17 @@ namespace EmpresariosConLiderazgo.Controllers
                 return View(balance);
             }
 
-          var movements = _context.MovementsByBalance.Where(x => x.BalanceId == id && x.status == EnumStatus.PendienteDeAprobacion);
+            var movements =
+                _context.MovementsByBalance.Where(
+                    x => x.BalanceId == id && x.status == EnumStatus.PendienteDeAprobacion);
 
-            if (movements.Count() > 0) {
+            if (movements.Count() > 0)
+            {
                 TempData["AlertMessage"] =
-                   $"Ya se tiene una retiro en curso, cuando este sea aprobado, puede hacer uno nuevo";
+                    $"Ya se tiene una retiro en curso, cuando este sea aprobado, puede hacer uno nuevo";
                 return View(balance);
             }
-         
+
 
             try
             {
@@ -172,6 +175,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 Name = HttpContext.Request.Form["category"],
                 Product = HttpContext.Request.Form["category"],
                 BalanceAvailable = decimal.Parse(HttpContext.Request.Form["amount"]),
+                BaseBalanceAvailable = decimal.Parse(HttpContext.Request.Form["amount"]),
                 Currency = EnumCurrencies.Peso_Colombiano,
                 CashOut = 0,
                 LastMovement = DateTime.Now,
@@ -197,7 +201,7 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
-        private void CreateMovement(int productID, string action, decimal balanceAvailable, decimal cashOut,
+        public void CreateMovement(int productID, string action, decimal balanceAvailable, decimal cashOut,
             Utils.EnumStatus status)
         {
             var movement = new MovementsByBalance
@@ -273,31 +277,27 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
-
         public IActionResult ApproveCashOut()
         {
-
-            var records =  from m in _context.MovementsByBalance
-                    join b in _context.Balance on m.BalanceId equals b.Id
-                    where(m.status == EnumStatus.PendienteDeAprobacion)
-                    
-                    select new MovementBalance
-                    {
-                        BalanceId = b.Id,
-                        MovementId = m.Id,
-                        UserApp = b.UserApp,
-                        Product = b.Product,
-                        BalanceAvailable = b.BalanceAvailable,
-                        BaseBalanceAvailable = b.BaseBalanceAvailable,
-                        Profit = b.Profit,
-                        DateMovement = m.DateMovement,
-                        CashOut = m.CashOut,
-                        BalanceAfter = m.BalanceAfter,
-                        Status = m.status
-                    };
+            var records = from m in _context.MovementsByBalance
+                join b in _context.Balance on m.BalanceId equals b.Id
+                where (m.status == EnumStatus.PendienteDeAprobacion)
+                select new MovementBalance
+                {
+                    BalanceId = b.Id,
+                    MovementId = m.Id,
+                    UserApp = b.UserApp,
+                    Product = b.Product,
+                    BalanceAvailable = b.BalanceAvailable,
+                    BaseBalanceAvailable = b.BaseBalanceAvailable,
+                    Profit = b.Profit,
+                    DateMovement = m.DateMovement,
+                    CashOut = m.CashOut,
+                    BalanceAfter = m.BalanceAfter,
+                    Status = m.status
+                };
 
 
-          
             return View(records);
         }
 
@@ -310,19 +310,27 @@ namespace EmpresariosConLiderazgo.Controllers
 
 
             var movement = await _context.MovementsByBalance
-             .SingleOrDefaultAsync(b => b.Id == id);
-
+                .SingleOrDefaultAsync(b => b.Id == id);
 
 
             var balance = await _context.Balance
-              .SingleOrDefaultAsync(b => b.Id == movement.BalanceId);
+                .SingleOrDefaultAsync(b => b.Id == movement.BalanceId);
 
 
             balance.LastMovement = DateTime.Now;
-            balance.BalanceAvailable = balance.BalanceAvailable - movement.CashOut;
+            balance.BalanceAvailable -= movement.CashOut;
+
+
+            balance.BaseBalanceAvailable -= movement.CashOut;
+            if (balance.BalanceAvailable == 0)
+            {
+                balance.StatusBalance = EnumStatusBalance.FINALIZADO;
+                balance.BaseBalanceAvailable = 0;
+            }
+
+
             movement.status = EnumStatus.RetiroAprobado;
 
-    
 
             _context.SaveChanges();
 
@@ -344,18 +352,16 @@ namespace EmpresariosConLiderazgo.Controllers
 
 
             var movement = await _context.MovementsByBalance
-             .SingleOrDefaultAsync(b => b.Id == id);
-
+                .SingleOrDefaultAsync(b => b.Id == id);
 
 
             var balance = await _context.Balance
-              .SingleOrDefaultAsync(b => b.Id == movement.BalanceId);
+                .SingleOrDefaultAsync(b => b.Id == movement.BalanceId);
 
 
             balance.LastMovement = DateTime.Now;
-           
-            movement.status = EnumStatus.Rechazado;
 
+            movement.status = EnumStatus.Rechazado;
 
 
             _context.SaveChanges();
@@ -368,6 +374,5 @@ namespace EmpresariosConLiderazgo.Controllers
                 $"Se ha Rechazado el retiro  para el usuario ${balance.UserApp}";
             return RedirectToAction("ApproveCashOut", "Balance");
         }
-
     }
 }

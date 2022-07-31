@@ -36,7 +36,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
                 string subject = "Invitacion Empresarios Con Liderazgo";
                 string body =
-                    $"Hola {refer.Name.ToString()} Empresarios con liderazgo quiere q hagas parte del proyecto, por ende te invitamos a registrarte y ser parte de nuestra comunidad, Visita http://empresariosconliderazgo-dev.us-east-1.elasticbeanstalk.com/Identity/Account/Register?returnUrl=%2F";
+                    $"Hola {refer.Name.ToString()} Empresarios con liderazgo quiere q hagas parte del proyecto, por ende te invitamos a registrarte y ser parte de nuestra comunidad, Visita https://www.empresariosconliderazgo.com/Identity/Account/Register?ReturnUrl=%2F";
 
                 var request = new MailRequest();
 
