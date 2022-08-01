@@ -23,6 +23,7 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
         // GET: Users_App
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {

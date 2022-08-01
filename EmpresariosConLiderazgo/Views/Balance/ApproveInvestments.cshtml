@@ -14,14 +14,9 @@
 
 
 
-<h1>Mis productos</h1>
-<p>
-    <h4> @User.Identity?.Name</h4>
-</p>
+<h1>Aprobacion de Inversiones</h1>
 
-<p>
-    <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("Packages", "Balance")'" />
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -30,11 +25,11 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.UserApp)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Product)
             </th>
-            @*     <th>
-            @Html.DisplayNameFor(model => model.Name)
-            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.BalanceAvailable)
             </th>
@@ -67,14 +62,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
+                  <td>
+                    @Html.DisplayFor(modelItem => item.UserApp)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Product)
                 </td>
-                @*     <td>
-            @Html.DisplayFor(modelItem => item.Name)
-            </td>*@@*     <td>
-            @Html.DisplayFor(modelItem => item.Name)
-            </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.BalanceAvailable)
                 </td>
@@ -101,7 +94,9 @@
                 </td>
 
                 <td>
-                    <a class="fas fa-chart-line" asp-action="Movements" asp-route-id="@item.Id" title="Movimientos" style="font-size: 24px; color: blue"></a> |
+                    <a class="fas fa-check" asp-action="ApproveInvestmentById" asp-route-id="@item.Id" title="Aprobar" style="font-size: 24px; color: green"></a> 
+                    <a class="fas fa-times" asp-action="RejectInvestmentById"  asp-route-id="@item.Id" title="Rechazar" style="font-size: 24px; color: red"></a> 
+
 
                     @if (item.StatusBalance == EnumStatusBalance.APROBADO)
                     {

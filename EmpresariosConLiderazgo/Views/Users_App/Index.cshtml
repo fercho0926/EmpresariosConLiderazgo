@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+
 }
 
 <h1>Usuarios Registrados </h1>
@@ -22,20 +23,12 @@
                 @Html.DisplayNameFor(model => model.Identification)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateBirth)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.EnumCountries)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.City)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Neighborhood)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.phone)
             </th>
@@ -60,19 +53,10 @@
                     @Html.DisplayFor(modelItem => item.Identification)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DateBirth)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.EnumCountries)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Neighborhood)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.phone)
@@ -80,7 +64,6 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AspNetUserId)
                 </td>
-                
                 <td>
                   
 

@@ -112,16 +112,27 @@ namespace EmpresariosConLiderazgo.Controllers
                 return View(balance);
             }
 
+            var movements =
+                _context.MovementsByBalance.Where(
+                    x => x.BalanceId == id && x.status == EnumStatus.PendienteDeAprobacion);
+
+            if (movements.Count() > 0)
+            {
+                TempData["AlertMessage"] =
+                    $"Ya se tiene una retiro en curso, cuando este sea aprobado, puede hacer uno nuevo";
+                return View(balance);
+            }
+
+
             try
             {
                 CreateMovement(balance.Id, "Solicitud de retiro", balance.BalanceAvailable, balance.CashOut,
-                    Utils.EnumStatus.Pendiente);
+                    Utils.EnumStatus.PendienteDeAprobacion);
             }
 
 
             catch (DbUpdateConcurrencyException)
             {
-
             }
 
             TempData["AlertMessage"] =
@@ -144,6 +155,14 @@ namespace EmpresariosConLiderazgo.Controllers
 
         public async Task<IActionResult> Packages()
         {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
             return View();
         }
 
@@ -156,6 +175,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 Name = HttpContext.Request.Form["category"],
                 Product = HttpContext.Request.Form["category"],
                 BalanceAvailable = decimal.Parse(HttpContext.Request.Form["amount"]),
+                BaseBalanceAvailable = decimal.Parse(HttpContext.Request.Form["amount"]),
                 Currency = EnumCurrencies.Peso_Colombiano,
                 CashOut = 0,
                 LastMovement = DateTime.Now,
@@ -173,6 +193,7 @@ namespace EmpresariosConLiderazgo.Controllers
             CreateMovement(productId.Id, "Creacion Inicial", productId.BalanceAvailable, productId.CashOut,
                 Utils.EnumStatus.creacion);
 
+
             TempData["AlertMessage"] =
                 $"Se realizo la creacion del nuevo producto  {NewProduct.Product}, por valor de $ {NewProduct.BalanceAvailable}, Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos";
 
@@ -180,10 +201,7 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
-
-
-
-        private void CreateMovement(int productID, string action, decimal balanceAvailable, decimal cashOut,
+        public void CreateMovement(int productID, string action, decimal balanceAvailable, decimal cashOut,
             Utils.EnumStatus status)
         {
             var movement = new MovementsByBalance
@@ -197,8 +215,164 @@ namespace EmpresariosConLiderazgo.Controllers
                 status = status
             };
             _context.MovementsByBalance.Add(movement);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
+        }
+
+
+        public async Task<IActionResult> ApproveInvestments()
+        {
+            var recordsToApprove = await _context.Balance
+                .Where(x => x.StatusBalance == EnumStatusBalance.PENDIENTE)
+                .ToListAsync();
+            return View(recordsToApprove);
+        }
+
+
+        public async Task<IActionResult> ApproveInvestmentById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _context.Balance
+                .SingleOrDefaultAsync(b => b.Id == id);
+            result.StatusBalance = EnumStatusBalance.APROBADO;
+            result.InitialDate = DateTime.Now;
+            result.EndlDate = DateTime.Now.AddDays(30);
+            _context.SaveChanges();
+
+            CreateMovement(result.Id, "Aprobado por el Administrador", result.BalanceAvailable, result.CashOut,
+                Utils.EnumStatus.AprovadoParaTransacciones);
+
+
+            TempData["AlertMessage"] =
+                $"Se ha aprobado El valor de la inversion por valor de $ {result.BalanceAvailable}, para el usuario ${result.UserApp}";
+            return RedirectToAction("ApproveInvestments", "Balance");
+        }
+
+
+        public async Task<IActionResult> RejectInvestmentById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _context.Balance
+                .SingleOrDefaultAsync(b => b.Id == id);
+
+            result.StatusBalance = EnumStatusBalance.RECHAZADO;
+            result.InitialDate = DateTime.Now;
+            result.EndlDate = DateTime.Now;
+            _context.SaveChanges();
+
+            CreateMovement(result.Id, "Rechazado por el Administrador", result.BalanceAvailable, result.CashOut,
+                Utils.EnumStatus.Rechazado);
+
+
+            TempData["AlertMessage"] =
+                $"Se ha Rechazado la inversion por valor de $ {result.BalanceAvailable}, para el usuario ${result.UserApp}";
+            return RedirectToAction("ApproveInvestments", "Balance");
+        }
+
+
+        public IActionResult ApproveCashOut()
+        {
+            var records = from m in _context.MovementsByBalance
+                join b in _context.Balance on m.BalanceId equals b.Id
+                where (m.status == EnumStatus.PendienteDeAprobacion)
+                select new MovementBalance
+                {
+                    BalanceId = b.Id,
+                    MovementId = m.Id,
+                    UserApp = b.UserApp,
+                    Product = b.Product,
+                    BalanceAvailable = b.BalanceAvailable,
+                    BaseBalanceAvailable = b.BaseBalanceAvailable,
+                    Profit = b.Profit,
+                    DateMovement = m.DateMovement,
+                    CashOut = m.CashOut,
+                    BalanceAfter = m.BalanceAfter,
+                    Status = m.status
+                };
+
+
+            return View(records);
+        }
+
+        public async Task<IActionResult> ApproveCashOutById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var movement = await _context.MovementsByBalance
+                .SingleOrDefaultAsync(b => b.Id == id);
+
+
+            var balance = await _context.Balance
+                .SingleOrDefaultAsync(b => b.Id == movement.BalanceId);
+
+
+            balance.LastMovement = DateTime.Now;
+            balance.BalanceAvailable -= movement.CashOut;
+
+
+            balance.BaseBalanceAvailable -= movement.CashOut;
+            if (balance.BalanceAvailable == 0)
+            {
+                balance.StatusBalance = EnumStatusBalance.FINALIZADO;
+                balance.BaseBalanceAvailable = 0;
+            }
+
+
+            movement.status = EnumStatus.RetiroAprobado;
+
+
+            _context.SaveChanges();
+
+            CreateMovement(balance.Id, $"Retiro Aprobado - {movement.Id} ", balance.BalanceAvailable, balance.CashOut,
+                Utils.EnumStatus.RetiroAprobado);
+
+
+            TempData["AlertMessage"] =
+                $"Se ha aprobado el retiro  para el usuario ${balance.UserApp}";
+            return RedirectToAction("ApproveCashOut", "Balance");
+        }
+
+        public async Task<IActionResult> RejectCashOutById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var movement = await _context.MovementsByBalance
+                .SingleOrDefaultAsync(b => b.Id == id);
+
+
+            var balance = await _context.Balance
+                .SingleOrDefaultAsync(b => b.Id == movement.BalanceId);
+
+
+            balance.LastMovement = DateTime.Now;
+
+            movement.status = EnumStatus.Rechazado;
+
+
+            _context.SaveChanges();
+
+            CreateMovement(balance.Id, $"Retiro Rechazado - {movement.Id} ", balance.BalanceAvailable, balance.CashOut,
+                Utils.EnumStatus.Rechazado);
+
+
+            TempData["AlertMessage"] =
+                $"Se ha Rechazado el retiro  para el usuario ${balance.UserApp}";
+            return RedirectToAction("ApproveCashOut", "Balance");
         }
     }
-
 }
