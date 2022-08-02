@@ -25,9 +25,9 @@ builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new 
 
 // Services dependencies
 builder.Services.AddTransient<IDocumentService, DocumentService>();
-
-
 builder.Services.AddTransient<IMailService, MailService>();
+builder.Services.AddTransient<ICloudwatchLogs, CloudwatchLogs>();
+builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build();
@@ -36,6 +36,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 else
 {

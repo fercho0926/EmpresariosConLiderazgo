@@ -1,27 +1,34 @@
 ﻿using EmpresariosConLiderazgo.Data;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Amazon.CloudWatchLogs;
+using Amazon.CloudWatchLogs.Model;
 using EmpresariosConLiderazgo.Models.Entities;
+using EmpresariosConLiderazgo.Services;
 using EmpresariosConLiderazgo.Utils;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
-    public class CronController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class CronController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly ICloudwatchLogs _cloudwatchLogs;
 
-
-        public CronController(ApplicationDbContext context)
+        public CronController(ApplicationDbContext context, ICloudwatchLogs cloudwatchLogs)
         {
             _context = context;
+            _cloudwatchLogs = cloudwatchLogs;
         }
 
-
-        public void ExecuteCron()
+        [HttpGet]
+        public IActionResult ExecuteCron()
         {
             var records = _context.Balance.Where(x => x.StatusBalance == Utils.EnumStatusBalance.APROBADO).ToList();
 
@@ -65,6 +72,16 @@ namespace EmpresariosConLiderazgo.Controllers
             }
 
             _context.SaveChanges();
+            return Ok();
+        }
+
+
+        [HttpPost]
+        [Route("[Action]")]
+        public async Task<IActionResult> Test()
+        {
+            await _cloudwatchLogs.InsertLogs("CronController", Request.Path.Value!, "Success");
+            return Ok("Log");
         }
     }
 }

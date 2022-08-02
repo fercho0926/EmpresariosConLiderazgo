@@ -19,11 +19,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.CloudWatchLogs" Version="3.7.2.82" />
     <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.71" />
     <PackageReference Include="AWSSDK.SimpleEmail" Version="3.7.0.154" />
     <PackageReference Include="DinkToPdfIncludesDependencies" Version="1.0.8" />
     <PackageReference Include="ExpertPdf.HtmlToPdf.NetCore" Version="17.0.0" />
     <PackageReference Include="itext7" Version="7.2.2" />
+    <PackageReference Include="LibWkHtmlToX-32" Version="0.12.6.1" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.7" />
