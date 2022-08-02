@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.2.71" />
     <PackageReference Include="AWSSDK.SimpleEmail" Version="3.7.0.154" />
     <PackageReference Include="DinkToPdfIncludesDependencies" Version="1.0.8" />
     <PackageReference Include="ExpertPdf.HtmlToPdf.NetCore" Version="17.0.0" />
