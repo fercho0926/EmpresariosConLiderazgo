@@ -8,13 +8,11 @@ namespace EmpresariosConLiderazgo.Services
         private readonly IConverter _converter;
 
 
-
         public DocumentService(
-           IConverter converter)
+            IConverter converter)
 
         {
             _converter = converter;
-
         }
 
         public byte[] GeneratePdfFromString()
@@ -88,7 +86,8 @@ namespace EmpresariosConLiderazgo.Services
                 HtmlContent = htmlContent,
                 WebSettings = { DefaultEncoding = "utf-8" },
                 HeaderSettings = { FontSize = 10, Right = "Pagina [page] de [toPage]", Line = true },
-                FooterSettings = { FontSize = 8, Center = "Empresarios Con Liderazgo, NIT 1128469767 -1 ", Line = true },
+                FooterSettings =
+                    { FontSize = 8, Center = "Empresarios Con Liderazgo, NIT 1128469767 -1 ", Line = true },
             };
 
             var htmlToPdfDocument = new HtmlToPdfDocument()

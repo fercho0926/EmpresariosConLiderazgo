@@ -9,7 +9,7 @@ namespace EmpresariosConLiderazgo.Services
         {
             var logClient = new AmazonCloudWatchLogsClient();
             var logGroupName = "/aws/EmpresariosConLiderazgo";
-            var logStreamName = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff");
+            var logStreamName = DateTime.UtcNow.ToString("yyyyMMdd");
             var existing = await logClient
                 .DescribeLogGroupsAsync(new DescribeLogGroupsRequest()
                     { LogGroupNamePrefix = logGroupName });

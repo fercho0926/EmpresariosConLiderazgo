@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Models;
 using EmpresariosConLiderazgo.Utils;
-using ExpertPdf.HtmlToPdf;
 using EmpresariosConLiderazgo.Services;
+using ExpertPdf.HtmlToPdf;
+using SelectPdf;
+
 
 namespace EmpresariosConLiderazgo.Controllers
 {
@@ -13,12 +15,15 @@ namespace EmpresariosConLiderazgo.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IDocumentService _documentService;
+        private readonly ICloudwatchLogs _cloudwatchLogs;
 
 
-        public User_contractsController(ApplicationDbContext context, IDocumentService documentService)
+        public User_contractsController(ApplicationDbContext context, IDocumentService documentService,
+            ICloudwatchLogs cloudwatchLogs)
         {
             _context = context;
             _documentService = documentService;
+            _cloudwatchLogs = cloudwatchLogs;
         }
 
         // GET: User_contracts
@@ -35,133 +40,48 @@ namespace EmpresariosConLiderazgo.Controllers
         }
 
 
+        public IActionResult Ultimo()
+        {
+            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "ENTRO");
+
+            HtmlToPdf converter = new HtmlToPdf();
+            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "converter");
+            PdfDocument doc = converter.ConvertUrl("www.google.com");
+            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "doc");
+
+            // save pdf document
+            byte[] pdf = doc.Save();
+            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "saved");
+
+            // close pdf document
+            doc.Close();
+            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "closed");
+
+            // return resulted pdf document
+            FileResult fileResult = new FileContentResult(pdf, "application/pdf");
+            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "filerresut");
+            fileResult.FileDownloadName = "Document.pdf";
+            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "documento");
+            return fileResult;
+        }
+
+        public IActionResult Ultimo_old()
+        {
+            //    //Logica que obtenga los datos de la BD
+            //    //Convertir información a HTML
+            //    //var htmlCode = 
+            //    //    File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "Template\\invoice1.html");
+            //    SelectPdf.HtmlToPdf converter = new SelectPdf.HtmlToPdf();
+            //    SelectPdf.PdfDocument doc = converter.ConvertHtmlString(
+            //        "<html>< head >< meta charset = 'utf-8' />< title > A simple, clean, and responsive HTML invoice template </ title ></head>< body ></body></html> ");
+            //    doc.Save(AppDomain.CurrentDomain.BaseDirectory + "Template\\invoice2.pdf");
+            //    byte[] data = doc.Save();
+            //    var result = Convert.ToBase64String(data);
 
 
-
-
-        //// GET: User_contracts/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var user_contracts = await _context.User_contracts
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (user_contracts == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(user_contracts);
-        //}
-
-        //// GET: User_contracts/Create
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: User_contracts/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("UserContract,Version,Product,StartDate,EndDate,S3Route,Approved,Id,Name")] User_contracts user_contracts)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(user_contracts);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(user_contracts);
-        //}
-
-        //// GET: User_contracts/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var user_contracts = await _context.User_contracts.FindAsync(id);
-        //    if (user_contracts == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(user_contracts);
-        //}
-
-        //// POST: User_contracts/Edit/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to.
-        //// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("UserContract,Version,Product,StartDate,EndDate,S3Route,Approved,Id,Name")] User_contracts user_contracts)
-        //{
-        //    if (id != user_contracts.Id)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(user_contracts);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!User_contractsExists(user_contracts.Id))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(user_contracts);
-        //}
-
-        //// GET: User_contracts/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var user_contracts = await _context.User_contracts
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (user_contracts == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(user_contracts);
-        //}
-
-        //// POST: User_contracts/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var user_contracts = await _context.User_contracts.FindAsync(id);
-        //    _context.User_contracts.Remove(user_contracts);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool User_contractsExists(int id)
-        //{
-        //    return _context.User_contracts.Any(e => e.Id == id);
-        //}
+            //    doc.Close();
+            //    //{status = "ok", data = "result"};
+            return View();
+        }
     }
 }
