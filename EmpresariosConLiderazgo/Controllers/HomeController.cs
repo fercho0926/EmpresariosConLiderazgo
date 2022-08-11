@@ -57,6 +57,27 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             return View();
         }
+        public IActionResult Transfer()
+        {
+            return View();
+        }
+        public IActionResult WebSite()
+        {
+            return View();
+        }
+        public IActionResult Credential()
+        {
+            return View();
+        }
+        public IActionResult News()
+        {
+            return View();
+        }
+        public IActionResult Crypto()
+        {
+            return View();
+        }
+
 
 
         public async Task<IActionResult> SendMail([FromForm] MailRequest request)
