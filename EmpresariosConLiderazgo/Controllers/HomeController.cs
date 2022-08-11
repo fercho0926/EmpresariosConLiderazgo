@@ -53,6 +53,10 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             return View();
         }
+        public IActionResult Support()
+        {
+            return View();
+        }
 
 
         public async Task<IActionResult> SendMail([FromForm] MailRequest request)

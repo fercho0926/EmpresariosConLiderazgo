@@ -5,277 +5,231 @@
 
 }
 
-
-
 <h1>Paquetes de inversión</h1>
 
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>Inicio</h3>
+
+                        <p>Desde : $200.000</p>
+                        <p>Hasta : $999.999</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-flash"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>4% </h3></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>Plus</h3>
+
+                        <p>Desde : $1.000.000</p>
+                        <p>Hasta : $3.499.999</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-plus"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>5% </h3> </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>STAR</h3>
+
+                        <p>Desde : $3.500.000</p>
+                        <p>Hasta : $8.499.999</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ios-star-outline"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>6.5% </h3> </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>ASOCIADO</h3>
+
+                        <p>Desde : 8.500.000</p>
+                        <p>Hasta : 12.499.999</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-person-stalker"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>7% </h3> </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-info">
+                    <div class="inner">
+                        <h3>EMPRENDEDOR</h3>
+
+                        <p>Desde : $12.500.000</p>
+                        <p>Hasta : 16.499.999</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-arrow-graph-up-right"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>7.5% </h3></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <h3>EMPRESARIO</h3>
+
+                        <p>Desde : 16.500.000</p>
+                        <p>Hasta : 20.499.999</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>8% </h3> </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-warning">
+                    <div class="inner">
+                        <h3>FINANCIERO</h3>
+
+                        <p>Desde : 20.500.000</p>
+                        <p>Hasta : 30.499.999</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-ribbon-a"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>9% </h3> </a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-danger">
+                    <div class="inner">
+                        <h3>ELITE</h3>
+
+                        <p>Desde : 30.500.000</p>
+                        <p>En Adelante</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-trophy"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>9.8% </h3> </a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+<div class="row">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> $</span>
+        </div>
+        <input type="text" class="form-control" name="amountToInvest" id="amountToInvest" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Ingrese valor a INVERTIR" maxlength="10">
+        <div class="input-group-append">
+            <button class="btn btn-success" type="button" onclick="InvestConfirm()">INVERTIR</button>
+        </div>
+    </div>
+</div>
+
 <div>
-    <!-- Content Row -->
-    <div class="row">
-        
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                INICIO
-                            </div>
-                            @*<div class="h6 mb-0 font-weight-bold text-gray-800"> Porcentaje : 7%</div>*@
-                            <hr>
-                            <p>Desde : $200.000</p>
-                            <p>Hasta : $999.999</p>
-                            <p>Porcentaje : 4%</p>
-                            @* <div>
-                                <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 1})'" />
-                            </div>*@
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="InvestConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmar Inversión</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                Plus
-                            </div>
-                            @*<div class="h6 mb-0 font-weight-bold text-gray-800"> Porcentaje : 7%</div>*@
-                            <hr>
-                            <p>Desde : $1.000.000</p>
-                            <p>Hasta : $3.499.999</p>
-                            <p>Porcentaje : 5%</p>
-                            @* <div>
-                                <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 1})'" />
-                            </div>*@
+                <div class="modal-body">
+                    <form id="myForm" action="CreateProduct" method="post">
+                        <div class="form-group">
+                            <label for="category">Categoria</label>
+                            <input type="text" class="form-control" id="category" name="category" readonly="readonly">
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        <div class="form-group">
+                            <label for="amount">Valor a Invertir</label>
+                            <input type="text" class="form-control" id="amount" name="amount" readonly="readonly">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="amount">Porcentaje</label>
+                            <input type="text" class="form-control" id="fee" name="fee" readonly="readonly">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Estado Actual</label>
+                            <input type="text" class="form-control" id="status" disabled="disabled" value="PENDIENTE DE APROBACION">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Observaciones</label>
+                            <textarea class="form-control" id="detail" disabled="disabled" rows="5">Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos</textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-success">Aceptar y Continuar</button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                STAR
-                            </div>
-                            @*<div class="h6 mb-0 font-weight-bold text-gray-800"> Porcentaje : 7%</div>*@
-                            <hr>
-                            <p>Desde : $3.500.000</p>
-                            <p>Hasta : $8.499.999</p>
-                            <p>Porcentaje : 6.5%</p>
-                            @* <div>
-                                <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("BuyById", "Balance", new { Id = 1})'" />
-                            </div>*@
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                Asociado
-                            </div>
-                            <hr>
-                            <p>Desde : 8.500.000</p>
-                            <p>Hasta : 12.499.999</p>
-                            <p>Porcentaje : 7%</p>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                Emprendedor
-                            </div>
-                            <hr>
-                            <p>Desde : $12.500.000</p>
-                            <p>Hasta : 16.499.999</p>
-                            <p>Porcentaje : 7.5%</p>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                Empresario
-                            </div>
-                            <hr>
-                            <p>Desde : 16.500.000</p>
-                            <p>Hasta : 20.499.999</p>
-                            <p>Porcentaje : 8%</p>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                Financiero
-                            </div>
-                            <hr>
-                            <p>Desde : 20.500.000</p>
-                            <p>Hasta : 30.499.999</p>
-                            <p>Porcentaje : 9%</p>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="font-weight-bold text-primary text-uppercase mb-1">
-                                elite
-                            </div>
-                            <hr>
-                            <p>Desde : 30.500.000</p>
-                            <p>En Adelante</p>
-                            <p>Porcentaje : 9.8%</p>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text"> $</span>
-            </div>
-            <input type="text" class="form-control" name="amountToInvest" id="amountToInvest" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Ingrese valor a INVERTIR" maxlength="10">
-            <div class="input-group-append">
-                <button class="btn btn-success" type="button"  onclick="InvestConfirm()">INVERTIR</button>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div>
-        <!-- Modal -->
-        <div class="modal fade" id="InvestConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Confirmar Inversión</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form id="myForm" action="CreateProduct" method="post">
-                            <div class="form-group">
-                                <label for="category">Categoria</label>
-                                <input type="text" class="form-control" id="category" name="category" readonly="readonly">
-                            </div>
-                            <div class="form-group">
-                                <label for="amount">Valor a Invertir</label>
-                                <input type="text" class="form-control" id="amount" name="amount" readonly="readonly">
-                            </div>
-                            <div class="form-group">
-                                <label for="amount">Porcentaje</label>
-                                <input type="text" class="form-control" id="fee" name="fee" readonly="readonly">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="amount">Estado Actual</label>
-                                <input type="text" class="form-control" id="status" disabled="disabled" value="PENDIENTE DE APROBACION">
-                            </div>
-                            <div class="form-group">
-                                <label for="amount">Observaciones</label>
-                                <textarea class="form-control" id="detail" disabled="disabled" rows="5">Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos</textarea>
-                            </div>
-                            <div>
-                                <button type="submit" class="btn btn-success">Aceptar y Continuar</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
     </div>
-
-
 </div>
 
 <script type="text/javascript">
     function InvestConfirm() {
-
+      
         var I_amount = document.getElementById('amountToInvest').value;
         var output = parseFloat(I_amount.replace(/,/g, ''));
 
         var Category = "";
         var fee = 0;
 
+        
+
 
         if (typeof I_amount == 'undefined' || I_amount === null || I_amount === "" || (output >= 0 && output <= 199999)) {
-             $("#category").val(null);
+            $("#category").val(null);
             $("#amount").val(0);
 
-             alert("La cantidad Ingresada no cumple con los requisitos");
+            alert("La cantidad Ingresada no cumple con los requisitos");
 
-             $('#InvestConfirmation').modal('hide');
-
-
-        } else { 
+            $('#InvestConfirmation').modal('hide');
             
+
+        } else {
           
+
             if (output >= 200000 && output <= 999999) {
                 Category = "INICIO";
                 fee = 4;
@@ -312,14 +266,18 @@
                 Category = "ELITE";
                 fee = 9.8;
             }
-            var feePercent = fee+ "%";
+         
+            var feePercent = fee + "%";
+   
 
             $("#category").val(Category);
             $("#amount").val(I_amount);
             $("#fee").val(feePercent);
-
+           
+           
             $('#InvestConfirmation').modal('show');
 
         }
     }
 </script>
+
