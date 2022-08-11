@@ -71,17 +71,9 @@ namespace EmpresariosConLiderazgo.Controllers
                 _context.MovementsByBalance.Add(movement);
             }
 
+            _cloudwatchLogs.InsertLogs("a", "b", "c");
             _context.SaveChanges();
             return Ok();
-        }
-
-
-        [HttpPost]
-        [Route("[Action]")]
-        public async Task<IActionResult> Test()
-        {
-            await _cloudwatchLogs.InsertLogs("CronController", Request.Path.Value!, "Success");
-            return Ok("Log");
         }
     }
 }

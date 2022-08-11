@@ -8,12 +8,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Rotativa\**" />
     <Compile Remove="themes\**" />
     <Compile Remove="wwwroot\NewFolder\**" />
+    <Content Remove="Rotativa\**" />
     <Content Remove="themes\**" />
     <Content Remove="wwwroot\NewFolder\**" />
+    <EmbeddedResource Remove="Rotativa\**" />
     <EmbeddedResource Remove="themes\**" />
     <EmbeddedResource Remove="wwwroot\NewFolder\**" />
+    <None Remove="Rotativa\**" />
     <None Remove="themes\**" />
     <None Remove="wwwroot\NewFolder\**" />
   </ItemGroup>
@@ -43,7 +47,6 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Rotativa\" />
     <Folder Include="Views\User_contracts\Contracts\" />
   </ItemGroup>
 

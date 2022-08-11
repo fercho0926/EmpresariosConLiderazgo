@@ -45,23 +45,18 @@ namespace EmpresariosConLiderazgo.Controllers
             _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "ENTRO");
 
             HtmlToPdf converter = new HtmlToPdf();
-            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "converter");
+
             PdfDocument doc = converter.ConvertUrl("www.google.com");
-            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "doc");
 
             // save pdf document
             byte[] pdf = doc.Save();
-            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "saved");
 
             // close pdf document
             doc.Close();
-            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "closed");
 
             // return resulted pdf document
             FileResult fileResult = new FileContentResult(pdf, "application/pdf");
-            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "filerresut");
             fileResult.FileDownloadName = "Document.pdf";
-            _cloudwatchLogs.InsertLogs("PDF", Request.Path.Value!, "documento");
             return fileResult;
         }
 

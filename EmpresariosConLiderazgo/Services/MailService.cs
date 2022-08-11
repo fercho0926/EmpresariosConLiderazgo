@@ -12,16 +12,8 @@ namespace EmpresariosConLiderazgo.Services
 {
     public class MailService : IMailService
     {
-        private readonly ICloudwatchLogs _cloudwatchLogs;
-
-        public MailService(CloudwatchLogs cloudwatchLogs)
-        {
-            _cloudwatchLogs = cloudwatchLogs;
-        }
-
         public async Task SendEmailAsync(MailRequest mailRequest)
         {
-            await _cloudwatchLogs.InsertLogs("mailRequest", "SendEmailAsync", "ENTRO");
             var password = "";
             var userC = "";
             var smttp = "";
@@ -35,7 +27,6 @@ namespace EmpresariosConLiderazgo.Services
             {
                 SecretId = "Mail"
             });
-            await _cloudwatchLogs.InsertLogs("mailRequest", "SendEmailAsync", "response" + response);
 
             var secretValues = JObject.Parse(response.SecretString);
             if (secretValues != null)
@@ -45,11 +36,6 @@ namespace EmpresariosConLiderazgo.Services
                 smttp = secretValues["Mail_Smtp"].ToString();
                 port = secretValues["Mail_Port"].ToString();
             }
-
-            await _cloudwatchLogs.InsertLogs("mailRequest", "SendEmailAsync", "password" + password);
-            await _cloudwatchLogs.InsertLogs("mailRequest", "SendEmailAsync", "userC" + userC);
-            await _cloudwatchLogs.InsertLogs("mailRequest", "SendEmailAsync", "smttp" + smttp);
-            await _cloudwatchLogs.InsertLogs("mailRequest", "SendEmailAsync", "port" + port);
 
 
             var email = new MimeMessage();
