@@ -6,6 +6,8 @@ using EmpresariosConLiderazgo.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using Microsoft.AspNetCore.Http;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -27,6 +29,8 @@ builder.Services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new 
 builder.Services.AddTransient<IDocumentService, DocumentService>();
 builder.Services.AddTransient<IMailService, MailService>();
 builder.Services.AddTransient<ICloudwatchLogs, CloudwatchLogs>();
+
+
 builder.Services.AddSwaggerGen();
 
 

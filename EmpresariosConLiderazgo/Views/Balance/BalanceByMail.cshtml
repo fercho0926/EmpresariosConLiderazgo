@@ -4,7 +4,19 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
 
+    .thNew {
+        background-color: #326091;
+        color: white;
+    }
+
+        .thmov {
+        background-color: #605F5F;
+        color: white;
+    }
+
+</style>
 @if (@TempData["AlertMessage"] != null)
 {
     <div class="alert-success jumbotron">
@@ -42,9 +54,9 @@
 
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="tbl_BalanceByMail" class="table table-bordered table-striped">
+                    <table id="table" class="table table-bordered table-striped">
                         <thead>
-                            <tr>
+                            <tr class="thNew">
                                 <th>  @Html.DisplayNameFor(model => model.Id)</th>
                                 <th> @Html.DisplayNameFor(model => model.Product)</th>
                                 <th>@Html.DisplayNameFor(model => model.BalanceAvailable)</th>

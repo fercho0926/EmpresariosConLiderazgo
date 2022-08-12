@@ -218,7 +218,7 @@ namespace EmpresariosConLiderazgo.Controllers
             _context.SaveChanges();
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ApproveInvestments()
         {
             var recordsToApprove = await _context.Balance
@@ -227,7 +227,7 @@ namespace EmpresariosConLiderazgo.Controllers
             return View(recordsToApprove);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ApproveInvestmentById(int? id)
         {
             if (id == null)
@@ -276,7 +276,7 @@ namespace EmpresariosConLiderazgo.Controllers
             return RedirectToAction("ApproveInvestments", "Balance");
         }
 
-
+        [Authorize(Roles = "Admin")]
         public IActionResult ApproveCashOut()
         {
             var records = from m in _context.MovementsByBalance
@@ -300,7 +300,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             return View(records);
         }
-
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ApproveCashOutById(int? id)
         {
             if (id == null)
