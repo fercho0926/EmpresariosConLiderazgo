@@ -74,9 +74,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                              
                                         @foreach (var movement in item.MovementsByBalance)
                                         {
+                                              <tr>
                                         <td>@Html.DisplayFor(modelmovement => movement.Id)</td>
                                         <td>@Html.DisplayFor(modelmovement => movement.Name)</td>
                                         <td>@Html.DisplayFor(modelmovement => movement.DateMovement)</td>
@@ -84,8 +85,9 @@
                                         <td>@Html.DisplayFor(modelmovement => movement.CashOut)</td>
                                         <td>@Html.DisplayFor(modelmovement => movement.BalanceAfter)</td>
                                         <td>@Html.DisplayFor(modelmovement => movement.status)</td>
+                                         </tr>
                                         }
-                                </tr>
+                               
                             </tbody>
 
                             }

@@ -7,12 +7,12 @@
 
 <style>
 
-    body,html {
+    body, html {
         margin: 0;
         font-family: sans-serif;
     }
 
-  
+
 
     a {
         outline: none;
@@ -33,37 +33,36 @@
         background: lightgreen;
     }
 
-    #confirm-link:hover {
-        background: orange;
-    }
+        #confirm-link:hover {
+            background: orange;
+        }
 
     a:active {
         background: red;
         color: white;
     }
 
-
-
 </style>
 
-<h1>@ViewData["Title"]</h1>
 @{
 
 
 
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h5 class="card-title m-0">Confirmación</h5>
+        </div>
+        <div class="card-body">
+            @if (@Model.DisplayConfirmAccountLink)
+            {
+                <p>
+                    Bienvenido a Empresarios con liderazgo Somos una organización que trabajamos de forma ordenada y perseverante para obtener un buen desempeño, satisfacción de los clientes y colaboradores : <a id="confirm-link" href="@Model.EmailConfirmationUrl">ACEPTAR</a>
+                </p>
+            }
+
+        </div>
+    </div>
 
 
-    if (@Model.DisplayConfirmAccountLink)
-    {
-        <p>
-           Bienvenido a Empresarios con liderazgo Somos una organización que trabajamos de forma ordenada y perseverante para obtener un buen desempeño, satisfacción de los clientes y colaboradores : <a   id="confirm-link" href="@Model.EmailConfirmationUrl">ACEPTAR</a>
-        </p>
-    }
-    else
-    {
-<p>
-        Please check your email to confirm your account.
-</p>
-    }
 }
 
