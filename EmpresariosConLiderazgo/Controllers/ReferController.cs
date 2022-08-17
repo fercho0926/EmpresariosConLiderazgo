@@ -2,15 +2,19 @@
 using EmpresariosConLiderazgo.Models;
 using EmpresariosConLiderazgo.Utils;
 using EmpresariosConLiderazgo.Services;
+using EmpresariosConLiderazgo.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
     public class ReferController : Controller
     {
         private readonly IMailService mailService;
+        private readonly ApplicationDbContext _context;
 
-        public ReferController(IMailService mailService)
+        public ReferController(ApplicationDbContext context, IMailService mailService)
         {
+            _context = context;
             this.mailService = mailService;
         }
 
@@ -30,7 +34,24 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Pending save 
+                var validateNewUser = _context.Users_App.Where(x => x.AspNetUserId == refer.Mail).ToList();
+                if (validateNewUser.Count > 0)
+                {
+                    TempData["ErrorMessage"] =
+                        $"El usuario {refer.Name?.ToString()} ,Ya existe en la plataforma";
+                    return RedirectToAction("Index", "Home");
+                }
+
+
+                var refered = new ReferedByUser
+                {
+                    AspNetUserId = @User.Identity?.Name,
+                    ReferedUserId = refer.Mail,
+                    Date = DateTime.Now
+                };
+                await _context.ReferedByUser.AddAsync(refered);
+                await _context.SaveChangesAsync();
+
 
                 //Send Mail
 
@@ -50,7 +71,30 @@ namespace EmpresariosConLiderazgo.Controllers
             TempData["AlertMessage"] =
                 $"Se ha realizado la invitacion a {refer.Name.ToString()} , Muchas gracias por hacer que esta familia crezca";
 
-            return RedirectToAction("Index", "Home");
+            //return RedirectToAction("Index", "Home");
+            return RedirectToAction("ReferedByMail", "Refer", new { @mail = User.Identity?.Name });
+        }
+
+
+        public async Task<IActionResult> ReferedByMail(string mail)
+        {
+            if (mail == null)
+            {
+                RedirectToPage("Error");
+            }
+
+            if (User.Identity?.Name != mail)
+            {
+                return NotFound();
+            }
+
+            var refer = _context.ReferedByUser.Where(x => x.AspNetUserId == mail).ToList();
+            if (refer.Count == 0)
+            {
+                RedirectToPage("Error");
+            }
+
+            return View(refer);
         }
     }
 }

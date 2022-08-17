@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
+using EmpresariosConLiderazgo.Models;
 using EmpresariosConLiderazgo.Models.Entities;
 using EmpresariosConLiderazgo.Utils;
 using Microsoft.AspNetCore.Authorization;
@@ -185,6 +186,17 @@ namespace EmpresariosConLiderazgo.Controllers
                 Contract = false
             };
             _context.Add(NewProduct);
+
+
+            var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x =>
+                x.ReferedUserId == NewProduct.UserApp && x.InvestDone == false);
+
+            if (refer != null)
+            {
+                refer.InvestDone = true;
+            }
+
+
             await _context.SaveChangesAsync();
             var productId = await _context.Balance.SingleAsync(x => x.UserApp == NewProduct.UserApp &&
                                                                     x.InitialDate == NewProduct.InitialDate);
@@ -235,12 +247,39 @@ namespace EmpresariosConLiderazgo.Controllers
                 return NotFound();
             }
 
+
             var result = await _context.Balance
                 .SingleOrDefaultAsync(b => b.Id == id);
             result.StatusBalance = EnumStatusBalance.APROBADO;
             result.InitialDate = DateTime.Now;
             result.EndlDate = DateTime.Now.AddDays(30);
-            _context.SaveChanges();
+
+
+            var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x =>
+                x.ReferedUserId == result.UserApp && x.ApproveByAdmin == false);
+
+            if (refer != null)
+            {
+                refer.ApproveByAdmin = true;
+
+                var firstOperation = _context.Balance.Where(x => x.UserApp == refer.ReferedUserId).OrderBy(x => x.Id)
+                    .First();
+
+                var toReturn = new Balance_ReferenceByuser();
+                toReturn.Balance = firstOperation;
+                toReturn.ReferedByUser = refer;
+
+
+                await _context.SaveChangesAsync();
+
+                CreateMovement(result.Id, "Aprobado por el Administrador", result.BalanceAvailable, result.CashOut,
+                    Utils.EnumStatus.AprovadoParaTransacciones);
+
+                return View("ApproveComission", toReturn);
+            }
+
+
+            await _context.SaveChangesAsync();
 
             CreateMovement(result.Id, "Aprobado por el Administrador", result.BalanceAvailable, result.CashOut,
                 Utils.EnumStatus.AprovadoParaTransacciones);
@@ -300,6 +339,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             return View(records);
         }
+
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ApproveCashOutById(int? id)
         {
@@ -373,6 +413,35 @@ namespace EmpresariosConLiderazgo.Controllers
             TempData["AlertMessage"] =
                 $"Se ha Rechazado el retiro  para el usuario ${balance.UserApp}";
             return RedirectToAction("ApproveCashOut", "Balance");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SaveMoneyPerReferee(
+            [Bind(
+                "Id,AmountToRefer")]
+            ReferedByUser ReferedByUser)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _context.ReferedByUser.SingleOrDefaultAsync(x => x.Id == ReferedByUser.Id);
+                    result!.AmountToRefer = ReferedByUser.AmountToRefer;
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+
+                TempData["AlertMessage"] =
+                    $"Se ha Abonado la comisión";
+                return RedirectToAction("ApproveInvestments", "Balance");
+            }
+
+            return View("ApproveComission");
         }
     }
 }

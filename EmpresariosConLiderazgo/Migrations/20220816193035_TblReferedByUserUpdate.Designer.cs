@@ -4,6 +4,7 @@ using EmpresariosConLiderazgo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmpresariosConLiderazgo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220816193035_TblReferedByUserUpdate")]
+    partial class TblReferedByUserUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,9 +158,6 @@ namespace EmpresariosConLiderazgo.Migrations
 
                     b.Property<decimal>("AmountToRefer")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("ApproveByAdmin")
-                        .HasColumnType("bit");
 
                     b.Property<string>("AspNetUserId")
                         .HasColumnType("nvarchar(max)");

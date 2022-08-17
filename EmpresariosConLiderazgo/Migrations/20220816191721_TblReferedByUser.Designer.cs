@@ -4,6 +4,7 @@ using EmpresariosConLiderazgo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmpresariosConLiderazgo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220816191721_TblReferedByUser")]
+    partial class TblReferedByUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,25 +153,16 @@ namespace EmpresariosConLiderazgo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<bool>("Accepted")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("AmountToRefer")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("ApproveByAdmin")
-                        .HasColumnType("bit");
-
                     b.Property<string>("AspNetUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("InvestDone")
+                    b.Property<bool>("effectiveContact")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ReferedUserId")
+                    b.Property<string>("referedUserId")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

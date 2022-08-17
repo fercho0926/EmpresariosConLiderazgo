@@ -125,6 +125,12 @@ namespace EmpresariosConLiderazgo.Controllers
                     }
                 }
 
+
+                var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x => x.ReferedUserId == users_App.AspNetUserId);
+                refer.Accepted = true;
+                await _context.SaveChangesAsync();
+
+
                 TempData["AlertMessage"] =
                     $"Se ha realizado la actualizacion de la Informacion";
                 return RedirectToAction("Index", "Home");

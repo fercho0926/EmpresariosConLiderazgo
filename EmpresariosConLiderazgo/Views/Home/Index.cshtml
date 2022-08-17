@@ -9,6 +9,13 @@
     </div>
 }
 
+@if (@TempData["ErrorMessage"] != null)
+{
+    <div class="alert-danger jumbotron">
+        <strong>Error !</strong> @TempData["ErrorMessage"]
+    </div>
+}
+
 
 <div class="card card-primary card-outline">
     <div class="card-header">
@@ -24,7 +31,7 @@ Algunos verán una gran oportunidad y mantendrán dinero en su cuenta para trans
         <p> Éxitos a quien vea una gran oportunidad</p>*@
       
 
-        <img src="~/Theme/img/wo" class="img-fluid"  style="width:600px;height:400px;" />
+        <img src="~/Theme/img/working.gif" class="img-fluid"  style="width:600px;height:400px;" />
 
     </div>
 </div>

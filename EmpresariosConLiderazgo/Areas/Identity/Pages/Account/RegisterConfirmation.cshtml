@@ -50,14 +50,14 @@
 
     <div class="card card-primary card-outline">
         <div class="card-header">
-            <h5 class="card-title m-0">Confirmación</h5>
+            <h1 style="color : #326091"><b>Confirmación</b></h1>
         </div>
         <div class="card-body">
             @if (@Model.DisplayConfirmAccountLink)
             {
-                <p>
-                    Bienvenido a Empresarios con liderazgo Somos una organización que trabajamos de forma ordenada y perseverante para obtener un buen desempeño, satisfacción de los clientes y colaboradores : <a id="confirm-link" href="@Model.EmailConfirmationUrl">ACEPTAR</a>
-                </p>
+                <p><b>
+                    Bienvenido a Empresarios con liderazgo Somos una organización que trabajamos de forma ordenada y perseverante para obtener un buen desempeño, satisfacción de los clientes y colaboradores :<br/> <a id="confirm-link" href="@Model.EmailConfirmationUrl">ACEPTAR</a>
+                </b></p>
             }
 
         </div>
