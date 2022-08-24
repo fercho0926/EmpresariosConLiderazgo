@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using EmpresariosConLiderazgo.Utils;
 
 namespace EmpresariosConLiderazgo.Models
 {
@@ -15,5 +16,7 @@ namespace EmpresariosConLiderazgo.Models
         [Display(Name = "Comisión x referido")]
         [DisplayFormat(DataFormatString = "{0:N0} ")]
         public decimal AmountToRefer { get; set; }
+
+        [Display(Name = "Estado")] public EnumStatusReferido EnumStatusReferido { get; set; } = 0;
     }
 }

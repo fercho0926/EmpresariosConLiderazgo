@@ -1,10 +1,5 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Models;
@@ -33,6 +28,14 @@ namespace EmpresariosConLiderazgo.Controllers
 
         public async Task<IActionResult> BalanceByMail(string mail)
         {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
             if (mail == null)
             {
                 RedirectToPage("Error");
@@ -91,7 +94,7 @@ namespace EmpresariosConLiderazgo.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CashOut(int id,
-            [Bind("UserApp,BalanceAvailable,Id,CashOut,Name,Product")]
+            [Bind("UserApp,Profit,BaseBalanceAvailable,BalanceAvailable,Id,CashOut,Name,Product")]
             Balance balance)
         {
             if (id != balance.Id)
@@ -99,10 +102,10 @@ namespace EmpresariosConLiderazgo.Controllers
                 return NotFound();
             }
 
-            if (balance.CashOut > balance.BalanceAvailable)
+            if (balance.CashOut > balance.Profit)
             {
                 TempData["AlertMessage"] =
-                    $"El valor del retiro por  $ {balance.CashOut}, supera el Saldo disponible : $ {balance.BalanceAvailable}";
+                    $"El valor del retiro por  $ {balance.CashOut}, supera el Saldo disponible de Utilidad: $ {balance.Profit}";
                 return View(balance);
             }
 
@@ -127,7 +130,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             try
             {
-                CreateMovement(balance.Id, "Solicitud de retiro", balance.BalanceAvailable, balance.CashOut,
+                CreateMovement(balance.Id, "Solicitud de retiro", 0, balance.CashOut,
                     Utils.EnumStatus.PendienteDeAprobacion);
             }
 
@@ -138,7 +141,10 @@ namespace EmpresariosConLiderazgo.Controllers
 
             TempData["AlertMessage"] =
                 $"Se registro la solicitud de retiro del producto {balance.Product}, por valor de $ {balance.CashOut} El desembolso se realiza el dia MARTES";
-            return RedirectToAction("Index", "Home");
+
+
+            string UserLogged = User.Identity?.Name.ToString();
+            return RedirectToAction("BalanceByMail", "Balance", new { @mail = UserLogged });
 
             return View(balance);
         }
@@ -194,6 +200,15 @@ namespace EmpresariosConLiderazgo.Controllers
             if (refer != null)
             {
                 refer.InvestDone = true;
+
+                var movement = new ReferedByUserMovement()
+                {
+                    ReferedByUserId = refer.Id,
+                    Message = "Realizó Inversión",
+                    DateMovement = DateTime.Now,
+                    Status = EnumStatusBalance.PENDIENTE
+                };
+                _context.ReferedByUserMovement.Add(movement);
             }
 
 
@@ -216,6 +231,13 @@ namespace EmpresariosConLiderazgo.Controllers
         public void CreateMovement(int productID, string action, decimal balanceAvailable, decimal cashOut,
             Utils.EnumStatus status)
         {
+            decimal balanceAfter = 0;
+            if (balanceAvailable != 0)
+            {
+                balanceAfter = balanceAvailable - cashOut;
+            }
+
+
             var movement = new MovementsByBalance
             {
                 BalanceId = productID,
@@ -223,7 +245,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 Name = action,
                 BalanceBefore = balanceAvailable,
                 CashOut = cashOut,
-                BalanceAfter = balanceAvailable - cashOut,
+                BalanceAfter = balanceAfter,
                 status = status
             };
             _context.MovementsByBalance.Add(movement);
@@ -268,6 +290,16 @@ namespace EmpresariosConLiderazgo.Controllers
                 var toReturn = new Balance_ReferenceByuser();
                 toReturn.Balance = firstOperation;
                 toReturn.ReferedByUser = refer;
+
+
+                var movement = new ReferedByUserMovement()
+                {
+                    ReferedByUserId = refer.Id,
+                    Message = "Se aprueba Inversión",
+                    DateMovement = DateTime.Now,
+                    Status = EnumStatusBalance.APROBADO
+                };
+                _context.ReferedByUserMovement.Add(movement);
 
 
                 await _context.SaveChangesAsync();
@@ -357,16 +389,18 @@ namespace EmpresariosConLiderazgo.Controllers
                 .SingleOrDefaultAsync(b => b.Id == movement.BalanceId);
 
 
-            balance.LastMovement = DateTime.Now;
-            balance.BalanceAvailable -= movement.CashOut;
-
-
-            balance.BaseBalanceAvailable -= movement.CashOut;
-            if (balance.BalanceAvailable == 0)
+            if (movement!.CashOut > balance!.Profit)
             {
-                balance.StatusBalance = EnumStatusBalance.FINALIZADO;
-                balance.BaseBalanceAvailable = 0;
+                TempData["Error"] = $"El valor a retirar es superior al disponible";
+                return RedirectToAction("ApproveCashOut", "Balance");
             }
+
+
+            balance.LastMovement = DateTime.Now;
+
+            var balanceAvailableOld = balance.BalanceAvailable;
+            balance.BalanceAvailable -= movement.CashOut;
+            balance.Profit -= movement.CashOut;
 
 
             movement.status = EnumStatus.RetiroAprobado;
@@ -374,7 +408,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             _context.SaveChanges();
 
-            CreateMovement(balance.Id, $"Retiro Aprobado - {movement.Id} ", balance.BalanceAvailable, balance.CashOut,
+            CreateMovement(balance.Id, $"Retiro Aprobado - {movement.Id} ", balanceAvailableOld, movement.CashOut,
                 Utils.EnumStatus.RetiroAprobado);
 
 
@@ -428,6 +462,18 @@ namespace EmpresariosConLiderazgo.Controllers
                 {
                     var result = await _context.ReferedByUser.SingleOrDefaultAsync(x => x.Id == ReferedByUser.Id);
                     result!.AmountToRefer = ReferedByUser.AmountToRefer;
+
+
+                    var movement = new ReferedByUserMovement()
+                    {
+                        ReferedByUserId = ReferedByUser.Id,
+                        Message = $"Se abona {ReferedByUser.AmountToRefer} , Disponible para retirar",
+                        DateMovement = DateTime.Now,
+                        Status = EnumStatusBalance.POR_RETIRAR
+                    };
+                    _context.ReferedByUserMovement.Add(movement);
+
+
                     await _context.SaveChangesAsync();
                 }
                 catch (Exception)

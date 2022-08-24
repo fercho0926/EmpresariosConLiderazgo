@@ -53,31 +53,84 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             return View();
         }
+
         public IActionResult Support()
         {
-            return View();
-        }
-        public IActionResult Transfer()
-        {
-            return View();
-        }
-        public IActionResult WebSite()
-        {
-            return View();
-        }
-        public IActionResult Credential()
-        {
-            return View();
-        }
-        public IActionResult News()
-        {
-            return View();
-        }
-        public IActionResult Crypto()
-        {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
             return View();
         }
 
+        public IActionResult Transfer()
+        {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+            return View();
+        }
+
+        public IActionResult WebSite()
+        {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+            return View();
+        }
+
+        public IActionResult Credential()
+        {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+            return View();
+        }
+
+        public IActionResult News()
+        {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+            return View();
+        }
+
+        public IActionResult Crypto()
+        {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+            return View();
+        }
 
 
         public async Task<IActionResult> SendMail([FromForm] MailRequest request)

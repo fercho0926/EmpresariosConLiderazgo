@@ -13,6 +13,8 @@ namespace EmpresariosConLiderazgo.Utils
         PENDIENTE,
         APROBADO,
         RECHAZADO,
-        FINALIZADO
+        FINALIZADO,
+        POR_RETIRAR,
+        SOLICITUD_RETIRO
     }
 }

@@ -3,6 +3,8 @@ using EmpresariosConLiderazgo.Models;
 using EmpresariosConLiderazgo.Utils;
 using EmpresariosConLiderazgo.Services;
 using EmpresariosConLiderazgo.Data;
+using EmpresariosConLiderazgo.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmpresariosConLiderazgo.Controllers
@@ -21,6 +23,14 @@ namespace EmpresariosConLiderazgo.Controllers
 
         public IActionResult Index()
         {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
             return View();
         }
 
@@ -52,6 +62,8 @@ namespace EmpresariosConLiderazgo.Controllers
                 await _context.ReferedByUser.AddAsync(refered);
                 await _context.SaveChangesAsync();
 
+                CreateMovement(refered.Id, "Se envia Invitación", EnumStatusBalance.PENDIENTE);
+
 
                 //Send Mail
 
@@ -78,6 +90,15 @@ namespace EmpresariosConLiderazgo.Controllers
 
         public async Task<IActionResult> ReferedByMail(string mail)
         {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+
             if (mail == null)
             {
                 RedirectToPage("Error");
@@ -95,6 +116,128 @@ namespace EmpresariosConLiderazgo.Controllers
             }
 
             return View(refer);
+        }
+
+
+        public async Task<IActionResult> SaveArray(List<int> data)
+        {
+            foreach (var id in data)
+            {
+                var res = await _context.ReferedByUser.SingleOrDefaultAsync(x => x.Id == id);
+                res.EnumStatusReferido = EnumStatusReferido.SOLICITUD_RETIRO;
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult ApproveRetireCommissions()
+        {
+            var records = _context.ReferedByUser.Where(x => x.EnumStatusReferido == EnumStatusReferido.SOLICITUD_RETIRO)
+                .ToList();
+
+
+            return View(records);
+        }
+
+
+        public async Task<IActionResult> GetMovementById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _context.ReferedByUserMovement.Where(x => x.ReferedByUserId == id).ToListAsync();
+
+
+            return View(result);
+        }
+
+
+        public async Task<IActionResult> ApproveCommissionById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var commission = await _context.ReferedByUser.SingleOrDefaultAsync(x => x.Id == id);
+            commission!.EnumStatusReferido = EnumStatusReferido.ABONADO_A_CUENTA;
+
+
+            await _context.SaveChangesAsync();
+            CreateMovement(Convert.ToInt32(id), $"Retiro  por {commission.AmountToRefer} Abonado",
+                EnumStatusBalance.APROBADO);
+
+
+            TempData["AlertMessage"] =
+                $"Se ha realizado El abono  por {commission.AmountToRefer} , al usuario {commission.AspNetUserId}";
+
+            return RedirectToAction("ApproveRetireCommissions", "Refer", new { @mail = User.Identity?.Name });
+        }
+
+        public async Task<IActionResult> TansferMoney(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var commission = await _context.ReferedByUser.SingleOrDefaultAsync(x => x.Id == id);
+            commission!.EnumStatusReferido = EnumStatusReferido.SOLICITUD_RETIRO;
+
+
+            await _context.SaveChangesAsync();
+            CreateMovement(Convert.ToInt32(id), $"Solicitud de retiro por {commission.AmountToRefer}",
+                EnumStatusBalance.SOLICITUD_RETIRO);
+
+
+            TempData["AlertMessage"] =
+                $"Se ha realizado la solicitud de retiro por {commission.AmountToRefer} , Este pago se verá reflejado entre los dias 12 al 15 de cada mes";
+
+            return RedirectToAction("ReferedByMail", "Refer", new { @mail = User.Identity?.Name });
+        }
+
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RejectCommissionById(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var commission = await _context.ReferedByUser.SingleOrDefaultAsync(x => x.Id == id);
+            commission!.EnumStatusReferido = EnumStatusReferido.RECHAZADO;
+
+
+            await _context.SaveChangesAsync();
+            CreateMovement(Convert.ToInt32(id), $"Retiro  por {commission.AmountToRefer} RECHAZADO",
+                EnumStatusBalance.RECHAZADO);
+
+
+            TempData["ErrorMessage"] =
+                $"Se ha RECHAZADO El abono  por {commission.AmountToRefer} , al usuario {commission.AspNetUserId}";
+
+            return RedirectToAction("ApproveRetireCommissions", "Refer", new { @mail = User.Identity?.Name });
+        }
+
+
+        public void CreateMovement(int referedID, string message, Utils.EnumStatusBalance status)
+        {
+            var movement = new ReferedByUserMovement()
+            {
+                ReferedByUserId = referedID,
+                Message = message,
+                DateMovement = DateTime.Now,
+                Status = status
+            };
+            _context.ReferedByUserMovement.Add(movement);
+            _context.SaveChanges();
         }
     }
 }

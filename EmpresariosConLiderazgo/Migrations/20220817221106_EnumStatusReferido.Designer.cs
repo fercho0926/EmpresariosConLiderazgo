@@ -4,6 +4,7 @@ using EmpresariosConLiderazgo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EmpresariosConLiderazgo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220817221106_EnumStatusReferido")]
+    partial class EnumStatusReferido
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,31 +180,6 @@ namespace EmpresariosConLiderazgo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ReferedByUser");
-                });
-
-            modelBuilder.Entity("EmpresariosConLiderazgo.Models.ReferedByUserMovement", b =>
-                {
-                    b.Property<int>("MovementId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovementId"), 1L, 1);
-
-                    b.Property<DateTime>("DateMovement")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ReferedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("MovementId");
-
-                    b.ToTable("ReferedByUserMovement");
                 });
 
             modelBuilder.Entity("EmpresariosConLiderazgo.Models.User_contracts", b =>

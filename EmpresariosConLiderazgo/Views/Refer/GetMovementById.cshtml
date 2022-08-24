@@ -1,0 +1,70 @@
+﻿@model IEnumerable<EmpresariosConLiderazgo.Models.ReferedByUserMovement>
+
+@{
+    ViewData["Title"] = "Movimientos";
+
+}
+
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+<style>
+
+    .thNew {
+        background-color: #326091;
+        color: white;
+    }
+
+    .thmov {
+        background-color: #605F5F;
+        color: white;
+    }
+
+</style>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr class="thNew">
+                            <th>@Html.DisplayNameFor(model => model.ReferedByUserId)</th>
+                            <th>@Html.DisplayNameFor(model => model.MovementId)</th>
+                            <th> @Html.DisplayNameFor(model => model.DateMovement)</th>
+                            <th>@Html.DisplayNameFor(model => model.Message)</th>
+                            <th>@Html.DisplayNameFor(model => model.Status)</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.ReferedByUserId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.MovementId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DateMovement)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Message)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->

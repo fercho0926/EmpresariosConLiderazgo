@@ -11,6 +11,13 @@
         <strong>Success !</strong> @TempData["AlertMessage"]
     </div>
 }
+
+@if (@TempData["Error"] != null)
+{
+    <div class="alert-danger jumbotron">
+        <strong>Error !</strong> @TempData["Error"]
+    </div>
+}
 <style>
 
     .thNew {
@@ -25,7 +32,8 @@
 
 </style>
 
-<h5>Aprobación de Retiros</h5>
+
+<h1 style="color : #326091"><b>Aprobación de Retiros</b></h1>
 
 
 

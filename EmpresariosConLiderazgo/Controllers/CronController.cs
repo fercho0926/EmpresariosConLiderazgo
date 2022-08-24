@@ -32,22 +32,35 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             var records = _context.Balance.Where(x => x.StatusBalance == Utils.EnumStatusBalance.APROBADO).ToList();
 
+
             foreach (var record in records)
             {
                 double Fee = 0.0;
                 switch (record.Product)
                 {
+                    case "INICIO":
+                        Fee = DailyFeeCalculator(4);
+                        break;
                     case "PLUS":
-                        Fee = 0.00333;
+                        Fee = DailyFeeCalculator(5);
                         break;
                     case "STAR":
-                        Fee = 0.00333;
+                        Fee = DailyFeeCalculator(6.5);
                         break;
-                    case "VIP":
-                        Fee = 0.00333;
+                    case "ASOCIADO":
+                        Fee = DailyFeeCalculator(7);
+                        break;
+                    case "EMPRENDEDOR":
+                        Fee = DailyFeeCalculator(7.5);
+                        break;
+                    case "EMPRESARIO":
+                        Fee = DailyFeeCalculator(8);
+                        break;
+                    case "FINANCIERO":
+                        Fee = DailyFeeCalculator(9);
                         break;
                     case "ELITE":
-                        Fee = 0.00333;
+                        Fee = DailyFeeCalculator(9.8);
                         break;
                 }
 
@@ -63,7 +76,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 {
                     BalanceId = record.Id,
                     DateMovement = DateTime.Now,
-                    Name = $"Abono Intereses {String.Format("{0:0.##}", profit)} ",
+                    Name = $"Abono a Utilidades {String.Format("{0:0.##}", profit)} ",
                     BalanceBefore = oldBalance,
                     CashOut = 0,
                     BalanceAfter = record.BalanceAvailable
@@ -71,9 +84,16 @@ namespace EmpresariosConLiderazgo.Controllers
                 _context.MovementsByBalance.Add(movement);
             }
 
-            _cloudwatchLogs.InsertLogs("a", "b", "c");
+            _cloudwatchLogs.InsertLogs("Cron", "cron", "Success");
             _context.SaveChanges();
             return Ok();
+        }
+
+
+        private double DailyFeeCalculator(double fee)
+        {
+            var montlyFee = fee / 100;
+            return (montlyFee / 30);
         }
     }
 }
