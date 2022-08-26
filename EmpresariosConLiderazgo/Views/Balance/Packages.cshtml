@@ -18,7 +18,7 @@
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
-                        <h3>INICIO</h3>
+                        <h5>INICIO</h5>
 
                         <p>Desde : $200.000</p>
                         <p>Hasta : $999.999</p>
@@ -34,7 +34,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>PLUS</h3>
+                        <h5>PLUS</h5>
 
                         <p>Desde : $1.000.000</p>
                         <p>Hasta : $3.499.999</p>
@@ -50,7 +50,7 @@
                 <!-- small box -->
                 <div class="small-box bg-secondary">
                     <div class="inner">
-                        <h3>STAR</h3>
+                        <h5>STAR</h5>
 
                         <p>Desde : $3.500.000</p>
                         <p>Hasta : $8.499.999</p>
@@ -66,7 +66,7 @@
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
-                        <h3>ASOCIADO</h3>
+                        <h5>ASOCIADO</h5>
 
                         <p>Desde : 8.500.000</p>
                         <p>Hasta : 12.499.999</p>
@@ -81,8 +81,7 @@
                 <!-- small box -->
                 <div class="small-box bg-primary">
                     <div class="inner">
-                        <h3>EMPRENDEDOR
-                        </h3>
+                        <h5>EMPRENDEDOR</h5>
                        
 
 
@@ -100,7 +99,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>EMPRESARIO</h3>
+                        <h5>EMPRESARIO</h5>
 
                         <p>Desde : 16.500.000</p>
                         <p>Hasta : 20.499.999</p>
@@ -116,7 +115,7 @@
                 <!-- small box -->
                 <div class="small-box bg-dark">
                     <div class="inner">
-                        <h3>FINANCIERO</h3>
+                        <h5>FINANCIERO</h5>
 
                         <p>Desde : 20.500.000</p>
                         <p>Hasta : 30.499.999</p>
@@ -132,7 +131,7 @@
                 <!-- small box -->
                  <div class="small-box bg-primary">
                     <div class="inner">
-                        <h3>ELITE</h3>
+                        <h5>ELITE</h5>
 
                         <p>Desde : 30.500.000</p>
                         <p>En Adelante</p>
@@ -197,8 +196,14 @@
                             <label for="amount">Observaciones</label>
                             <textarea class="form-control" id="detail" disabled="disabled" rows="5">Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos</textarea>
                         </div>
+
+                        <div class="form-group">
+                            <input id="contractcheck" type="checkbox" name="contractcheck" style=" width: 25px; height: 25px; " /><b>&nbsp; &nbsp;  Leí, entendí y acepto estos términos</b>
+
+                        </div>
+
                         <div>
-                            <button type="submit" class="btn btn-success">Aceptar y Continuar</button>
+                            <button type="submit" class="btn btn-success" id="btn_Aceptar">Aceptar y Continuar</button>
                         </div>
                     </form>
                 </div>
@@ -210,16 +215,53 @@
     </div>
 </div>
 
+
+
+<div>
+    <!-- Modal -->
+    <div class="modal fade" id="contractModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contrato de Inversión</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+CONVENIO DE INVERSIÓN entre EMPRESARIOS CON LIDERAZGO con NIT 1128469767-1, gestor de capitales de la ciudad de Medellín, Antioquia. Ubicados en edificio REGUS poblado en la dirección Cra 43 N° 11ª 44 oficina 206. Conste por el presente documento, el Convenio de Inversión con inversionista XXXXXXXXXXXXXXXXX, CC XXXXXXXXXX. Mayor de edad, quien de ahora en adelante firma convenio de administración de capital por un total de             XXXXXXXXX, (XXXXXXXXXX), del cual recibirá una utilidad del X%, cada mes, este convenio es mutuo acuerdo, e intransferible a segundas o terceras personas; ya que es de única persona. Clausula 1 Este convenio y ejecución se realiza a cambio de producción de activos en mercados bursátiles tales como, inversiones en trading, compra de acciones, entre otras actividades que respaldan nuestra inversión. Clausula 2 Este convenio tendrá una duración de x meses iniciando el xx de xxx 202x y finalización del contrato xx de xx 202x. Clausula 3 Los pagos de los porcentajes se realizarán en los primeros 5 días de cada mes, en esos primeros 5 días recibirá vía WhatsApp, o correo electrónico una confirmación de pago, en caso de no recibir la confirmación, avisar a la compañía al número de WhatsApp +57300-333-0745, o al correo electrónico empresarios.admon@gmail.com. Clausula 4 El pago del primer mes se liquida sobre los días hábiles de inversión, es decir la diferencia entre el día que se hace el pago y los días que pasaron para el fin de mes. Clausula 5 Para cancelación de convenio y solicitud de retiro del capital, lo debe hacer con 2 meses de anticipación, en caso de retirar antes de la finalización del convenio, el inversionista asumirá una penalidad del 20% sobre la inversión realizada.
+TERMINOS Y CONDICIONES Nuestros financieros tienen la oportunidad de invertir en diferentes tipos de contratos, largo, mediano, y corto plazo, son autónomos y responsables de sus propias decisiones, sus datos serán tratados con responsabilidad, se les informara de eventos e inversiones, foros que realizamos desde nuestra compañía, tiene derecho a participar y estar enterado(a) de cómo se mueven los mercados financieros, puede abrir los convenios de inversión que desee, puede ingresar a nuestra página web, www.empresariosconliderazgo.org. Es muy importante que tenga en cuenta a mayor inversión, mayores ganancias.
+ Aunque el riesgo es bajo, no lo exime de los riesgos que conlleva operar en los mercados bursátiles.
+
+</p>
+                    
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script type="text/javascript">
+
+    document.getElementById('btn_Aceptar').disabled = true;
+
+
+
     function InvestConfirm() {
-      
+
         var I_amount = document.getElementById('amountToInvest').value;
         var output = parseFloat(I_amount.replace(/,/g, ''));
 
         var Category = "";
         var fee = 0;
-
-        
 
 
         if (typeof I_amount == 'undefined' || I_amount === null || I_amount === "" || (output >= 0 && output <= 199999)) {
@@ -229,10 +271,10 @@
             alert("La cantidad Ingresada no cumple con los requisitos");
 
             $('#InvestConfirmation').modal('hide');
-            
+
 
         } else {
-          
+
 
             if (output >= 200000 && output <= 999999) {
                 Category = "INICIO";
@@ -270,18 +312,38 @@
                 Category = "ELITE";
                 fee = 9.8;
             }
-         
+
             var feePercent = fee + "%";
-   
+
 
             $("#category").val(Category);
             $("#amount").val(I_amount);
             $("#fee").val(feePercent);
-           
-           
+
+
             $('#InvestConfirmation').modal('show');
 
         }
     }
+
+
+
+    var checkbox = document.getElementById('contractcheck');
+
+    checkbox.addEventListener('change',
+        (event) => {
+            if (event.currentTarget.checked) {
+                $('#contractModal').modal('show');
+                document.getElementById('btn_Aceptar').disabled = false;
+            } else {
+
+                document.getElementById('btn_Aceptar').disabled = true;
+
+             
+
+            }
+        });
+
+
 </script>
 
