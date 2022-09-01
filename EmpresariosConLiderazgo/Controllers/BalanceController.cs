@@ -118,7 +118,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             var movements =
                 _context.MovementsByBalance.Where(
-                    x => x.BalanceId == id && x.status == EnumStatus.PendienteDeAprobacion);
+                    x => x.BalanceId == id && x.status == EnumStatus.PendienteDeAprobación);
 
             if (movements.Count() > 0)
             {
@@ -131,7 +131,7 @@ namespace EmpresariosConLiderazgo.Controllers
             try
             {
                 CreateMovement(balance.Id, "Solicitud de retiro", 0, balance.CashOut,
-                    Utils.EnumStatus.PendienteDeAprobacion);
+                    Utils.EnumStatus.PendienteDeAprobación);
             }
 
 
@@ -140,7 +140,7 @@ namespace EmpresariosConLiderazgo.Controllers
             }
 
             TempData["AlertMessage"] =
-                $"Se registro la solicitud de retiro del producto {balance.Product}, por valor de $ {balance.CashOut} El desembolso se realiza el dia MARTES";
+                $"Se registró la solicitud de retiro del producto {balance.Product}, por valor de $ {balance.CashOut} El desembolso se realiza entre los días 12 al 15 de cada mes";
 
 
             string UserLogged = User.Identity?.Name.ToString();
@@ -217,12 +217,12 @@ namespace EmpresariosConLiderazgo.Controllers
                                                                     x.InitialDate == NewProduct.InitialDate);
 
 
-            CreateMovement(productId.Id, "Creacion Inicial", productId.BalanceAvailable, productId.CashOut,
-                Utils.EnumStatus.creacion);
+            CreateMovement(productId.Id, "Creación Inicial", productId.BalanceAvailable, productId.CashOut,
+                Utils.EnumStatus.creación);
 
 
             TempData["AlertMessage"] =
-                $"Se realizo la creacion del nuevo producto  {NewProduct.Product}, por valor de $ {NewProduct.BalanceAvailable}, Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos";
+                $"Se realizo la creación del nuevo producto  {NewProduct.Product}, por valor de $ {NewProduct.BalanceAvailable}, Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignación o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos";
 
             return RedirectToAction("BalanceByMail", "Balance", new { @mail = User.Identity?.Name });
         }
@@ -305,7 +305,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 await _context.SaveChangesAsync();
 
                 CreateMovement(result.Id, "Aprobado por el Administrador", result.BalanceAvailable, result.CashOut,
-                    Utils.EnumStatus.AprovadoParaTransacciones);
+                    Utils.EnumStatus.AprobadoParaTransacciones);
 
                 return View("ApproveComission", toReturn);
             }
@@ -314,7 +314,7 @@ namespace EmpresariosConLiderazgo.Controllers
             await _context.SaveChangesAsync();
 
             CreateMovement(result.Id, "Aprobado por el Administrador", result.BalanceAvailable, result.CashOut,
-                Utils.EnumStatus.AprovadoParaTransacciones);
+                Utils.EnumStatus.AprobadoParaTransacciones);
 
 
             TempData["AlertMessage"] =
@@ -352,7 +352,7 @@ namespace EmpresariosConLiderazgo.Controllers
         {
             var records = from m in _context.MovementsByBalance
                 join b in _context.Balance on m.BalanceId equals b.Id
-                where (m.status == EnumStatus.PendienteDeAprobacion)
+                where (m.status == EnumStatus.PendienteDeAprobación)
                 select new MovementBalance
                 {
                     BalanceId = b.Id,

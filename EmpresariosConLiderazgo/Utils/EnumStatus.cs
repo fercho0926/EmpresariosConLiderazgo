@@ -8,10 +8,10 @@ namespace EmpresariosConLiderazgo.Utils
 {
     public enum EnumStatus
     {
-        AprovadoParaTransacciones,
-        PendienteDeAprobacion,
+        AprobadoParaTransacciones,
+        PendienteDeAprobación,
         Rechazado,
-        creacion,
+        creación,
         RetiroAprobado
     }
 }
