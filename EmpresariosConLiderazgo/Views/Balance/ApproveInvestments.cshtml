@@ -11,101 +11,85 @@
         <strong>Success !</strong> @TempData["AlertMessage"]
     </div>
 }
+<style>
+
+    .thNew {
+        background-color: #326091;
+        color: white;
+    }
+
+        .thmov {
+        background-color: #605F5F;
+        color: white;
+    }
+
+</style>
 
 
 
-<h1>Aprobacion de Inversiones</h1>
 
 
-<table class="table">
-    <thead>
-        <tr>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserApp)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BalanceAvailable)
-            </th>
-
-             <th>
-                @Html.DisplayNameFor(model => model.Profit)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.LastMovement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InitialDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndlDate)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.StatusBalance)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                  <td>
-                    @Html.DisplayFor(modelItem => item.UserApp)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BalanceAvailable)
-                </td>
-                 <td>
-                    @Html.DisplayFor(modelItem => item.Profit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastMovement)
-                </td>
-                <td>
-                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
-                    {
-                        @Html.DisplayFor(modelItem => item.InitialDate)
-                    }
-                </td>
-                <td>
-                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
-                    {
-                        @Html.DisplayFor(modelItem => item.EndlDate)
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StatusBalance)
-                </td>
-
-                <td>
-                    <a class="fas fa-check" asp-action="ApproveInvestmentById" asp-route-id="@item.Id" title="Aprobar" style="font-size: 24px; color: green"></a> 
-                    <a class="fas fa-times" asp-action="RejectInvestmentById"  asp-route-id="@item.Id" title="Rechazar" style="font-size: 24px; color: red"></a> 
+<h1 style="color : #326091"><b>Aprobacion de Inversiones</b></h1>
 
 
-                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
-                    {
-                        <a class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar" style="font-size: 24px; color: green"></a>
-                    }
 
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="table" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="thNew">
+                                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                                <th> @Html.DisplayNameFor(model => model.UserApp)</th>
+                                <th>@Html.DisplayNameFor(model => model.Product)</th>
+                                <th> @Html.DisplayNameFor(model => model.BalanceAvailable)</th>
+                                <th>@Html.DisplayNameFor(model => model.Profit)</th>
+                                <th>@Html.DisplayNameFor(model => model.LastMovement)</th>
+                                <th>@Html.DisplayNameFor(model => model.InitialDate)</th>
+                                <th>@Html.DisplayNameFor(model => model.EndlDate)</th>
+                                <th>@Html.DisplayNameFor(model => model.StatusBalance)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.UserApp)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BalanceAvailable)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Profit)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.LastMovement)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.InitialDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EndlDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.StatusBalance)</td>
+                                    <td>
+                                        <a class="fas fa-check" asp-action="ApproveInvestmentById" asp-route-id="@item.Id" title="Aprobar" style="font-size: 24px; color: green"></a>
+                                        <a class="fas fa-times" asp-action="RejectInvestmentById" asp-route-id="@item.Id" title="Rechazar" style="font-size: 24px; color: red"></a>
+                                        @if (item.StatusBalance == EnumStatusBalance.APROBADO)
+                                        {
+                                            <a class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar" style="font-size: 24px; color: green"></a>
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+

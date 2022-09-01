@@ -20,6 +20,7 @@ using EmpresariosConLiderazgo.Services;
 
 namespace EmpresariosConLiderazgo.Areas.Identity.Pages.Account
 {
+    [Authorize(Roles = "Admin")]
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

@@ -1,0 +1,87 @@
+﻿@using EmpresariosConLiderazgo.Utils
+@model IEnumerable<ReferedByUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+
+    .thNew {
+        background-color: #326091;
+        color: white;
+    }
+
+    .thmov {
+        background-color: #605F5F;
+        color: white;
+    }
+
+</style>
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+@if (@TempData["ErrorMessage"] != null)
+{
+    <div class="alert-danger jumbotron">
+        <strong>Error !</strong> @TempData["ErrorMessage"]
+    </div>
+}
+
+
+<h1 style="color : #326091"><b>Aprobación de Retiros de Comisiones</b></h1>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="table" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="thNew">
+                                <th>  @Html.DisplayNameFor(model => model.Id)</th>
+                                <th>  @Html.DisplayNameFor(model => model.Date)</th>
+                                <th>  @Html.DisplayNameFor(model => model.AspNetUserId)</th>
+
+                                <th> @Html.DisplayNameFor(model => model.ReferedUserId)</th>
+                               
+                                <th>@Html.DisplayNameFor(model => model.AmountToRefer)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnumStatusReferido)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AspNetUserId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ReferedUserId)</td>
+                              
+                                    <td>@Html.DisplayFor(modelItem => item.AmountToRefer)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnumStatusReferido)</td>
+                                    <td>
+                                        <a class="fas fa-check" asp-action="ApproveCommissionById" asp-route-id="@item.Id" title="Aprobar" style="font-size: 24px; color: green"></a>
+                                        <a class="fas fa-times" asp-action="RejectCommissionById" asp-route-id="@item.Id" title="Rechazar" style="font-size: 24px; color: red"></a>
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+

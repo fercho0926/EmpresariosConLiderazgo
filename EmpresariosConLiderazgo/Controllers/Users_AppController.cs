@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmpresariosConLiderazgo.Data;
 using EmpresariosConLiderazgo.Models;
+using EmpresariosConLiderazgo.Utils;
 using Microsoft.AspNetCore.Authorization;
 
 namespace EmpresariosConLiderazgo.Controllers
@@ -124,6 +125,24 @@ namespace EmpresariosConLiderazgo.Controllers
                         throw;
                     }
                 }
+
+
+                var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x =>
+                    x.ReferedUserId == users_App.AspNetUserId);
+                refer.Accepted = true;
+
+
+                var movement = new ReferedByUserMovement()
+                {
+                    ReferedByUserId = refer.Id,
+                    Message = "Acepto Invitación",
+                    DateMovement = DateTime.Now,
+                    Status = EnumStatusBalance.PENDIENTE
+                };
+                _context.ReferedByUserMovement.Add(movement);
+
+                await _context.SaveChangesAsync();
+
 
                 TempData["AlertMessage"] =
                     $"Se ha realizado la actualizacion de la Informacion";

@@ -4,7 +4,19 @@
 @{
     ViewData["Title"] = "Index";
 }
+<style>
 
+    .thNew {
+        background-color: #326091;
+        color: white;
+    }
+
+        .thmov {
+        background-color: #605F5F;
+        color: white;
+    }
+
+</style>
 @if (@TempData["AlertMessage"] != null)
 {
     <div class="alert-success jumbotron">
@@ -14,103 +26,73 @@
 
 
 
-<h1>Mis productos</h1>
-<p>
-    <h4> @User.Identity?.Name</h4>
-</p>
+<div class="card card-primary card-outline">
+    <div class="card-header">
+       <h1 style="color : #326091"><b>Antes de invertir tenga en cuenta los siguientes puntos</b></h1>
+    </div>
+    <div class="card-body">
+        <p><b>*1. Organiza tus finanzas personales </p>
+        <p> * 2. Ahorra y crea un fondo de emergencia </p>
+        <p> * 3. Informate sobre tu inversión y la proyección de ella  </p>
+        <p> * 4. Planifica tu inversión y organiza como vas a utilizar los recursos que vas a recibir. </p>
+        <p> * 5. Guarda un % de tu liquidez  </p>
+        <p> * 6. Planifica tu próxima inversión para que puedas tener diferentes fuentes de ingresos</b> </p>
+        <input type="button" class="btn btn-success" value="Comprar" onclick="location.href='@Url.Action("Packages", "Balance")'" />
 
-<p>
-    <input type="button" class="btn btn-outline-danger" value="Comprar" onclick="location.href='@Url.Action("Packages", "Balance")'" />
-</p>
-<table class="table">
-    <thead>
-        <tr>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            @*     <th>
-            @Html.DisplayNameFor(model => model.Name)
-            </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.BalanceAvailable)
-            </th>
-
-             <th>
-                @Html.DisplayNameFor(model => model.Profit)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.LastMovement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InitialDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndlDate)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.StatusBalance)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product)
-                </td>
-                @*     <td>
-            @Html.DisplayFor(modelItem => item.Name)
-            </td>*@@*     <td>
-            @Html.DisplayFor(modelItem => item.Name)
-            </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.BalanceAvailable)
-                </td>
-                 <td>
-                    @Html.DisplayFor(modelItem => item.Profit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastMovement)
-                </td>
-                <td>
-                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
-                    {
-                        @Html.DisplayFor(modelItem => item.InitialDate)
-                    }
-                </td>
-                <td>
-                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
-                    {
-                        @Html.DisplayFor(modelItem => item.EndlDate)
-                    }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StatusBalance)
-                </td>
-
-                <td>
-                    <a class="fas fa-chart-line" asp-action="Movements" asp-route-id="@item.Id" title="Movimientos" style="font-size: 24px; color: blue"></a> |
-
-                    @if (item.StatusBalance == EnumStatusBalance.APROBADO)
-                    {
-                        <a class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar" style="font-size: 24px; color: green"></a>
-                    }
+    </div>
+</div>
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
 
 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="table" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="thNew">
+                                <th>  @Html.DisplayNameFor(model => model.Id)</th>
+                                <th> @Html.DisplayNameFor(model => model.Product)</th>
+                                <th>@Html.DisplayNameFor(model => model.BalanceAvailable)</th>
+                                <th> @Html.DisplayNameFor(model => model.Profit)</th>
+                                <th>@Html.DisplayNameFor(model => model.StatusBalance)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Product)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BalanceAvailable)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Profit)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.StatusBalance)</td>
+                                    <td>
+                                        <a class="fas fa-chart-line" asp-action="Movements" asp-route-id="@item.Id" title="Movimientos" style="font-size: 24px; color: blue"></a> |
+
+                                        @if (item.StatusBalance == EnumStatusBalance.APROBADO)
+                                        {
+                                            <a class="far fa-money-bill-alt" asp-action="CashOut" asp-route-id="@item.Id" title="Retirar" style="font-size: 24px; color: green"></a>
+                                        }
+
+
+                                    </td>
+
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->

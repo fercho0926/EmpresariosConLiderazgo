@@ -9,10 +9,12 @@ namespace EmpresariosConLiderazgo.Utils
 {
     public enum EnumStatusBalance
     {
-        [Display(Name = "PENDIENTE DE APROBACION")]
+        [Display(Name = "PENDIENTE DE APROBACIÓN")]
         PENDIENTE,
         APROBADO,
         RECHAZADO,
-        FINALIZADO
+        FINALIZADO,
+        POR_RETIRAR,
+        SOLICITUD_RETIRO
     }
 }

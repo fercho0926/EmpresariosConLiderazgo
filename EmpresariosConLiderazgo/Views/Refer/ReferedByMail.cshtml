@@ -1,0 +1,151 @@
+﻿@using EmpresariosConLiderazgo.Utils
+@model IEnumerable<ReferedByUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+
+    .thNew {
+        background-color: #326091;
+        color: white;
+    }
+
+    .thmov {
+        background-color: #605F5F;
+        color: white;
+    }
+
+</style>
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+ <h1 style="color : #326091"><b>Comisiones</b></h1>
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="table" class="table table-bordered table-striped">
+                        <thead>
+                            <tr class="thNew">
+                                <th>  @Html.DisplayNameFor(model => model.Id)</th>
+                                <th>  @Html.DisplayNameFor(model => model.Date)</th>
+                                <th> @Html.DisplayNameFor(model => model.ReferedUserId)</th>
+                                <th>@Html.DisplayNameFor(model => model.AmountToRefer)</th>
+                                <th>@Html.DisplayNameFor(model => model.EnumStatusReferido)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ReferedUserId)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AmountToRefer)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EnumStatusReferido)</td>
+                                    <td>
+                                        <a class="fas fa-chart-line" asp-action="GetMovementById" asp-route-id="@item.Id" title="Movimientos" style="font-size: 24px; color: blue"></a> |
+
+                                        @if (item.EnumStatusReferido == EnumStatusReferido.EN_PROCESO && item.ApproveByAdmin == true)
+                                        {
+                                            <a class="far fa-money-bill-alt" asp-action="TansferMoney" asp-route-id="@item.Id" title="Retirar saldo" style="font-size: 24px;  color: green"></a>
+
+                                        }
+
+
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+                </div>
+                <!-- /.card-body -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+@*
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h1 style="color : #326091"><b>Valor Total a retirar</b></h1>
+    </div>
+    <div class="card-body">
+
+        <div>
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    <text id="Text"><b>En esta casilla puedes ver el valor total a retirar</b></text>
+
+                </dt>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <form>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" name="totalAmount" id="totalAmount" placeholder="Seleccione las comisiones a retirar" readonly="readonly" value="">
+                </div>
+                <div class="form-group">
+                    <input onclick="SaveArray()" value="Solicitar retiro" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>*@
+
+@*<script type="text/javascript">
+
+    var listId = [];
+    var listAmount = [];
+
+    function GetMoney(id, amount) {
+        var totalAmountsum = 0;
+        var continueLopp = true;
+        listId.forEach(function(i) {
+            if (id == i) {
+                continueLopp = false;
+            }
+        });
+
+        if (continueLopp === true) {
+
+            listId.push(id);
+            listAmount.push(amount);
+
+            listAmount.forEach(function(i) {
+                totalAmountsum = totalAmountsum + i;
+            });
+            $("#totalAmount").val(totalAmountsum);
+        }
+    }
+
+    function SaveArray() {
+
+        $.get('/Refer/SaveArray', $.param({ data: listId }, true), function(data) {
+            location.reload();
+        });
+
+    }*@
+
+
+
+
+</script>

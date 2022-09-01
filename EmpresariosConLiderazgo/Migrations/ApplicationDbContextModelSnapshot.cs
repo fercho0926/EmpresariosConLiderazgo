@@ -17,7 +17,7 @@ namespace EmpresariosConLiderazgo.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -141,6 +141,68 @@ namespace EmpresariosConLiderazgo.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User_Logs");
+                });
+
+            modelBuilder.Entity("EmpresariosConLiderazgo.Models.ReferedByUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Accepted")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("AmountToRefer")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("ApproveByAdmin")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("AspNetUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EnumStatusReferido")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("InvestDone")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ReferedUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ReferedByUser");
+                });
+
+            modelBuilder.Entity("EmpresariosConLiderazgo.Models.ReferedByUserMovement", b =>
+                {
+                    b.Property<int>("MovementId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MovementId"), 1L, 1);
+
+                    b.Property<DateTime>("DateMovement")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReferedByUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("MovementId");
+
+                    b.ToTable("ReferedByUserMovement");
                 });
 
             modelBuilder.Entity("EmpresariosConLiderazgo.Models.User_contracts", b =>

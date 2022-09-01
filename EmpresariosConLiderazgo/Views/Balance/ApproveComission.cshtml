@@ -1,0 +1,130 @@
+﻿@using EmpresariosConLiderazgo.Utils
+@model Balance_ReferenceByuser
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+<style>
+
+    .thNew {
+        background-color: #326091;
+        color: white;
+    }
+
+    .thmov {
+        background-color: #605F5F;
+        color: white;
+    }
+
+</style>
+
+
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h1 style="color : #326091"><b>Aprobar Dinero por Referidos</b></h1>
+    </div>
+    <div class="card-body">
+        <form asp-action="SaveMoneyPerReferee">
+            <input type="hidden" asp-for="ReferedByUser.Id" />
+    
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Quien Refiere</label>
+                        <input asp-for="ReferedByUser.AspNetUserId" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="ReferedByUser.AspNetUserId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Referido</label>
+                        <input asp-for="ReferedByUser.ReferedUserId" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="ReferedByUser.ReferedUserId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Fecha referido : </label>
+                        <input asp-for="ReferedByUser.Date" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="ReferedByUser.Date" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Referido</label>
+                        <input asp-for="ReferedByUser.ReferedUserId" class="form-control" readonly="readonly" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Plan</label>
+                        <input asp-for="Balance.Product" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="Balance.Product" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Valor</label>
+                        <input asp-for="Balance.BalanceAvailable" class="form-control" asp-format="{0:C}" readonly="readonly" />
+                        <span asp-validation-for="Balance.BalanceAvailable" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Valor por referido</label>
+                    <input asp-for="ReferedByUser.AmountToRefer" class="form-control"   />
+                    <span asp-validation-for="ReferedByUser.AmountToRefer" class="text-danger"></span>
+                </div>
+            </div>  
+
+         @*   <!-- input states -->
+            <div class="form-group">
+                <label class="col-form-label" for="inputSuccess">
+                   Valor a pagar por Referido
+                </label>
+               <input type="text" class="form-control" name="amountToInvest" id="amountToInvest" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Ingrese valor a pagar" maxlength="10" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+            </div>*@
+
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+@section Scripts {
+}
+
+
+
+
+
+
+
+
+
+
+

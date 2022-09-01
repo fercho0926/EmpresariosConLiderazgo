@@ -5,78 +5,104 @@
 
 }
 
-<h1>Retiros</h1>
-@if (@TempData["AlertMessage"] != null)
-{
-    <div class="alert-danger jumbotron">
-        <strong>Error!</strong> @TempData["AlertMessage"]
-    </div>
-}
+    @if (@TempData["AlertMessage"] != null)
+    {
+        <div class="alert-danger jumbotron">
+            <strong>Error!</strong> @TempData["AlertMessage"]
+        </div>
+    }
 
-<div>
-    <h4> @User.Identity?.Name</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastMovement)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastMovement)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h1 style="color : #326091"><b>Retiros</b></h1>
+        </div>
+        <div class="card-body">
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BalanceAvailable)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BalanceAvailable)
-        </dd>
+            <div>
 
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.InitialDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InitialDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EndlDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EndlDate)
-        </dd>
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.LastMovement)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.LastMovement)
+                    </dd>
 
-    </dl>
-</div>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Product)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Product)
+                    </dd>
+                    <dt class="col-sm-2">
+                       Capital
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.BaseBalanceAvailable)
+                    </dd>
+                    <dt class="col-sm-2" style="color:#008000">
+                        Utilidad
+                    </dt>
+                    <dd class="col-sm-10" style="color: #008000">
+                        <b>
+                            @Html.DisplayFor(model => model.Profit)</b>
+                    </dd>
+                    <dt class="col-sm-2">
+                        Capital + Utilidad
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.BalanceAvailable)
+                    </dd>
 
- <div class="col-md-4">
-        <form asp-action="CashOut">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="UserApp" />
-            <input type="hidden" asp-for="Name" />
-            <input type="hidden" asp-for="Product" />
-            <input type="hidden" asp-for="BalanceAvailable" />
-            <div class="form-group">
-                <label asp-for="CashOut" class="control-label"></label>
-                <input asp-for="CashOut" class="form-control" placeholder="Ingresa la cantidad a retirar"/>
-                <span asp-validation-for="CashOut" class="text-danger"></span>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.InitialDate)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.InitialDate)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.EndlDate)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.EndlDate)
+                    </dd>
+
+                </dl>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Solicitar retiro" class="btn btn-primary" />
+            <div class="col-md-4">
+                <form asp-action="CashOut">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="UserApp" />
+                    <input type="hidden" asp-for="Name" />
+                    <input type="hidden" asp-for="Product" />
+                    <input type="hidden" asp-for="Profit" />
+                    <input type="hidden" asp-for="BaseBalanceAvailable" />
+                    <input type="hidden" asp-for="BalanceAvailable" />
+                    <div class="form-group">
+                        <label asp-for="CashOut" class="control-label"></label>
+                        <input asp-for="CashOut" class="form-control" value="" placeholder="Ingresa la cantidad a retirar" />
+                        <span asp-validation-for="CashOut" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Solicitar retiro" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-        </form>
+
+        </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
