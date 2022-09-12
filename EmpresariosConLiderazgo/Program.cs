@@ -6,11 +6,25 @@ using EmpresariosConLiderazgo.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
+using Amazon;
+using Amazon.CDK.AWS.SSM;
+using Amazon.SecretsManager;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.Extensions.Configuration;
+using static Org.BouncyCastle.Math.EC.ECCurve;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Configuration.AddSecretsManager(
+    configurator: options =>
+    {
+        options.ConfigureSecretsManagerConfig(new AmazonSecretsManagerConfig());
+        options.PollingInterval = TimeSpan.FromSeconds(10);
+        options.SecretFilter = entry => entry.Name.Contains("Database");
+    });
+
+var connectionString = builder.Configuration.GetValue<string>("Prod_DatabaseConection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
