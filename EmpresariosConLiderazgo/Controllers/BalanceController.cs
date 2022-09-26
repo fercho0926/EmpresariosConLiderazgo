@@ -29,7 +29,7 @@ namespace EmpresariosConLiderazgo.Controllers
         public async Task<IActionResult> BalanceByMail(string mail)
         {
             string UserLogged = User.Identity?.Name.ToString();
-            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+            var completed = await  _context.Users_App.FirstOrDefaultAsync(m => m.AspNetUserId == UserLogged);
 
             if (completed.Identification == "")
             {
@@ -48,7 +48,7 @@ namespace EmpresariosConLiderazgo.Controllers
 
             var movementsByMail = _context.Balance.Where(x => x.UserApp == mail).OrderByDescending(x => x.Id).ToList();
 
-            if (movementsByMail.Count() == 0)
+            if (movementsByMail.Count == 0)
             {
                 RedirectToPage("Error");
             }
@@ -274,7 +274,7 @@ namespace EmpresariosConLiderazgo.Controllers
                 .SingleOrDefaultAsync(b => b.Id == id);
             result.StatusBalance = EnumStatusBalance.APROBADO;
             result.InitialDate = DateTime.Now;
-            result.EndlDate = DateTime.Now.AddDays(30);
+            result.EndlDate = DateTime.Now.AddYears(1);
 
 
             var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x =>

@@ -11,6 +11,8 @@ using Amazon.CloudWatchLogs.Model;
 using EmpresariosConLiderazgo.Models.Entities;
 using EmpresariosConLiderazgo.Services;
 using EmpresariosConLiderazgo.Utils;
+using EmpresariosConLiderazgo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmpresariosConLiderazgo.Controllers
 {
@@ -20,17 +22,20 @@ namespace EmpresariosConLiderazgo.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ICloudwatchLogs _cloudwatchLogs;
+        private readonly IMailService mailService;
 
-        public CronController(ApplicationDbContext context, ICloudwatchLogs cloudwatchLogs)
+        public CronController(ApplicationDbContext context, ICloudwatchLogs cloudwatchLogs, IMailService mailService)
         {
             _context = context;
             _cloudwatchLogs = cloudwatchLogs;
+            this.mailService = mailService;
         }
 
         [HttpGet]
-        public IActionResult ExecuteCron()
+        public async Task<IActionResult> ExecuteCron()
         {
-            var records = _context.Balance.Where(x => x.StatusBalance == Utils.EnumStatusBalance.APROBADO).ToList();
+            var records = await _context.Balance.Where(x => x.StatusBalance == Utils.EnumStatusBalance.APROBADO)
+                .ToListAsync();
 
 
             foreach (var record in records)
@@ -81,12 +86,36 @@ namespace EmpresariosConLiderazgo.Controllers
                     CashOut = 0,
                     BalanceAfter = record.BalanceAvailable
                 };
-                _context.MovementsByBalance.Add(movement);
+                await _context.MovementsByBalance.AddAsync(movement);
             }
 
-            _cloudwatchLogs.InsertLogs("Cron", "cron", "Success");
-            _context.SaveChanges();
+            await _cloudwatchLogs.InsertLogs("Cron", "cron", "Success");
+            await _context.SaveChangesAsync();
+
+            await SendNotification();
             return Ok();
+        }
+
+
+        private async Task SendNotification()
+        {
+            var listEmail = new List<string>()
+            {
+                "empresarios.riqueza@gmail.com",
+                "m.logueo123@gmail.com"
+            };
+
+            var date = DateTime.UtcNow;
+            foreach (var mail in listEmail)
+            {
+                var request = new MailRequest
+                {
+                    Subject = $"Intereses Aplicados {date} ",
+                    Body = "Se aplicaron los intereses con exito",
+                    ToEmail = mail.ToString()
+                };
+                await mailService.SendEmailAsync(request);
+            }
         }
 
 
