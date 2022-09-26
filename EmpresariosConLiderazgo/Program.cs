@@ -24,7 +24,8 @@ builder.Configuration.AddSecretsManager(
         options.SecretFilter = entry => entry.Name.Contains("Database");
     });
 
-var connectionString = builder.Configuration.GetValue<string>("Prod_DatabaseConection");
+var connectionString = builder.Configuration.GetValue<string>("Dev_DatabaseConection");
+//var connectionString = builder.Configuration.GetValue<string>("Prod_DatabaseConection");
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));

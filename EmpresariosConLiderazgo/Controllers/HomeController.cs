@@ -132,6 +132,19 @@ namespace EmpresariosConLiderazgo.Controllers
             return View();
         }
 
+        public IActionResult Bancolombia()
+        {
+            string UserLogged = User.Identity?.Name.ToString();
+            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+            return View();
+        }
+
 
         public async Task<IActionResult> SendMail([FromForm] MailRequest request)
         {
