@@ -52,6 +52,16 @@ namespace EmpresariosConLiderazgo.Controllers
                     return RedirectToAction("Index", "Home");
                 }
 
+                var checkMail = await _context.ReferedByUser.OrderByDescending(x => x.Date).FirstOrDefaultAsync(x => x.ReferedUserId == refer.Mail);
+                if (checkMail != null)
+                {
+                    TempData["ErrorMessage"] =
+                        $"El usuario {refer.Name?.ToString()} ,Ya fue invitado a unirse a la plataforma";
+                    await SendMail(refer);
+                    return RedirectToAction("Index", "Home");
+                }
+
+
 
                 var refered = new ReferedByUser
                 {
@@ -67,26 +77,29 @@ namespace EmpresariosConLiderazgo.Controllers
 
                 //Send Mail
 
-                string subject = "Invitacion Empresarios Con Liderazgo";
-                string body =
-                    $"Hola {refer.Name.ToString()} Empresarios con liderazgo quiere q hagas parte del proyecto, por ende te invitamos a registrarte y ser parte de nuestra comunidad, Visita https://www.empresariosconliderazgo.com/Identity/Account/Register?ReturnUrl=%2F";
-
-                var request = new MailRequest();
-
-                request.Body = body;
-                request.Subject = subject;
-                request.ToEmail = refer.Mail.ToString();
-
-                await mailService.SendEmailAsync(request);
+                await SendMail(refer);
             }
 
             TempData["AlertMessage"] =
                 $"Se ha realizado la invitacion a {refer.Name.ToString()} , Muchas gracias por hacer que esta familia crezca";
 
-            //return RedirectToAction("Index", "Home");
             return RedirectToAction("ReferedByMail", "Refer", new { @mail = User.Identity?.Name });
         }
 
+        private async Task SendMail(Refer refer)
+        {
+            string subject = "Invitacion Empresarios Con Liderazgo";
+            string body =
+                $"Hola {refer.Name.ToString()} Empresarios con liderazgo quiere q hagas parte del proyecto, por ende te invitamos a registrarte y ser parte de nuestra comunidad, Visita https://www.empresariosconliderazgo.com/Identity/Account/Register?ReturnUrl=%2F";
+
+            var request = new MailRequest();
+
+            request.Body = body;
+            request.Subject = subject;
+            request.ToEmail = refer.Mail.ToString();
+
+            await mailService.SendEmailAsync(request);
+        }
 
         public async Task<IActionResult> ReferedByMail(string mail)
         {

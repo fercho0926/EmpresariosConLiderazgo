@@ -194,7 +194,7 @@ namespace EmpresariosConLiderazgo.Controllers
             _context.Add(NewProduct);
 
 
-            var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x =>
+            var refer = await _context.ReferedByUser.OrderByDescending(x=>x.Date).FirstOrDefaultAsync(x =>
                 x.ReferedUserId == NewProduct.UserApp && x.InvestDone == false);
 
             if (refer != null)
@@ -277,8 +277,11 @@ namespace EmpresariosConLiderazgo.Controllers
             result.EndlDate = DateTime.Now.AddYears(1);
 
 
-            var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x =>
-                x.ReferedUserId == result.UserApp && x.ApproveByAdmin == false);
+            var refer = await _context.ReferedByUser.OrderByDescending(x => x.Date).FirstOrDefaultAsync(x =>
+             x.ReferedUserId == result.UserApp && x.ApproveByAdmin == false);
+
+
+          
 
             if (refer != null)
             {

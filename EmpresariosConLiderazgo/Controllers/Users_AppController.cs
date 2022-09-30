@@ -109,39 +109,32 @@ namespace EmpresariosConLiderazgo.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+
+
+                var refer = await _context.ReferedByUser.OrderByDescending(x => x.Date).FirstOrDefaultAsync(x =>
+              x.ReferedUserId == users_App.AspNetUserId);
+
+                if (refer != null)
                 {
+                    refer.Accepted = true;
+                    var movement = new ReferedByUserMovement()
+                    {
+                        ReferedByUserId = refer.Id,
+                        Message = "Acepto Invitación",
+                        DateMovement = DateTime.Now,
+                        Status = EnumStatusBalance.PENDIENTE
+                    };
+                    _context.ReferedByUserMovement.Add(movement);
+
                     _context.Update(users_App);
                     await _context.SaveChangesAsync();
+
+
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!Users_AppExists(users_App.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return NotFound();
                 }
-
-
-                var refer = await _context.ReferedByUser.SingleOrDefaultAsync(x =>
-                    x.ReferedUserId == users_App.AspNetUserId);
-                refer.Accepted = true;
-
-
-                var movement = new ReferedByUserMovement()
-                {
-                    ReferedByUserId = refer.Id,
-                    Message = "Acepto Invitación",
-                    DateMovement = DateTime.Now,
-                    Status = EnumStatusBalance.PENDIENTE
-                };
-                _context.ReferedByUserMovement.Add(movement);
-
-                await _context.SaveChangesAsync();
 
 
                 TempData["AlertMessage"] =
