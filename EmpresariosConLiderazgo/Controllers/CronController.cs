@@ -39,55 +39,54 @@ namespace EmpresariosConLiderazgo.Controllers
 
 
             foreach (var record in records)
-            {
-                double Fee = 0.0;
-                switch (record.Product)
+                if (DateTime.Now < record.EndlDate)
                 {
-                    case "INICIO":
-                        Fee = DailyFeeCalculator(4);
-                        break;
-                    case "PLUS":
-                        Fee = DailyFeeCalculator(5);
-                        break;
-                    case "STAR":
-                        Fee = DailyFeeCalculator(6.5);
-                        break;
-                    case "ASOCIADO":
-                        Fee = DailyFeeCalculator(7);
-                        break;
-                    case "EMPRENDEDOR":
-                        Fee = DailyFeeCalculator(7.5);
-                        break;
-                    case "EMPRESARIO":
-                        Fee = DailyFeeCalculator(8);
-                        break;
-                    case "FINANCIERO":
-                        Fee = DailyFeeCalculator(9);
-                        break;
-                    case "ELITE":
-                        Fee = DailyFeeCalculator(9.8);
-                        break;
+                    decimal Fee = 0;
+                    switch (record.Product)
+                    {
+                        case "INICIO":
+                            Fee = 0.04m;
+                            break;
+                        case "PLUS":
+                            Fee = 0.05m;
+                            break;
+                        case "STAR":
+                            Fee = 0.065m;
+                            break;
+                        case "ASOCIADO":
+                            Fee = 0.07m;
+                            break;
+                        case "EMPRENDEDOR":
+                            Fee = 0.075m;
+                            break;
+                        case "EMPRESARIO":
+                            Fee = 0.08m;
+                            break;
+                        case "FINANCIERO":
+                            Fee = 0.09m;
+                            break;
+                        case "ELITE":
+                            Fee = 0.098m;
+                            break;
+                    }
+
+                    var daysPerThisMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+                    var profit = DailyFee(record.BaseBalanceAvailable, daysPerThisMonth, Fee);
+                    var oldBalance = record.BalanceAvailable;
+                    record.BalanceAvailable += profit;
+                    record.Profit += profit;
+
+                    var movement = new MovementsByBalance
+                    {
+                        BalanceId = record.Id,
+                        DateMovement = DateTime.Now,
+                        Name = $"Abono a Utilidades {profit:0.##} ",
+                        BalanceBefore = oldBalance,
+                        CashOut = 0,
+                        BalanceAfter = record.BalanceAvailable
+                    };
+                    await _context.MovementsByBalance.AddAsync(movement);
                 }
-
-
-                decimal profit = (record.BaseBalanceAvailable * Convert.ToDecimal(Fee));
-
-                var oldBalance = record.BalanceAvailable;
-                record.BalanceAvailable += profit;
-                record.Profit += profit;
-
-
-                var movement = new MovementsByBalance
-                {
-                    BalanceId = record.Id,
-                    DateMovement = DateTime.Now,
-                    Name = $"Abono a Utilidades {String.Format("{0:0.##}", profit)} ",
-                    BalanceBefore = oldBalance,
-                    CashOut = 0,
-                    BalanceAfter = record.BalanceAvailable
-                };
-                await _context.MovementsByBalance.AddAsync(movement);
-            }
 
             await _cloudwatchLogs.InsertLogs("Cron", "cron", "Success");
             await _context.SaveChangesAsync();
@@ -106,23 +105,22 @@ namespace EmpresariosConLiderazgo.Controllers
             };
 
             var date = DateTime.UtcNow;
-            foreach (var mail in listEmail)
+            foreach (var request in listEmail.Select(mail => new MailRequest
+                     {
+                         Subject = $"Intereses Aplicados {date} ",
+                         Body = "Se aplicaron los intereses con exito",
+                         ToEmail = mail.ToString()
+                     }))
             {
-                var request = new MailRequest
-                {
-                    Subject = $"Intereses Aplicados {date} ",
-                    Body = "Se aplicaron los intereses con exito",
-                    ToEmail = mail.ToString()
-                };
                 await mailService.SendEmailAsync(request);
             }
         }
 
 
-        private double DailyFeeCalculator(double fee)
+        private static decimal DailyFee(decimal balance, int monthDays, decimal monthlyFee)
         {
-            var montlyFee = fee / 100;
-            return (montlyFee / 30);
+            var dailyFee = monthlyFee / monthDays;
+            return balance * dailyFee;
         }
     }
 }
