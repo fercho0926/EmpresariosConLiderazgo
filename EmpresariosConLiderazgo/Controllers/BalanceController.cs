@@ -163,7 +163,19 @@ namespace EmpresariosConLiderazgo.Controllers
         public async Task<IActionResult> Packages()
         {
             string UserLogged = User.Identity?.Name.ToString();
-            var completed = _context.Users_App.FirstOrDefault(m => m.AspNetUserId == UserLogged);
+            var completed = await _context.Users_App.FirstOrDefaultAsync(m => m.AspNetUserId == UserLogged);
+
+            if (completed.Identification == "")
+            {
+                return RedirectToAction("EditByMail", "Users_App", new { @mail = UserLogged });
+            }
+
+            return View();
+        }
+        public async Task<IActionResult> EmergencyFund()
+        {
+            string  UserLogged = User.Identity?.Name.ToString();
+            var  completed = await _context.Users_App.FirstOrDefaultAsync(m => m.AspNetUserId == UserLogged);
 
             if (completed.Identification == "")
             {

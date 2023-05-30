@@ -1,0 +1,222 @@
+﻿@model IEnumerable<EmpresariosConLiderazgo.Models.Entities.Balance>
+
+@{
+    ViewData["Title"] = "Paquetes";
+
+}
+@if (@TempData["AlertMessage"] != null)
+{
+    <div class="alert-success jumbotron">
+        <strong>Success !</strong> @TempData["AlertMessage"]
+    </div>
+}
+
+
+
+<div class="card card-primary card-outline">
+    <div class="card-header">
+        <h1 style="color : #326091"><b>¿Qué es un fondo de emergencia o un fondo emergente?</b></h1>
+    </div>
+    <div class="card-body">
+        <p><b>* El fondo de emergencia es tu colchón ante imprevistos.<br />
+            Es un dinero que servirá para cubrir los gastos no presupuestados que puedan surgir en el día a día.<br />
+            Por eso mismo la principal característica de un fondo de emergencia es que el dinero se pueda recuperar rápidamente y que esté seguro.<br />
+           <br />* A modo de ejemplo, un fondo de inversión nunca será un buen destino para este dinero para gastos inesperados. </p>
+            <br />
+        <p> * Los fondos emergentes se activan a partir de 3 millones la duración  puede ser de 1 mes a 6 meses el tiempo que elijas, se retorna un 7% de la inversión  más el retorno del capital. </p>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h5>EMERGENTE</h5>
+
+                        <p>Desde : $3.000.000</p>
+                        <p>En Adelante</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion-flash"></i>
+                    </div>
+                    <a class="small-box-footer">Rentabilidad : <h3>7% </h3></a>
+                </div>
+            </div>
+        </div>
+
+
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+<div class="row">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> $</span>
+        </div>
+        <input type="text" class="form-control" name="amountToInvest" id="amountToInvest" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" value="" data-type="currency" placeholder="Ingrese valor a INVERTIR" maxlength="10" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+        <div class="input-group-append">
+            <button class="btn btn-success" type="button" onclick="InvestConfirm()">INVERTIR</button>
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- Modal -->
+    <div class="modal fade" id="InvestConfirmation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirmar Inversión</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="myForm" action="CreateProduct" method="post">
+                        <div class="form-group">
+                            <label for="category">Categoria</label>
+                            <input type="text" class="form-control" id="category" name="category" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Valor a Invertir</label>
+                            <input type="text" class="form-control" id="amount" name="amount" readonly="readonly">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Porcentaje</label>
+                            <input type="text" class="form-control" id="fee" name="fee" readonly="readonly">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Estado Actual</label>
+                            <input type="text" class="form-control" id="status" disabled="disabled" value="PENDIENTE DE APROBACION">
+                        </div>
+                        <div class="form-group">
+                            <label for="amount">Observaciones</label>
+                            <textarea class="form-control" id="detail" disabled="disabled" rows="5">Esta Inversión entra en un proceso de verificación, por lo cual  debe hacer la consignacion o transferencia del valor y posteriormente se le enviara a su correo el contrato para que relice la firma y pueda ser activada, hasta que esto no ocurra su Inversión no empezara a generar dividendos</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input id="contractcheck" type="checkbox" name="contractcheck" style=" width: 25px; height: 25px; " /><b>&nbsp; &nbsp;  Leí, entendí y acepto estos términos</b>
+
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-success" id="btn_Aceptar">Aceptar y Continuar</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div>
+    <!-- Modal -->
+    <div class="modal fade" id="contractModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Contrato de Inversión</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        CONVENIO DE INVERSIÓN entre EMPRESARIOS CON LIDERAZGO con NIT 1128469767-1, gestor de capitales de la ciudad de Medellín, Antioquia. Ubicados en edificio REGUS poblado en la dirección Cra 43 N° 11ª 44 oficina 206. Conste por el presente documento, el Convenio de Inversión con inversionista. Mayor de edad, quien de ahora en adelante firma convenio de administración de capital, el cual recibirá una utilidad cada mes, este convenio es mutuo acuerdo, e intransferible a segundas o terceras personas; ya que es de única persona. Clausula 1 Este convenio y ejecución se realiza a cambio de producción de activos en mercados bursátiles tales como, inversiones en trading, compra de acciones, entre otras actividades que respaldan nuestra inversión. Clausula 2 Este convenio tendrá una duración de 12 meses. Clausula 3 Los pagos de los porcentajes se realizarán en los primeros 5 días de cada mes, en esos primeros 5 días recibirá vía WhatsApp, o correo electrónico una confirmación de pago, en caso de no recibir la confirmación, avisar a la compañía al número de WhatsApp +57300-333-0745, o al correo electrónico empresarios.admon@gmail.com. Clausula 4 El pago del primer mes se liquida sobre los días hábiles de inversión, es decir la diferencia entre el día que se hace el pago y los días que pasaron para el fin de mes. Clausula 5 Para cancelación de convenio y solicitud de retiro del capital, lo debe hacer con 2 meses de anticipación, en caso de retirar antes de la finalización del convenio, el inversionista asumirá una penalidad del 20% sobre la inversión realizada.
+                        TERMINOS Y CONDICIONES Nuestros financieros tienen la oportunidad de invertir en diferentes tipos de contratos, largo, mediano, y corto plazo, son autónomos y responsables de sus propias decisiones, sus datos serán tratados con responsabilidad, se les informara de eventos e inversiones, foros que realizamos desde nuestra compañía, tiene derecho a participar y estar enterado(a) de cómo se mueven los mercados financieros, puede abrir los convenios de inversión que desee, puede ingresar a nuestra página web, www.empresariosconliderazgo.org. Es muy importante que tenga en cuenta a mayor inversión, mayores ganancias.
+                        Aunque el riesgo es bajo, no lo exime de los riesgos que conlleva operar en los mercados bursátiles.
+
+                    </p>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    document.getElementById('btn_Aceptar').disabled = true;
+
+
+
+    function InvestConfirm() {
+
+        var I_amount = document.getElementById('amountToInvest').value;
+        var output = parseFloat(I_amount.replace(/,/g, ''));
+
+        var Category = "";
+        var fee = 0;
+
+
+        if (typeof I_amount == 'undefined' || I_amount === null || I_amount === "" || (output >= 0 && output < 3000000)) {
+            $("#category").val(null);
+            $("#amount").val(0);
+
+            alert("La cantidad Ingresada no cumple con los requisitos");
+
+            $('#InvestConfirmation').modal('hide');
+
+
+        } else {
+            Category = "EMERGENTE";
+            fee = 7.0;
+            var feePercent = fee + "%";
+
+
+            $("#category").val(Category);
+            $("#amount").val(I_amount);
+            $("#fee").val(feePercent);
+
+
+            $('#InvestConfirmation').modal('show');
+
+        }
+    }
+
+
+
+    var checkbox = document.getElementById('contractcheck');
+
+    checkbox.addEventListener('change',
+        (event) => {
+            if (event.currentTarget.checked) {
+                $('#contractModal').modal('show');
+                document.getElementById('btn_Aceptar').disabled = false;
+            } else {
+
+                document.getElementById('btn_Aceptar').disabled = true;
+
+
+
+            }
+        });
+
+
+</script>
+
